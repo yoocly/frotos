@@ -1,0 +1,18 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'AllerLight', sans-serif;
+}
+
+@font-face {
+  font-family: 'AllerLight';
+  src: url('../assets/aller.light.ttf');
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

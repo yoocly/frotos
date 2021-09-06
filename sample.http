@@ -1,0 +1,14 @@
+### GET Request
+GET http://localhost:3000/?query=testQuery
+
+### GET Request
+GET http://localhost:3000/test?query=testQuery
+
+### Add a new credential
+POST http://localhost:3000/
+Content-Type: application/json
+
+{
+    "key1": "value1",
+    "Key2": "key2"
+}
