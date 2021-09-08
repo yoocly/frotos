@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 dotenv.config();
 
-const port = process.env.EXPRESS_PORT || 3001;
+const port = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.disable('x-powered-by');
