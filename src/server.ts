@@ -8,10 +8,14 @@ app.use(express.json());
 app.disable('x-powered-by');
 
 app.use('/storybook', express.static('dist/storybook'));
-app.use(express.static('dist/app'));
 
 app.get('/api/', async (_req, res) => {
   res.status(200).json({ message: 'API is running' });
+});
+
+app.use(express.static('dist/app'));
+app.get('*', (_request, response) => {
+  response.sendFile('index.html', { root: 'dist/app' });
 });
 
 app.listen(port, async () => {
