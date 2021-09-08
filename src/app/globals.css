@@ -4,7 +4,42 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'AllerLight', sans-serif;
+}
+
+:root {
+  /* Fonts */
+  --fontDefault: 'AllerLight', sans-serif;
+  --fontLogo: 'Aller', sans-serif;
+  --fontBold: 'AllerBold', sans-serif;
+  --fontSizeDefault: 1rem;
+  --fontSizeInput: 1.25rem;
+  --fontSizeHeadlineLarge: 2.6rem;
+  --fontSizeHeadlineDefault: 1.6rem;
+  --fontSizeLogo: 0.9rem;
+  --lineHeightDefault: 150%;
+  --lineHeightHeadlines: 100%;
+
+  /* Paddings */
+  --gap: 1rem;
+  --gapSmall: 0.5rem;
+
+  /* Border-radius */
+  --radius: 0.5rem;
+
+  /* Shadows */
+  --shadowDefault: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
+  --shadowSmall: 1px 1px 1px hsla(0, 0%, 0%, 0.5);
+
+  /* Colors */
+  --hue: 200;
+  --primarySolid: hsl(var(--hue), 100%, 45%);
+  --primary: linear-gradient(100deg, hsl(var(--hue), 100%, 50%) 5%, hsl(var(--hue), 100%, 40%) 77%);
+  --light: hsl(var(--hue), 100%, 100%);
+  --lightPrimary: hsl(var(--hue), 100%, 95%);
+  --dark: hsl(var(--hue), 10%, 25%);
+  --inactiveSolid: hsl(0, 0%, 45%);
+  --inactive: linear-gradient(100deg, hsl(0, 00%, 40%) 5%, hsl(0, 00%, 50%) 77%);
+  --medium: linear-gradient(100deg, hsl(0, 00%, 70%) 5%, hsl(0, 00%, 80%) 77%);
 }
 
 @font-face {
@@ -12,7 +47,21 @@
   src: url('../assets/aller.light.ttf');
 }
 
+@font-face {
+  font-family: 'Aller';
+  src: url('../assets/aller.regular.ttf');
+}
+
+@font-face {
+  font-family: 'AllerBold';
+  src: url('../assets/aller.bold.ttf');
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--fontDefault);
+  line-height: var(--lineHeightDefault);
+  background: var(--dark);
+  color: var(--light);
 }

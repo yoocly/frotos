@@ -12,6 +12,8 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  layout: 'fullscreen',
 };
 
 addDecorator((story) => <MemoryRouter>{story()}</MemoryRouter>);
+addDecorator((story) => <div style={{ margin: '1rem' }}>{story()}</div>);
