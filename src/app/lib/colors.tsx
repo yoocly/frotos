@@ -2,6 +2,7 @@ import React from 'react';
 
 export type color = {
   cssVar: string;
+  colorClass: string;
   gradientFillClass?: string;
   gradientStrokeClass?: string;
   gradientSVG?: () => JSX.Element;
@@ -77,26 +78,29 @@ export const GRADIENTS_SVG = {
 };
 
 export const COLORS = {
-  primary: { cssVar: `primary` },
-  lightPrimary: { cssVar: `lightPrimary` },
-  light: { cssVar: `light` },
-  medium: { cssVar: `medium` },
-  inactive: { cssVar: `inactive` },
-  dark: { cssVar: `dark` },
+  primary: { cssVar: `primary`, colorClass: `colorPrimary` },
+  lightPrimary: { cssVar: `lightPrimary`, colorClass: `colorLightPrimary` },
+  light: { cssVar: `light`, colorClass: `colorLight` },
+  medium: { cssVar: `medium`, colorClass: `colorMedium` },
+  inactive: { cssVar: `inactive`, colorClass: `colorInactive` },
+  dark: { cssVar: `dark`, colorClass: `colorDark` },
   primaryGradient: {
     cssVar: `primaryGradient`,
+    colorClass: `colorPrimaryGradient`,
     gradientFillClass: `fillPrimaryGradient`,
     gradientStrokeClass: `strokePrimaryGradient`,
     gradientSVG: GRADIENTS_SVG.primary,
   },
   mediumGradient: {
     cssVar: `mediumGradient`,
+    colorClass: `colorMediumGradient`,
     gradientFillClass: `fillMediumGradient`,
     gradientStrokeClass: `strokeMediumGradient`,
     gradientSVG: GRADIENTS_SVG.medium,
   },
   inactiveGradient: {
     cssVar: `inactiveGradient`,
+    colorClass: `colorInactiveGradient`,
     gradientFillClass: `fillInactiveGradient`,
     gradientStrokeClass: `strokeInactiveGradient`,
     gradientSVG: GRADIENTS_SVG.inactive,

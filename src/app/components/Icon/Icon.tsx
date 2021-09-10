@@ -34,8 +34,7 @@ export default function Icon({
           icon={iconItem.iconify}
           width={height}
           height={width}
-          style={{ color: `var(--${colorItem.cssVar})` }}
-          className={`${
+          className={`${colorItem.colorClass} ${
             colorItem.gradientFillClass ? styles[colorItem.gradientFillClass] : ``
           } ${className}`}
         />
