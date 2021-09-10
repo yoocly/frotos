@@ -9,7 +9,7 @@
 :root {
   /* Fonts */
   --fontDefault: 'AllerLight', sans-serif;
-  --fontLogo: 'Aller', sans-serif;
+  --fontMedium: 'Aller', sans-serif;
   --fontBold: 'AllerBold', sans-serif;
   --fontSizeDefault: 1rem;
   --fontSizeInput: 1.25rem;
@@ -17,10 +17,11 @@
   --fontSizeHeadlineDefault: 1.6rem;
   --fontSizeLogo: 0.9rem;
   --lineHeightDefault: 150%;
-  --lineHeightHeadlines: 100%;
+  --lineHeightHeadlines: 120%;
 
   /* Paddings */
   --gap: 1rem;
+  --gapMedium: 0.75rem;
   --gapSmall: 0.5rem;
 
   /* Border-radius */
@@ -76,7 +77,10 @@ body {
 }
 
 .colorPrimaryGradient {
-  color: var(--primaryGradient);
+  background: var(--primaryGradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .colorLight {
@@ -96,7 +100,10 @@ body {
 }
 
 .colorInactiveGradient {
-  color: var(--inactiveGradient);
+  background: var(--inactiveGradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .colorMedium {
@@ -104,5 +111,8 @@ body {
 }
 
 .colorMediumGradient {
-  color: var(--mediumGradient);
+  background: var(--mediumGradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
