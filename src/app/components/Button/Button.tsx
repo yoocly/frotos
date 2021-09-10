@@ -1,5 +1,6 @@
 import React from 'react';
-import type { colorKey } from '../../lib/colors';
+import type { color, colorKey } from '../../lib/colors';
+import { COLORS } from '../../lib/colors';
 import Icon from '../Icon/Icon';
 import type { iconKey } from '../Icon/icons';
 import styles from './Button.module.css';
@@ -23,16 +24,18 @@ export default function Button({
   onClick,
   className = '',
 }: ButtonProps): JSX.Element {
+  const colorItem: color = COLORS[color];
+
   return (
     <button
       onClick={onClick}
-      className={`${styles.button} 
+      className={`${styles.button} ${colorItem.colorClass} 
         ${small ? styles.small : ``} ${transparent ? styles.transparent : ``} ${className}`}
     >
       {icon && (
         <Icon icon={icon} color={color} width={small ? '1rem' : ''} height={small ? '1rem' : ''} />
       )}
-      {text && text}
+      {text && <div className={`${colorItem.colorClass}`}>{text}</div>}
     </button>
   );
 }

@@ -3,7 +3,6 @@
   border-radius: var(--radius);
   border: none;
   padding: var(--gapMedium);
-  color: var(--lightPrimary);
   font-family: var(--fontBold);
   font-size: var(--fontSizeInput);
   line-height: var(--lineHeightHeadlines);
