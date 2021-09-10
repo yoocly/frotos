@@ -4,7 +4,7 @@ import styles from './Icon.module.css';
 
 export type icon = {
   iconify?: string;
-  svg?: (height: string, width: string, colorItem: color, className: string) => JSX.Element;
+  svg?: (height: string, width: string, color: color, className: string) => JSX.Element;
 };
 
 export type iconKey = keyof typeof ICONS;
@@ -40,18 +40,13 @@ export const ICONS = {
   delete: { iconify: 'ic:round-delete-forever' },
 
   filterFormat: {
-    svg: (
-      height = '1.5rem',
-      width = '1.5rem',
-      colorItem: color,
-      className?: string
-    ): JSX.Element => (
+    svg: (height = '1.5rem', width = '1.5rem', color: color, className?: string): JSX.Element => (
       <svg
         width={width}
         height={height}
         viewBox="0 0 29 29"
         className={`${
-          colorItem.gradientStrokeClass ? styles[colorItem.gradientStrokeClass] : ``
+          color.gradientStrokeClass ? styles[color.gradientStrokeClass] : ``
         } ${className}`}
         fill="none"
       >
@@ -61,7 +56,7 @@ export const ICONS = {
           width="11.5"
           height="16"
           rx="1"
-          stroke={className ? `currentColor` : `var(--${colorItem.cssVar})`}
+          stroke={className ? `currentColor` : `var(--${color.cssVar})`}
           strokeWidth="2"
           shapeRendering="crispEdges"
         />
@@ -71,7 +66,7 @@ export const ICONS = {
           width="16"
           height="11.5"
           rx="1"
-          stroke={className ? `currentColor` : `var(--${colorItem.cssVar})`}
+          stroke={className ? `currentColor` : `var(--${color.cssVar})`}
           strokeWidth="2"
         />
       </svg>
@@ -79,12 +74,7 @@ export const ICONS = {
   },
 
   logo: {
-    svg: (
-      height = '1.5rem',
-      width = '1.5rem',
-      _colorItem: color,
-      className: string
-    ): JSX.Element => (
+    svg: (height = '1.5rem', width = '1.5rem', _color: color, className: string): JSX.Element => (
       <svg width={width} height={height} className={className} viewBox="0 0 67 67">
         <path
           d="M25.1334 23.0312C25.1334 24.6971 24.4716 26.2948 23.2936 27.4728C22.1157 28.6507 20.518 29.3125 18.8521 29.3125C17.1862 29.3125 15.5886 28.6507 14.4106 27.4728C13.2326 26.2948 12.5709 24.6971 12.5709 23.0312C12.5709 21.3654 13.2326 19.7677 14.4106 18.5897C15.5886 17.4118 17.1862 16.75 18.8521 16.75C20.518 16.75 22.1157 17.4118 23.2936 18.5897C24.4716 19.7677 25.1334 21.3654 25.1334 23.0312V23.0312Z"
