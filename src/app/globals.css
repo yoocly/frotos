@@ -9,7 +9,7 @@
 :root {
   /* Fonts */
   --fontDefault: 'AllerLight', sans-serif;
-  --fontLogo: 'Aller', sans-serif;
+  --fontMedium: 'Aller', sans-serif;
   --fontBold: 'AllerBold', sans-serif;
   --fontSizeDefault: 1rem;
   --fontSizeInput: 1.25rem;
@@ -21,6 +21,7 @@
 
   /* Paddings */
   --gap: 1rem;
+  --gapMedium: 0.75rem;
   --gapSmall: 0.5rem;
 
   /* Border-radius */
