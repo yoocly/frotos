@@ -16,8 +16,8 @@
   --fontSizeHeadlineLarge: 2.6rem;
   --fontSizeHeadlineDefault: 1.6rem;
   --fontSizeLogo: 0.9rem;
-  --lineHeightDefault: 150%;
-  --lineHeightHeadlines: 120%;
+  --lineHeightDefault: 1.5;
+  --lineHeightHeadlines: 1.2;
 
   /* Paddings */
   --gap: 1rem;
