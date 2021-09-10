@@ -32,14 +32,19 @@
 
   /* Colors */
   --hue: 200;
-  --primarySolid: hsl(var(--hue), 100%, 45%);
-  --primary: linear-gradient(100deg, hsl(var(--hue), 100%, 50%) 5%, hsl(var(--hue), 100%, 40%) 77%);
+  --primary: hsl(var(--hue), 100%, 45%);
+  --primaryGradient: linear-gradient(
+    100deg,
+    hsl(var(--hue), 100%, 50%) 5%,
+    hsl(var(--hue), 100%, 40%) 77%
+  );
   --light: hsl(var(--hue), 100%, 100%);
   --lightPrimary: hsl(var(--hue), 100%, 95%);
   --dark: hsl(var(--hue), 10%, 25%);
-  --inactiveSolid: hsl(0, 0%, 45%);
-  --inactive: linear-gradient(100deg, hsl(0, 00%, 40%) 5%, hsl(0, 00%, 50%) 77%);
-  --medium: linear-gradient(100deg, hsl(0, 00%, 70%) 5%, hsl(0, 00%, 80%) 77%);
+  --inactive: hsl(0, 0%, 45%);
+  --inactiveGradient: linear-gradient(100deg, hsl(0, 00%, 40%) 5%, hsl(0, 00%, 50%) 77%);
+  --medium: hsl(0, 0%, 75%);
+  --mediumGradient: linear-gradient(100deg, hsl(0, 00%, 70%) 5%, hsl(0, 00%, 80%) 77%);
 }
 
 @font-face {
