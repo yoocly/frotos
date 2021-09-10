@@ -22,12 +22,14 @@ export default {
   },
 } as Meta;
 
-export const allIcons = (args: IconProps): JSX.Element[][] =>
-  Object.keys(ICONS).map((icon) =>
-    Object.keys(COLORS).map((color) => (
-      <Icon {...args} icon={icon as iconKey} color={color as colorKey} key={`${icon}${color}`} />
-    ))
-  );
+export const allIcons = (args: IconProps): JSX.Element[] =>
+  Object.keys(ICONS).map((icon) => (
+    <div>
+      {Object.keys(COLORS).map((color) => (
+        <Icon {...args} icon={icon as iconKey} color={color as colorKey} key={`${icon}${color}`} />
+      ))}
+    </div>
+  ));
 
 const Template: Story<IconProps> = (args) => <Icon {...args} />;
 export const specificIcon = Template.bind({});
