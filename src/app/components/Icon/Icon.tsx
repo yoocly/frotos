@@ -28,7 +28,7 @@ export default function Icon({
   const colorItem: color = COLORS[color];
 
   return (
-    <>
+    <div className={styles.wrapper}>
       {iconItem.iconify && (
         <IconifyIcon
           icon={iconItem.iconify}
@@ -42,6 +42,6 @@ export default function Icon({
       )}
       {iconItem.svg && iconItem.svg(height, width, colorItem, className)}
       {colorItem.gradientSVG && colorItem.gradientSVG()}
-    </>
+    </div>
   );
 }
