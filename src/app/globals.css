@@ -17,7 +17,7 @@
   --fontSizeHeadlineDefault: 1.6rem;
   --fontSizeLogo: 0.9rem;
   --lineHeightDefault: 150%;
-  --lineHeightHeadlines: 100%;
+  --lineHeightHeadlines: 120%;
 
   /* Paddings */
   --gap: 1rem;
@@ -77,7 +77,10 @@ body {
 }
 
 .colorPrimaryGradient {
-  color: var(--primaryGradient);
+  background: var(--primaryGradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .colorLight {
@@ -97,7 +100,10 @@ body {
 }
 
 .colorInactiveGradient {
-  color: var(--inactiveGradient);
+  background: var(--inactiveGradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .colorMedium {
@@ -105,5 +111,8 @@ body {
 }
 
 .colorMediumGradient {
-  color: var(--mediumGradient);
+  background: var(--mediumGradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
