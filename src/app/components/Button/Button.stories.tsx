@@ -1,5 +1,6 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
+import { COLORS } from '../../lib/colors';
 import { ICONS } from '../Icon/icons';
 import type { ButtonProps } from './Button';
 import Button from './Button';
@@ -9,7 +10,11 @@ export default {
   component: Button,
   argTypes: {
     icon: {
-      options: Object.keys(ICONS),
+      options: [``, ...Object.keys(ICONS)],
+      control: { type: 'select' },
+    },
+    color: {
+      options: Object.keys(COLORS),
       control: { type: 'select' },
     },
   },
@@ -23,4 +28,5 @@ button.args = {
   text: 'Search',
   small: false,
   transparent: false,
+  onClick: () => console.log('Clicked'),
 };
