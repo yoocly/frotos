@@ -1,6 +1,5 @@
 .checkbox {
-  display: inline-grid;
-  grid-auto-flow: column;
+  display: flex;
   gap: var(--gapSmall);
 }
 
