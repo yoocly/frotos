@@ -24,23 +24,23 @@ export default function Icon({
   width = '1.5rem',
   className = '',
 }: IconProps): JSX.Element {
-  const iconItem: icon = ICONS[icon];
-  const colorItem: color = COLORS[color];
+  const { iconify, svg }: icon = ICONS[icon];
+  const { colorClass, gradientFillClass, gradientSVG }: color = COLORS[color];
 
   return (
     <div className={styles.wrapper}>
-      {iconItem.iconify && (
+      {iconify && (
         <IconifyIcon
-          icon={iconItem.iconify}
+          icon={iconify}
           width={height}
           height={width}
-          className={`${colorItem.colorClass} ${
-            colorItem.gradientFillClass ? styles[colorItem.gradientFillClass] : ``
+          className={`${colorClass} ${
+            gradientFillClass ? styles[gradientFillClass] : ``
           } ${className}`}
         />
       )}
-      {iconItem.svg && iconItem.svg(height, width, colorItem, className)}
-      {colorItem.gradientSVG && colorItem.gradientSVG()}
+      {svg && svg(height, width, COLORS[color], className)}
+      {gradientSVG && gradientSVG()}
     </div>
   );
 }
