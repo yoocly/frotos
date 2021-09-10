@@ -24,24 +24,24 @@ export default function Icon({
   width = '1.5rem',
   className = '',
 }: IconProps): JSX.Element {
-  const iconElement: icon = ICONS[icon];
-  const colorElement: color = COLORS[color];
+  const iconItem: icon = ICONS[icon];
+  const colorItem: color = COLORS[color];
 
   return (
     <>
-      {iconElement.iconify && (
+      {iconItem.iconify && (
         <IconifyIcon
-          icon={iconElement.iconify}
+          icon={iconItem.iconify}
           width={height}
           height={width}
-          style={{ color: `var(--${colorElement.cssVar})` }}
+          style={{ color: `var(--${colorItem.cssVar})` }}
           className={`${
-            colorElement.gradientFillClass ? styles[colorElement.gradientFillClass] : ``
+            colorItem.gradientFillClass ? styles[colorItem.gradientFillClass] : ``
           } ${className}`}
         />
       )}
-      {iconElement.svg && iconElement.svg(height, width, colorElement, className)}
-      {colorElement.gradientSVG && colorElement.gradientSVG()}
+      {iconItem.svg && iconItem.svg(height, width, colorItem, className)}
+      {colorItem.gradientSVG && colorItem.gradientSVG()}
     </>
   );
 }

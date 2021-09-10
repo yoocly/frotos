@@ -4,7 +4,7 @@ import styles from './Icon.module.css';
 
 export type icon = {
   iconify?: string;
-  svg?: (height: string, width: string, colorElement: color, className: string) => JSX.Element;
+  svg?: (height: string, width: string, colorItem: color, className: string) => JSX.Element;
 };
 
 export type iconKey = keyof typeof ICONS;
@@ -43,7 +43,7 @@ export const ICONS = {
     svg: (
       height = '1.5rem',
       width = '1.5rem',
-      colorElement: color,
+      colorItem: color,
       className?: string
     ): JSX.Element => (
       <svg
@@ -51,7 +51,7 @@ export const ICONS = {
         height={height}
         viewBox="0 0 29 29"
         className={`${
-          colorElement.gradientStrokeClass ? styles[colorElement.gradientStrokeClass] : ``
+          colorItem.gradientStrokeClass ? styles[colorItem.gradientStrokeClass] : ``
         } ${className}`}
         fill="none"
       >
@@ -61,7 +61,7 @@ export const ICONS = {
           width="11.5"
           height="16"
           rx="1"
-          stroke={className ? `currentColor` : `var(--${colorElement.cssVar})`}
+          stroke={className ? `currentColor` : `var(--${colorItem.cssVar})`}
           strokeWidth="2"
           shapeRendering="crispEdges"
         />
@@ -71,7 +71,7 @@ export const ICONS = {
           width="16"
           height="11.5"
           rx="1"
-          stroke={className ? `currentColor` : `var(--${colorElement.cssVar})`}
+          stroke={className ? `currentColor` : `var(--${colorItem.cssVar})`}
           strokeWidth="2"
         />
       </svg>
@@ -82,7 +82,7 @@ export const ICONS = {
     svg: (
       height = '1.5rem',
       width = '1.5rem',
-      _colorElement: color,
+      _colorItem: color,
       className: string
     ): JSX.Element => (
       <svg width={width} height={height} className={className} viewBox="0 0 67 67">
