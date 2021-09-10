@@ -1,3 +1,7 @@
+.wrapper {
+  display: inline-flex;
+}
+
 .fillPrimaryGradient * {
   fill: url(#primaryGradient);
 }
