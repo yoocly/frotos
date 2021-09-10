@@ -70,3 +70,39 @@ body {
   background: var(--dark);
   color: var(--light);
 }
+
+.colorPrimary {
+  color: var(--primary);
+}
+
+.colorPrimaryGradient {
+  color: var(--primaryGradient);
+}
+
+.colorLight {
+  color: var(--light);
+}
+
+.colorLightPrimary {
+  color: var(--lightPrimary);
+}
+
+.colorDark {
+  color: var(--dark);
+}
+
+.colorInactive {
+  color: var(--inactive);
+}
+
+.colorInactiveGradient {
+  color: var(--inactiveGradient);
+}
+
+.colorMedium {
+  color: var(--medium);
+}
+
+.colorMediumGradient {
+  color: var(--mediumGradient);
+}
