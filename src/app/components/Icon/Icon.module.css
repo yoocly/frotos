@@ -1,0 +1,23 @@
+.fillPrimaryGradient * {
+  fill: url(#primaryGradient);
+}
+
+.strokePrimaryGradient * {
+  stroke: url(#primaryGradient);
+}
+
+.fillMediumGradient * {
+  fill: url(#mediumGradient);
+}
+
+.strokeMediumGradient * {
+  stroke: url(#mediumGradient);
+}
+
+.fillInactiveGradient * {
+  fill: url(#inactiveGradient);
+}
+
+.strokeInactiveGradient * {
+  stroke: url(#inactiveGradient);
+}
