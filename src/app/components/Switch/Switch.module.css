@@ -1,0 +1,61 @@
+.switch {
+  display: flex;
+  gap: var(--gapSmall);
+  position: relative;
+  cursor: pointer;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle {
+  cursor: pointer;
+  height: 1.5em;
+  width: 3em;
+  background: var(--inactiveGradient);
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+  border-radius: 1.5em;
+}
+
+.toggle::before {
+  position: absolute;
+  z-index: 1;
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='.9rem' height='.9rem' fill='hsl(0,0%,45%)' viewBox='0 0 24 24'><path d='M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z'/></svg>");
+  text-align: center;
+  height: 1.3em;
+  width: 1.3em;
+  left: 0.6em;
+  top: 0.1em;
+  border-radius: 50%;
+  background: var(--medium);
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+}
+
+.toggle::after {
+  position: absolute;
+  content: '';
+  height: 1.5em;
+  width: 3em;
+  background: var(--primaryGradient);
+  -webkit-transition: 0.4s ease;
+  transition: 0.4s ease;
+  border-radius: 1.5em;
+  opacity: 0;
+}
+
+input:checked + .toggle::after {
+  opacity: 1;
+}
+
+input:checked + .toggle::before {
+  background: var(--lightPrimary);
+  content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='.9rem' height='.9rem' fill='hsl(200,100%,45%)' viewBox='0 0 24 24'><path d='M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z'/></svg>");
+  -webkit-transform: translateX(1.5rem);
+  -ms-transform: translateX(1.5rem);
+  transform: translateX(1.5rem);
+}
