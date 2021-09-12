@@ -1,6 +1,7 @@
 .checkbox {
   display: flex;
   gap: var(--gapSmall);
+  cursor: pointer;
 }
 
 .checkbox input {
@@ -10,6 +11,7 @@
   height: var(--fontSizeDefault);
   width: var(--fontSizeDefault);
   border-radius: calc(0.25 * var(--radius));
+  cursor: pointer;
 }
 
 .checkbox input::before {
