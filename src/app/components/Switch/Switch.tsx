@@ -18,7 +18,6 @@ export default function Switch({
     <label className={`${styles.switch} ${className}`}>
       <input type="checkbox" checked={value} onChange={onChange} />
       <div className={styles.toggle}></div>
-      <div className={styles.toggleActive}></div>
       <div>{children}</div>
     </label>
   );
