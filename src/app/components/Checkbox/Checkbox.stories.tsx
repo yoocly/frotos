@@ -14,5 +14,6 @@ const Template: Story<CheckboxProps> = (args) => <Checkbox {...args}></Checkbox>
 export const checkbox = Template.bind({});
 checkbox.args = {
   checked: false,
+  onChange: () => console.log('Changed'),
   children: `This is my checkbox`,
 };
