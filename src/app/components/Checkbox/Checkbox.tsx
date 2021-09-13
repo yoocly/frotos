@@ -17,7 +17,8 @@ export default function Checkbox({
   return (
     <label className={`${styles.checkbox} ${className}`}>
       <input type="checkbox" checked={checked} onChange={onChange} />
-      <div>{children}</div>
+      <span className={styles.styledCheckbox}></span>
+      <span className={styles.labelText}>{children}</span>
     </label>
   );
 }

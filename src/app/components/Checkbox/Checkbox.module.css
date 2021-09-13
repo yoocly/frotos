@@ -1,31 +1,36 @@
 .checkbox {
   display: flex;
-  gap: var(--gapSmall);
   cursor: pointer;
 }
 
 .checkbox input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.styledCheckbox {
   margin-top: calc(
     0.4 * (var(--fontSizeDefault) * var(--lineHeightDefault) - var(--fontSizeDefault))
   );
   height: var(--fontSizeDefault);
   width: var(--fontSizeDefault);
-  border-radius: calc(0.25 * var(--radius));
+  border-radius: calc(0.4 * var(--radius));
+  border: 1px solid var(--light);
   cursor: pointer;
 }
 
-.checkbox input::before {
-  height: var(--fontSizeDefault);
-  width: var(--fontSizeDefault);
-  border-radius: calc(0.25 * var(--radius));
-  border: 1px solid var(--light);
+.styledCheckbox::before {
   background: var(--dark);
-  display: block;
   content: '';
 }
 
-.checkbox input:checked::before {
+.checkbox input:checked + .styledCheckbox {
   border: none;
   background: var(--primaryGradient);
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1rem' height='1rem' viewBox='0 0 24 24'><path d='M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z' fill='white'/></svg>");
+}
+
+.labelText {
+  margin-left: var(--gapSmall);
 }
