@@ -4,7 +4,7 @@ import type { HeadlineProps } from './Headline';
 import Headline from './Headline';
 
 export default {
-  title: 'Components',
+  title: 'Components/Headline',
   component: Headline,
   argTypes: {
     level: {
