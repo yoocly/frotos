@@ -26,7 +26,7 @@ export async function images(req: Request, res: Response): Promise<void> {
     const results =
       response[images]?.map((image, index) => {
         const castedImage = castImage(image);
-        const richImage = enrichImage(castedImage, api, index, count || 0);
+        const richImage = enrichImage(castedImage, api, index, count);
         return richImage;
       }) || [];
 
