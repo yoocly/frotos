@@ -32,19 +32,31 @@ export default function Input({
     onSubmit();
   }
 
+  const inputElement = (
+    <input
+      className={styles.inputField}
+      type={password ? `password` : `text`}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+    />
+  );
+  const iconElement = <Icon icon={icon} className={styles.icon} />;
+  const submitButton = <Button icon={submitIcon} className={styles.submitButton} />;
+
+  if (submitIcon && submitIcon !== 'none')
+    return (
+      <form onSubmit={handleSubmit} className={`${styles.input} ${className}`}>
+        {iconElement}
+        {inputElement}
+        {submitButton}
+      </form>
+    );
+
   return (
-    <form onSubmit={handleSubmit} className={`${styles.input} ${className}`}>
-      <Icon icon={icon} className={styles.icon} />
-      <input
-        className={styles.inputField}
-        type={password ? `password` : `text`}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-      {submitIcon && submitIcon !== 'none' && (
-        <Button icon={submitIcon} className={styles.submitButton} />
-      )}
-    </form>
+    <div className={`${styles.input} ${className}`}>
+      {iconElement}
+      {inputElement}
+    </div>
   );
 }
