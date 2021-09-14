@@ -1,0 +1,25 @@
+.button {
+  background: var(--primaryGradient);
+  border-radius: var(--radius);
+  border: none;
+  padding: var(--gapMedium);
+  font-family: var(--fontBold);
+  font-size: var(--fontSizeInput);
+  line-height: var(--lineHeightHeadlines);
+  display: flex;
+  align-items: center;
+  gap: var(--gapMedium);
+  cursor: pointer;
+}
+
+.small {
+  font-family: var(--fontMedium);
+  font-size: var(--fontSizeDefault);
+  padding: var(--gapSmall);
+  gap: var(--gapSmall);
+}
+
+.transparent {
+  background: transparent;
+  padding: 0;
+}
