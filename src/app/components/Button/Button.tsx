@@ -29,9 +29,8 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`${styles.button} ${colorClass} ${small ? styles.small : ``} ${
-        transparent ? styles.transparent : ``
-      } ${className}`}
+      className={`${styles.button} ${colorClass} 
+        ${small && styles.small} ${transparent && styles.transparent} ${className}`}
     >
       {icon && (
         <Icon icon={icon} color={color} width={small ? '1rem' : ''} height={small ? '1rem' : ''} />
