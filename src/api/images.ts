@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import fetchJSONsAsync from '../utils/fetchJSONsAsync';
 import type { castedImage, image } from './apis';
 import { apis } from './apis';
-import type { imageAPIResult } from './apiTypes';
+import type { imageAPIResult } from './externalAPITypes';
 
 export async function images(req: Request, res: Response): Promise<void> {
   if (!(`query` in req.params)) {

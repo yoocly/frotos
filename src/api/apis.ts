@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type { APIImage, pexelsImage, pixabayImage, unsplashImage } from './apiTypes';
+import type { APIImage, pexelsImage, pixabayImage, unsplashImage } from './externalAPITypes';
 dotenv.config();
 
 export type image = castedImage & {
