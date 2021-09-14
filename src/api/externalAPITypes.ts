@@ -11,7 +11,7 @@ export type imageAPIResult = {
   hits?: pixabayImage[];
 };
 
-export type APIImage = unsplashImage | pexelsImage | pixabayImage;
+export type imageAPIImage = unsplashImage | pexelsImage | pixabayImage;
 
 export type pixabayImage = {
   id?: number;

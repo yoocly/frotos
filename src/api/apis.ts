@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type { APIImage, pexelsImage, pixabayImage, unsplashImage } from './externalAPITypes';
+import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externalAPITypes';
 dotenv.config();
 
 export type image = castedImage & {
@@ -28,7 +28,7 @@ export type api = {
     count: 'total' | 'total_results';
     images: 'results' | 'photos' | 'hits';
   };
-  castImage: (image: APIImage) => castedImage;
+  castImage: (image: imageAPIImage) => castedImage;
 };
 
 export type apiNames = 'unsplash' | 'pexels' | 'pixabay';
@@ -48,7 +48,7 @@ export const apis: api[] = [
       count: 'total',
       images: 'results',
     },
-    castImage: function (image: APIImage): castedImage {
+    castImage: function (image: imageAPIImage): castedImage {
       const unsplashImage = image as unsplashImage;
 
       return {
@@ -72,7 +72,7 @@ export const apis: api[] = [
       count: 'total_results',
       images: 'photos',
     },
-    castImage: function (image: APIImage): castedImage {
+    castImage: function (image: imageAPIImage): castedImage {
       const pexelsImage = image as pexelsImage;
       return {
         id: pexelsImage?.id?.toString() || '',
@@ -96,7 +96,7 @@ export const apis: api[] = [
       count: 'total',
       images: 'hits',
     },
-    castImage: function (image: APIImage): castedImage {
+    castImage: function (image: imageAPIImage): castedImage {
       const pixabayImage = image as pixabayImage;
       return {
         id: pixabayImage?.id?.toString() || '',
