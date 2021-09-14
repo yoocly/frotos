@@ -18,7 +18,7 @@ export type IconProps = {
 };
 
 export default function Icon({
-  icon,
+  icon = 'none',
   color = 'primaryGradient',
   height = '1.5rem',
   width = '1.5rem',
@@ -26,6 +26,8 @@ export default function Icon({
 }: IconProps): JSX.Element {
   const { iconify, svg }: icon = ICONS[icon];
   const { colorClass, gradientFillClass, gradientSVG }: color = COLORS[color];
+
+  if (!(iconify || svg)) return <></>;
 
   return (
     <div className={styles.wrapper}>

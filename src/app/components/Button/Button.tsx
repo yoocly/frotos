@@ -16,7 +16,7 @@ export type ButtonProps = {
 };
 
 export default function Button({
-  icon,
+  icon = 'none',
   text,
   color = 'lightPrimary',
   small = false,
@@ -30,7 +30,7 @@ export default function Button({
     <button
       onClick={onClick}
       className={`${styles.button} ${colorClass} 
-        ${small ? styles.small : ``} ${transparent ? styles.transparent : ``} ${className}`}
+        ${small && styles.small} ${transparent && styles.transparent} ${className}`}
     >
       {icon && (
         <Icon icon={icon} color={color} width={small ? '1rem' : ''} height={small ? '1rem' : ''} />
