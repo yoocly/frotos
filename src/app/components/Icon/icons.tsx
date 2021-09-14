@@ -10,6 +10,7 @@ export type icon = {
 export type iconKey = keyof typeof ICONS;
 
 export const ICONS = {
+  none: {},
   search: { iconify: 'ic:round-search' },
   info: { iconify: 'ic:outline-info' },
   collection: { iconify: 'ic:round-bookmark-border' },

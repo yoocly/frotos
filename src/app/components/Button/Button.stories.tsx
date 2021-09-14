@@ -10,7 +10,7 @@ export default {
   component: Button,
   argTypes: {
     icon: {
-      options: [``, ...Object.keys(ICONS)],
+      options: Object.keys(ICONS),
       control: { type: 'select' },
     },
     color: {
