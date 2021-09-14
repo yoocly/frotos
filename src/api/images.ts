@@ -36,7 +36,7 @@ export async function images(req: Request, res: Response): Promise<void> {
     };
   });
 
-  const totalCount = results.reduce((total, result) => total + (result?.count || 0), 0);
+  const totalCount = results.reduce((total, result) => total + result?.count, 0);
 
   const mergedResults = results.map((result) => result.images).flat();
   const sortedResults = mergedResults.sort((a, b) => (a.score < b.score ? 1 : -1));
@@ -49,7 +49,7 @@ function enrichImage(castedImage: castedImage, api: string, index: number, total
     ...castedImage,
     aspectRatio: getAspectRatio(castedImage.width, castedImage.height),
     api,
-    score: total > 0 ? total / (index + 1) : 0,
+    score: total / (index + 1),
   };
 }
 
