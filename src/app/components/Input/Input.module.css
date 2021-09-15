@@ -1,0 +1,36 @@
+.input {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  background: var(--light);
+  border-radius: var(--radius);
+  border: none;
+}
+
+.inputField {
+  flex-grow: 1;
+  background: var(--light);
+  color: var(--dark);
+  font-family: var(--fontDefault);
+  font-size: var(--fontSizeInput);
+  line-height: var(--lineHeightDefault);
+  border-radius: var(--radius);
+  border: none;
+  padding: var(--gapSmall) var(--gapMedium);
+}
+
+.inputField::placeholder {
+  color: var(--inactive);
+}
+
+.inputField:focus {
+  outline: none;
+}
+
+.icon {
+  margin-left: var(--gapMedium);
+}
+
+.submitButton {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
