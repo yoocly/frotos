@@ -1,14 +1,10 @@
-### GET Request
-GET http://localhost:3000/?query=testQuery
+### Query Pexels
+GET https://api.pexels.com/v1/search?query=pizza
+Authorization: {{$dotenv KEY_PEXELS}}
 
-### GET Request
-GET http://localhost:3000/test?query=testQuery
+### Query Unsplash
+GET https://api.unsplash.com/search/photos?query=pizza
+Authorization: {{$dotenv KEY_UNSPLASH}}
 
-### Add a new credential
-POST http://localhost:3000/
-Content-Type: application/json
-
-{
-    "key1": "value1",
-    "Key2": "key2"
-}
+### Query Pixabay
+GET https://pixabay.com/api/?key={{$dotenv KEY_PIXABAY}}&q=pizza
