@@ -1,0 +1,46 @@
+.mobile {
+  position: fixed;
+  z-index: 1;
+  bottom: 0;
+  left: calc((100vw - min(30rem, 100vw)) / 2);
+  width: min(30rem, 100vw);
+}
+@media (min-width: 30rem) {
+  .mobile {
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .navBarWrapper {
+    background: hsla(0, 0%, 0%, 50%);
+    -webkit-backdrop-filter: blur(0.5rem);
+    backdrop-filter: blur(0.5rem);
+  }
+}
+@supports not ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+  .navBarWrapper {
+    background: hsla(0, 0%, 0%, 80%);
+  }
+}
+
+.navBar {
+  display: grid;
+  grid-auto-flow: column;
+  padding: 3vh;
+  max-width: 45rem;
+}
+
+.mobile .navItem {
+  justify-content: center;
+}
+
+.mobile .navItemActive::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 4rem;
+  height: 0.5rem;
+  background: var(--primaryGradient);
+  border-radius: var(--radius);
+}
