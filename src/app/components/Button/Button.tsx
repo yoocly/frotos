@@ -10,8 +10,9 @@ export type ButtonProps = {
   text?: string;
   color?: colorKey;
   small?: boolean;
+  large?: boolean;
   transparent?: boolean;
-  onClick?: () => void;
+  onClick: () => void;
   className?: string;
 };
 
@@ -20,6 +21,7 @@ export default function Button({
   text,
   color = 'lightPrimary',
   small = false,
+  large = false,
   transparent = false,
   onClick,
   className = '',
@@ -36,8 +38,8 @@ export default function Button({
         <Icon
           icon={icon}
           color={color}
-          width={small ? '1rem' : undefined}
-          height={small ? '1rem' : undefined}
+          width={small ? '1rem' : large ? '2rem' : undefined}
+          height={small ? '1rem' : large ? '2rem' : undefined}
         />
       )}
       {text && <div className={`${colorClass}`}>{text}</div>}
