@@ -41,7 +41,7 @@ export async function images(req: Request, res: Response): Promise<void> {
   const mergedResults = results.map((result) => result.images).flat();
   const sortedResults = mergedResults.sort((a, b) => (a.score < b.score ? 1 : -1));
 
-  res.status(200).send({ count: totalCount, results: sortedResults });
+  res.status(200).json({ count: totalCount, results: sortedResults });
 }
 
 function enrichImage(castedImage: castedImage, api: string, index: number, total: number): image {
@@ -58,36 +58,62 @@ function getAspectRatio(width: number, height: number): string {
   const ratio = (width / height).toFixed(2).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
   const ratioInverse = (height / width).toFixed(2).replace(/(?:\.0+|(\.\d+?)0+)$/, '$1');
 
-  if (ratio === '1.33') return `4:3`;
-  if (ratio === '0.75') return `3:4`;
+  switch (ratio) {
+    case '1.33':
+      return `4:3`;
+    case '0.75':
+      return `3:4`;
 
-  if (ratio === '1.49') return `3:2`;
-  if (ratio === '1.5') return `3:2`;
-  if (ratio === '1.51') return `3:2`;
-  if (ratio === '0.66') return `2:3`;
-  if (ratio === '0.67') return `2:3`;
+    case '1.49':
+      return `3:2`;
+    case '1.5':
+      return `3:2`;
+    case '1.51':
+      return `3:2`;
+    case '0.66':
+      return `2:3`;
+    case '0.67':
+      return `2:3`;
 
-  if (ratio === '1.25') return `5:4`;
-  if (ratio === '0.8') return `4:5`;
+    case '1.25':
+      return `5:4`;
+    case '0.8':
+      return `4:5`;
 
-  if (ratio === '1.19') return `6:5`;
-  if (ratio === '1.2') return `6:5`;
-  if (ratio === '1.21') return `6:5`;
-  if (ratio === '0.83') return `5:6`;
-  if (ratio === '0.84') return `5:6`;
+    case '1.19':
+      return `6:5`;
+    case '1.2':
+      return `6:5`;
+    case '1.21':
+      return `6:5`;
+    case '0.83':
+      return `5:6`;
+    case '0.84':
+      return `5:6`;
 
-  if (ratio === '1.66') return `5:3`;
-  if (ratio === '1.67') return `5:3`;
-  if (ratio === '0.6') return `3:5`;
+    case '1.66':
+      return `5:3`;
+    case '1.67':
+      return `5:3`;
+    case '0.6':
+      return `3:5`;
 
-  if (ratio === '1.77') return `16:9`;
-  if (ratio === '1.78') return `16:9`;
-  if (ratio === '0.56') return `9:16`;
-  if (ratio === '0.57') return `9:16`;
+    case '1.77':
+      return `16:9`;
+    case '1.78':
+      return `16:9`;
+    case '0.56':
+      return `9:16`;
+    case '0.57':
+      return `9:16`;
 
-  if (ratio === '1.6') return `16:10`;
-  if (ratio === '0.62') return `10:16`;
-  if (ratio === '0.63') return `10:16`;
+    case '1.6':
+      return `16:10`;
+    case '0.62':
+      return `10:16`;
+    case '0.63':
+      return `10:16`;
+  }
 
   if (width / height >= 1) return `${ratio}:1`;
   return `1:${ratioInverse}`;
