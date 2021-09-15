@@ -16,7 +16,7 @@ export default function BackgroundImage({
 }: BackgroundImageProps): JSX.Element {
   return (
     <div
-      style={{ backgroundImage: `url("src/assets/${image}.webp")` }}
+      style={{ backgroundImage: `url("${image}.webp")` }}
       className={`${styles.backgroundImage} ${className}`}
     >
       {dim ? <div className={styles.dim}>{children}</div> : children}

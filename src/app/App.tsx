@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import BackgroundImage from './components/BackgroundImage/BackgroundImage';
 import NavBar from './components/NavBar/NavBar';
 
 export default function App(): JSX.Element {
@@ -23,8 +24,10 @@ export default function App(): JSX.Element {
           <main>About page</main>
         </Route>
         <Route path="/">
-          <NavBar />
-          <main>Splash Home</main>
+          <BackgroundImage>
+            <NavBar />
+            <main>Splash Home</main>
+          </BackgroundImage>
         </Route>
       </Switch>
     </BrowserRouter>
