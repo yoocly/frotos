@@ -13,8 +13,8 @@
     "prepare": "husky install",
     "test": "prettier --check . && eslint . && stylelint \"**/*.css\"",
     "start": "node dist/server.js",
-    "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook -o dist/storybook",
+    "storybook": "start-storybook -s / -p 6006",
+    "storybook:build": "build-storybook -s / -o dist/storybook",
     "fix": "npx eslint . --fix"
   },
   "devDependencies": {
