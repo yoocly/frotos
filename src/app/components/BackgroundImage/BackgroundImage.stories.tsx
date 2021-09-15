@@ -15,7 +15,6 @@ const Template: Story<BackgroundImageProps> = (args) => (
 
 export const backgroundImage = Template.bind({});
 backgroundImage.args = {
-  image: `splash`,
   dim: true,
   children: `This is my backgroundimage`,
 };

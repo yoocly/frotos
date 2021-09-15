@@ -1,22 +1,21 @@
 import React from 'react';
 import styles from './BackgroundImage.module.css';
+import splash from '/src/assets/splash.webp';
 
 export type BackgroundImageProps = {
-  image?: string;
   dim?: boolean;
   children?: React.ReactNode;
   className?: string;
 };
 
 export default function BackgroundImage({
-  image = 'splash',
   dim = true,
   children,
   className = '',
 }: BackgroundImageProps): JSX.Element {
   return (
     <div
-      style={{ backgroundImage: `url("${image}.webp")` }}
+      style={{ backgroundImage: `url("${splash}")` }}
       className={`${styles.backgroundImage} ${className}`}
     >
       {dim ? <div className={styles.dim}>{children}</div> : children}
