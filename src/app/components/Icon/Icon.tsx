@@ -15,6 +15,7 @@ export type IconProps = {
   height?: string;
   width?: string;
   className?: string;
+  iconClass?: string;
 };
 
 export default function Icon({
@@ -23,6 +24,7 @@ export default function Icon({
   height = '1.5rem',
   width = '1.5rem',
   className = '',
+  iconClass = '',
 }: IconProps): JSX.Element {
   const { iconify, svg }: icon = ICONS[icon];
   const { colorClass, gradientFillClass, gradientSVG }: color = COLORS[color];
@@ -30,7 +32,7 @@ export default function Icon({
   if (!(iconify || svg)) return <></>;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${className}`}>
       {iconify && (
         <IconifyIcon
           icon={iconify}
@@ -38,10 +40,10 @@ export default function Icon({
           height={width}
           className={`${colorClass} ${
             gradientFillClass ? styles[gradientFillClass] : ``
-          } ${className}`}
+          } ${iconClass}`}
         />
       )}
-      {svg && svg(height, width, COLORS[color], className)}
+      {svg && svg(height, width, COLORS[color], iconClass)}
       {gradientSVG && gradientSVG()}
     </div>
   );
