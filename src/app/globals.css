@@ -51,17 +51,17 @@
 
 @font-face {
   font-family: 'AllerLight';
-  src: url('../assets/aller.light.ttf');
+  src: url('aller.light.ttf');
 }
 
 @font-face {
   font-family: 'Aller';
-  src: url('../assets/aller.regular.ttf');
+  src: url('aller.regular.ttf');
 }
 
 @font-face {
   font-family: 'AllerBold';
-  src: url('../assets/aller.bold.ttf');
+  src: url('aller.bold.ttf');
 }
 
 body {

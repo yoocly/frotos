@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './BackgroundImage.module.css';
-import splash from '/src/assets/splash.webp';
+import splash from '../../../assets/splash.webp';
 
 export type BackgroundImageProps = {
   dim?: boolean;

@@ -7,6 +7,7 @@ const { PORT = 3001 } = process.env;
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [reactRefresh()],
+  publicDir: 'src/assets/public',
   build: {
     outDir: 'dist/app',
   },
