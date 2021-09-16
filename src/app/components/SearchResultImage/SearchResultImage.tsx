@@ -5,6 +5,7 @@ import Button from '../Button/Button';
 
 export type SearchResultImageProps = {
   image: image;
+  width: string;
   inCollection?: boolean;
   onClick: () => void;
   onCollectionClick: () => void;
@@ -13,6 +14,7 @@ export type SearchResultImageProps = {
 
 export default function SearchResultImage({
   image,
+  width,
   inCollection = false,
   onClick,
   onCollectionClick,
@@ -21,7 +23,7 @@ export default function SearchResultImage({
   const { urlSource, author, urlAuthor, thumbnail, api } = image;
 
   return (
-    <article className={`${styles.container} ${className}`}>
+    <article className={`${styles.container} ${className}`} style={{ width: width }}>
       <div className={styles.thumbnailWrapper}>
         <img src={thumbnail} className={styles.thumbnail} onClick={onClick} />
         <Button
