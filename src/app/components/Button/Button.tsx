@@ -12,7 +12,7 @@ export type ButtonProps = {
   small?: boolean;
   large?: boolean;
   transparent?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
   className?: string;
 };
 

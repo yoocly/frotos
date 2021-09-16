@@ -46,21 +46,22 @@
   --inactiveGradient: linear-gradient(100deg, hsl(0, 00%, 40%) 5%, hsl(0, 00%, 50%) 77%);
   --medium: hsl(0, 0%, 75%);
   --mediumGradient: linear-gradient(100deg, hsl(0, 00%, 70%) 5%, hsl(0, 00%, 80%) 77%);
+  --backgroundDim: hsla(var(--hue), 10%, 25%, 50%);
 }
 
 @font-face {
   font-family: 'AllerLight';
-  src: url('../assets/aller.light.ttf');
+  src: url('/aller.light.ttf');
 }
 
 @font-face {
   font-family: 'Aller';
-  src: url('../assets/aller.regular.ttf');
+  src: url('/aller.regular.ttf');
 }
 
 @font-face {
   font-family: 'AllerBold';
-  src: url('../assets/aller.bold.ttf');
+  src: url('/aller.bold.ttf');
 }
 
 body {
@@ -70,6 +71,10 @@ body {
   line-height: var(--lineHeightDefault);
   background: var(--dark);
   color: var(--light);
+}
+
+#app {
+  height: 100vh;
 }
 
 .colorPrimary {
