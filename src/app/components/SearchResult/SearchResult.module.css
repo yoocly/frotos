@@ -1,3 +1,16 @@
 .searchResultImage {
-  padding: var(--gapSmall);
+  padding: 0 var(--gapSmall);
+}
+
+.loading {
+  opacity: 0;
+}
+
+.loaded {
+  opacity: 1;
+  transition: ease-in 0.2s;
+}
+
+.spinner {
+  height: 30vh;
 }
