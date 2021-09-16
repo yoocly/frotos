@@ -50,7 +50,7 @@ const mockImages = {
 };
 
 export default {
-  title: 'Components/SearchResultImage',
+  title: 'Components/Search Result Image',
   component: SearchResultImage,
   argTypes: {
     image: {
@@ -64,8 +64,8 @@ const Template: Story<SearchResultImageProps> = (args) => (
   <SearchResultImage {...args}></SearchResultImage>
 );
 
-export const searchresultimage = Template.bind({});
-searchresultimage.args = {
+export const searchResultImage = Template.bind({});
+searchResultImage.args = {
   image: mockImages.image1,
   inCollection: false,
   onClick: () => console.log('clicked image'),
