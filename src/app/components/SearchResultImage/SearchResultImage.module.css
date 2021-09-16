@@ -1,0 +1,36 @@
+.container {
+  display: grid;
+  grid: auto auto / auto auto;
+  gap: 0.25rem;
+}
+.thumbnailWrapper {
+  grid-column: span 2;
+  position: relative;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+}
+
+.collectionButton {
+  position: absolute;
+  top: var(--gap);
+  right: var(--gap);
+  box-shadow: var(--shadowSmall);
+}
+
+.author,
+.authorLink,
+.api,
+.apiLink {
+  color: var(--inactive);
+  font-size: var(--fontSizeCopyright);
+  text-decoration: none;
+  text-transform: capitalize;
+}
+
+.api {
+  justify-self: end;
+}
