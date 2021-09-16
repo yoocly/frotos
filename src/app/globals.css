@@ -16,6 +16,7 @@
   --fontSizeHeadlineLarge: 2.6rem;
   --fontSizeHeadlineDefault: 1.6rem;
   --fontSizeLogo: 0.9rem;
+  --fontSizeCopyright: 0.7rem;
   --lineHeightDefault: 1.5;
   --lineHeightHeadlines: 1.2;
 
@@ -28,7 +29,7 @@
   --radius: 0.5rem;
 
   /* Shadows */
-  --shadowDefault: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
+  --shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
   --shadowSmall: 1px 1px 1px hsla(0, 0%, 0%, 0.5);
 
   /* Colors */
@@ -43,7 +44,7 @@
   --lightPrimary: hsl(var(--hue), 100%, 95%);
   --dark: hsl(var(--hue), 10%, 25%);
   --inactive: hsl(0, 0%, 45%);
-  --inactiveGradient: linear-gradient(100deg, hsl(0, 00%, 40%) 5%, hsl(0, 00%, 50%) 77%);
+  --inactiveGradient: linear-gradient(100deg, hsl(0, 00%, 50%) 5%, hsl(0, 00%, 40%) 77%);
   --medium: hsl(0, 0%, 75%);
   --mediumGradient: linear-gradient(100deg, hsl(0, 00%, 70%) 5%, hsl(0, 00%, 80%) 77%);
 }
