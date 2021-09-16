@@ -27,7 +27,7 @@
 .navBar {
   display: grid;
   grid-auto-flow: column;
-  padding: 3vh;
+  padding: 1rem;
   max-width: 45rem;
 }
 
