@@ -3,6 +3,7 @@
   grid: auto auto / auto auto;
   gap: 0.25rem;
 }
+
 .thumbnailWrapper {
   grid-column: span 2;
   position: relative;
@@ -16,8 +17,8 @@
 
 .collectionButton {
   position: absolute;
-  top: var(--gap);
-  right: var(--gap);
+  top: var(--gapSmall);
+  right: var(--gapSmall);
   box-shadow: var(--shadowSmall);
 }
 
