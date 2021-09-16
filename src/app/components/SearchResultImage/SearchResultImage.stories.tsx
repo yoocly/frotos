@@ -1,4 +1,5 @@
 import type { Meta, Story } from '@storybook/react';
+import { addDecorator } from '@storybook/react';
 import React from 'react';
 import type { SearchResultImageProps } from './SearchResultImage';
 import SearchResultImage from './SearchResultImage';
@@ -71,3 +72,5 @@ searchResultImage.args = {
   onClick: () => console.log('clicked image'),
   onCollectionClick: () => console.log('clicked collection'),
 };
+
+addDecorator((story) => <div style={{ margin: '-1rem' }}>{story()}</div>);
