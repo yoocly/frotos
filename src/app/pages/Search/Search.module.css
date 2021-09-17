@@ -1,0 +1,25 @@
+.search {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.input {
+  margin: var(--gapSmall);
+}
+
+.searchResult {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.searchResult::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+
+.searchResult::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
+}
