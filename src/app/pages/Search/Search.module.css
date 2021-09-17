@@ -9,6 +9,18 @@
   margin: var(--gapSmall);
 }
 
+.filterBar {
+  display: grid;
+  grid-auto-flow: column;
+  margin: 0 var(--gapSmall);
+  height: 2rem;
+  color: var(--medium);
+}
+
+.filter {
+  justify-self: end;
+}
+
 .searchResult {
   height: 100%;
   overflow-y: auto;
