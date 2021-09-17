@@ -35,11 +35,9 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`${styles.button} ${colorClass} 
-        ${small && styles.small} 
-        ${transparent && styles.transparent}  
-        ${inactive && styles.inactive} 
-        ${className}`}
+      className={`${styles.button} ${colorClass} ${small ? styles.small : ``} ${
+        transparent ? styles.transparent : ``
+      } ${inactive ? styles.inactive : ``} ${className}`}
     >
       {icon && (
         <Icon
