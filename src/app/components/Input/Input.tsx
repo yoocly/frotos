@@ -11,7 +11,7 @@ export type InputProps = {
   submitIcon?: iconKey;
   value: string;
   onSubmit?: () => void;
-  onChange?: () => void;
+  onChange: (inputValue: string) => void;
   className?: string;
 };
 
@@ -38,7 +38,7 @@ export default function Input({
       type={password ? `password` : `text`}
       placeholder={placeholder}
       value={value}
-      onChange={onChange}
+      onChange={(event) => onChange(event.target.value)}
     />
   );
   const iconElement = <Icon icon={icon} className={styles.icon} />;

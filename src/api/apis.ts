@@ -20,6 +20,11 @@ export type castedImage = {
   thumbnail: string;
 };
 
+export type imagesResult = {
+  count: number;
+  results: image[];
+};
+
 export type api = {
   name: apiNames;
   key: string;

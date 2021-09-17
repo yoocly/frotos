@@ -75,15 +75,9 @@ body {
 }
 
 #app {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
-  width: 100vw;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-#app::-webkit-scrollbar {
-  display: none;
 }
 
 .colorPrimary {

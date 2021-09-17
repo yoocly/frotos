@@ -4,11 +4,13 @@
 
 .loading {
   opacity: 0;
+  height: 0 !important;
+  overflow: hidden;
 }
 
 .loaded {
   opacity: 1;
-  transition: ease-in 0.2s;
+  transition: ease-in 0.1s;
 }
 
 .spinner {

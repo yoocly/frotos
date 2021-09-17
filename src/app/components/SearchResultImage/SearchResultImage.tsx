@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './SearchResultImage.module.css';
 import type { image } from '../../../api/apis';
 import Button from '../Button/Button';
+import styles from './SearchResultImage.module.css';
 
 export type SearchResultImageProps = {
   image: image;

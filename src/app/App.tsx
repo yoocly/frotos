@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import BackgroundImage from './components/BackgroundImage/BackgroundImage';
 import NavBar from './components/NavBar/NavBar';
+import Search from './pages/Search/Search';
 
 export default function App(): JSX.Element {
   return (
@@ -9,7 +10,7 @@ export default function App(): JSX.Element {
       <Switch>
         <Route path="/search">
           <NavBar active="search" />
-          <main>Search page</main>
+          <Search />
         </Route>
         <Route path="/collections">
           <NavBar active="collections" />

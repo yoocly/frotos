@@ -1,15 +1,10 @@
 import type { Request, Response } from 'express';
 import fetchJSONsAsync from '../utils/fetchJSONsAsync';
-import type { castedImage, image } from './apis';
+import type { castedImage, image, imagesResult } from './apis';
 import { apis } from './apis';
 import type { imageAPIResult } from './externalAPITypes';
 
 export async function images(req: Request, res: Response): Promise<void> {
-  if (!(`query` in req.params)) {
-    res.status(400).send(``);
-    return;
-  }
-
   const { query } = req.params;
   const requests = apis.map(({ url, key }) => ({
     url: url.replace(`{query}`, query),
@@ -41,7 +36,9 @@ export async function images(req: Request, res: Response): Promise<void> {
   const mergedResults = results.map((result) => result.images).flat();
   const sortedResults = mergedResults.sort((a, b) => (a.score < b.score ? 1 : -1));
 
-  res.status(200).json({ count: totalCount, results: sortedResults });
+  const jsonResponse: imagesResult = { count: totalCount, results: sortedResults };
+
+  res.status(200).json(jsonResponse);
 }
 
 function enrichImage(castedImage: castedImage, api: string, index: number, total: number): image {
