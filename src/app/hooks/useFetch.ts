@@ -22,7 +22,6 @@ export default function useFetch<T>(url: string): {
   useEffect(() => {
     refetch();
   }, [url]);
-  console.log(`Loading: ${isLoading} `);
 
   return { data, isLoading, errorMessage, refetch };
 }

@@ -26,8 +26,6 @@ export default function SearchResult({
   const columns = Math.min(4, Math.floor(window.innerWidth / 150));
   const resultWidth = 100 / columns;
 
-  console.log(masonryComplete, `|`, isLoading, `-`, imagesResult?.count);
-
   return (
     <>
       {imagesResult?.count === 0 || (!isLoading && !imagesResult) ? (
