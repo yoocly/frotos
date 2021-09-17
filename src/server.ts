@@ -10,8 +10,11 @@ app.disable('x-powered-by');
 
 app.use('/storybook', express.static('dist/storybook'));
 
-app.get('/api/images/:query?', async (req, res) => {
+app.get('/api/images/:query', async (req, res) => {
   await images(req, res);
+});
+app.get('/api/images/', async (_req, res) => {
+  res.status(400).json();
 });
 
 app.get('/api/', async (_req, res) => {
