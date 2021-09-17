@@ -12,8 +12,8 @@ export default function Spinner({ show = true, className = '' }: SpinnerProps): 
       {' '}
       {show && (
         <div className={`${styles.spinner} ${className}`}>
-          <div className={styles.spinnerA}>
-            <div className={styles.spinnerB}>
+          <div className={styles.spinnerCircle1}>
+            <div className={styles.spinnerCircle2}>
               <div></div>
               <div></div>
             </div>

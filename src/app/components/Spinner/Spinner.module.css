@@ -4,14 +4,14 @@
   justify-items: center;
 }
 
-.spinnerA {
+.spinnerCircle1 {
   width: 100px;
   height: 100px;
   display: inline-block;
   overflow: hidden;
 }
 
-.spinnerB {
+.spinnerCircle2 {
   width: 100%;
   height: 100%;
   position: relative;
@@ -20,7 +20,7 @@
   transform-origin: 0 0;
 }
 
-@keyframes spinnerB {
+@keyframes spinnerCircle2 {
   0% {
     top: 49px;
     left: 49px;
@@ -37,21 +37,21 @@
   }
 }
 
-.spinnerB div {
+.spinnerCircle2 div {
   position: absolute;
   border-width: 1px;
   border-style: solid;
   opacity: 1;
   border-radius: 50%;
-  animation: spinnerB 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  animation: spinnerCircle2 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
 
-.spinnerB div:nth-child(1) {
+.spinnerCircle2 div:nth-child(1) {
   border-color: var(--primary);
   animation-delay: 0s;
 }
 
-.spinnerB div:nth-child(2) {
+.spinnerCircle2 div:nth-child(2) {
   border-color: var(--inactive);
   animation-delay: -0.75s;
 }
