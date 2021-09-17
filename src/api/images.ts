@@ -11,6 +11,13 @@ export async function images(req: Request, res: Response): Promise<void> {
     key,
   }));
 
+  console.log(req.params);
+  if (req.params.query === undefined) {
+    const jsonResponse: imagesResult = { count: 0, results: [] };
+    res.status(200).json(jsonResponse);
+    return;
+  }
+
   const responses = (await fetchJSONsAsync(requests)) as imageAPIResult[];
 
   const results = responses.map((response, index) => {
