@@ -1,0 +1,57 @@
+.spinner {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.spinnerCircle1 {
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.spinnerCircle2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0;
+}
+
+@keyframes spinnerCircle2 {
+  0% {
+    top: 49px;
+    left: 49px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 17.5px;
+    left: 17.5px;
+    width: 63px;
+    height: 63px;
+    opacity: 0;
+  }
+}
+
+.spinnerCircle2 div {
+  position: absolute;
+  border-width: 1px;
+  border-style: solid;
+  opacity: 1;
+  border-radius: 50%;
+  animation: spinnerCircle2 1.5s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.spinnerCircle2 div:nth-child(1) {
+  border-color: var(--primary);
+  animation-delay: 0s;
+}
+
+.spinnerCircle2 div:nth-child(2) {
+  border-color: var(--inactive);
+  animation-delay: -0.75s;
+}

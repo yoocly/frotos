@@ -1,0 +1,41 @@
+.container {
+  display: grid;
+  grid: auto auto / auto auto;
+  gap: 0.1rem;
+}
+
+.thumbnailWrapper {
+  grid-column: span 2;
+  position: relative;
+}
+
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.collectionButton {
+  position: absolute;
+  bottom: var(--gapSmall);
+  right: var(--gapSmall);
+  box-shadow: var(--shadowSmall);
+}
+
+.author,
+.authorLink,
+.api,
+.apiLink {
+  color: var(--inactive);
+  font-size: var(--fontSizeCopyright);
+  text-decoration: none;
+  text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.api {
+  justify-self: end;
+}

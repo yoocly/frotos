@@ -12,6 +12,7 @@ export type ButtonProps = {
   small?: boolean;
   large?: boolean;
   transparent?: boolean;
+  inactive?: boolean;
   onClick?: () => void;
   className?: string;
 };
@@ -23,7 +24,10 @@ export default function Button({
   small = false,
   large = false,
   transparent = false,
-  onClick,
+  inactive = false,
+  onClick = () => {
+    return;
+  },
   className = '',
 }: ButtonProps): JSX.Element {
   const { colorClass } = COLORS[color];
@@ -32,7 +36,10 @@ export default function Button({
     <button
       onClick={onClick}
       className={`${styles.button} ${colorClass} 
-        ${small && styles.small} ${transparent && styles.transparent} ${className}`}
+        ${small && styles.small} 
+        ${transparent && styles.transparent}  
+        ${inactive && styles.inactive} 
+        ${className}`}
     >
       {icon && (
         <Icon
