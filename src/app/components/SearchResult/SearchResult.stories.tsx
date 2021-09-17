@@ -327,4 +327,8 @@ export default {
 const Template: Story<SearchResultProps> = (args) => <SearchResult {...args}></SearchResult>;
 
 export const searchResult = Template.bind({});
-searchResult.args = { images: mockImages };
+searchResult.args = {
+  images: mockImages,
+  onImageClick: (id) => console.log(`clicked image ${id}`),
+  onCollectionClick: (id) => console.log(`clicked collection on image ${id}`),
+};
