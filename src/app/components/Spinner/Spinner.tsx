@@ -9,7 +9,6 @@ export type SpinnerProps = {
 export default function Spinner({ show = true, className = '' }: SpinnerProps): JSX.Element {
   return (
     <>
-      {' '}
       {show && (
         <div className={`${styles.spinner} ${className}`}>
           <div className={styles.spinnerCircle1}>
