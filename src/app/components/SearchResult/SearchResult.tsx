@@ -36,7 +36,7 @@ export default function SearchResult({
           return (
             <SearchResultImage
               image={image}
-              width={`calc(${resultWidth}%`} // - 2 * ${columns} * var(--gapSmall))`}
+              width={`calc(${resultWidth}%`}
               inCollection={false}
               onClick={() => onImageClick(image.id)}
               onCollectionClick={() => onCollectionClick(image.id)}
