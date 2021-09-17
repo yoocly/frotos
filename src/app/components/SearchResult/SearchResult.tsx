@@ -26,36 +26,32 @@ export default function SearchResult({
   const columns = Math.min(4, Math.floor(window.innerWidth / 150));
   const resultWidth = 100 / columns;
 
+  if (!isLoading && (!imagesResult || imagesResult?.count === 0)) return <></>;
+
   return (
     <>
-      {imagesResult?.count === 0 || (!isLoading && !imagesResult) ? (
-        <span>No results</span>
-      ) : (
-        <>
-          <Spinner show={!masonryComplete} className={styles.spinner} />
-          {imagesResult && imagesResult.count > 0 && (
-            <Masonry
-              updateOnEachImageLoad={false}
-              elementType={'section'}
-              onLayoutComplete={() => setMasonryComplete(true)}
-              className={`${!masonryComplete ? styles.loading : styles.loaded} ${className}`}
-            >
-              {imagesResult?.results.map((image) => {
-                return (
-                  <SearchResultImage
-                    image={image}
-                    width={`calc(${resultWidth}%`}
-                    inCollection={false}
-                    onClick={() => onImageClick(image.id)}
-                    onCollectionClick={() => onCollectionClick(image.id)}
-                    className={styles.searchResultImage}
-                    key={`${image.api}${image.id}`}
-                  />
-                );
-              })}
-            </Masonry>
-          )}
-        </>
+      <Spinner show={!masonryComplete} className={styles.spinner} />
+      {imagesResult && imagesResult.count > 0 && (
+        <Masonry
+          updateOnEachImageLoad={false}
+          elementType={'section'}
+          onLayoutComplete={() => setMasonryComplete(true)}
+          className={`${!masonryComplete ? styles.loading : styles.loaded} ${className}`}
+        >
+          {imagesResult?.results.map((image) => {
+            return (
+              <SearchResultImage
+                image={image}
+                width={`calc(${resultWidth}%`}
+                inCollection={false}
+                onClick={() => onImageClick(image.id)}
+                onCollectionClick={() => onCollectionClick(image.id)}
+                className={styles.searchResultImage}
+                key={`${image.api}${image.id}`}
+              />
+            );
+          })}
+        </Masonry>
       )}
     </>
   );

@@ -25,7 +25,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         className={styles.input}
       />
       <div className={styles.filterBar}>
-        <div>{imagesResult?.count && `${imagesResult?.count.toLocaleString()} results`}</div>
+        <div>{imagesResult && `${imagesResult.count.toLocaleString()} results`}</div>
         <div className={styles.filter}></div>
       </div>
       <div className={styles.searchResult}>
