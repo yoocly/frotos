@@ -1,4 +1,5 @@
 import React from 'react';
+import { isMobileOnly } from 'react-device-detect';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 import type { iconKey } from '../Icon/icons';
@@ -28,6 +29,7 @@ export default function Input({
   className = '',
 }: InputProps): JSX.Element {
   function handleSubmit(event: React.FormEvent) {
+    if (isMobileOnly) (document.activeElement as HTMLElement).blur();
     event.preventDefault();
     onSubmit();
   }
