@@ -18,6 +18,8 @@ export type castedImage = {
   urlAuthor?: string;
   src: string;
   thumbnail: string;
+  thumbnailWidth: number;
+  thumbnailHeight: number;
 };
 
 export type imagesResult = {
@@ -66,6 +68,11 @@ export const apis: api[] = [
         urlAuthor: unsplashImage?.user?.links?.html || '',
         src: `${unsplashImage?.urls?.raw}&fm=webp&q=100&lossless=1` || '',
         thumbnail: unsplashImage?.urls?.thumb || '',
+        thumbnailWidth: 200,
+        thumbnailHeight:
+          unsplashImage?.width && unsplashImage?.height
+            ? (unsplashImage?.width / 200) * unsplashImage?.height
+            : 0,
       };
     },
   },
@@ -88,6 +95,8 @@ export const apis: api[] = [
         urlAuthor: pexelsImage?.photographer_url || '',
         src: pexelsImage?.src?.original || '',
         thumbnail: pexelsImage?.src?.tiny || '',
+        thumbnailWidth: 280,
+        thumbnailHeight: 200,
       };
     },
   },
@@ -112,6 +121,8 @@ export const apis: api[] = [
         author: pixabayImage?.user || '',
         src: pixabayImage?.previewURL?.replace('_150.', '_1920.') || '',
         thumbnail: pixabayImage?.webformatURL || '',
+        thumbnailWidth: pixabayImage?.webformatWidth || 0,
+        thumbnailHeight: pixabayImage?.webformatHeight || 0,
       };
     },
   },
