@@ -64,15 +64,15 @@ export const apis: api[] = [
         urlSource: unsplashImage?.links?.html || '',
         author: unsplashImage?.user?.name || '',
         urlAuthor: unsplashImage?.user?.links?.html || '',
-        src: `${unsplashImage?.urls?.raw}&fm=webp&q=100&lossless=0` || '',
-        thumbnail: `${unsplashImage?.urls?.small}&fm=webp&q=50&lossless=1` || '',
+        src: `${unsplashImage?.urls?.raw}&fm=webp&q=100&lossless=1` || '',
+        thumbnail: unsplashImage?.urls?.thumb || '',
       };
     },
   },
   {
     name: 'pexels',
     key: process.env.KEY_PEXELS || '',
-    url: `https://api.pexels.com/v1/search?query={query}&locale=de-DE&per_page=80`,
+    url: `https://api.pexels.com/v1/search?query={query}&locale=de-DE&per_page=30`,
     resultKeys: {
       count: 'total_results',
       images: 'photos',
@@ -95,7 +95,7 @@ export const apis: api[] = [
     name: 'pixabay',
     url: `https://pixabay.com/api/?key=${
       process.env.KEY_PIXABAY || ''
-    }&q={query}&lang=de&per_page=80`,
+    }&q={query}&lang=de&per_page=30`,
     key: ``,
     resultKeys: {
       count: 'total',
