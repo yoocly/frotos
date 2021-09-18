@@ -6,7 +6,8 @@ export default function useSearchImages(query: string): {
   errorMessage: string | null;
   isLoading: boolean;
 } {
-  const result = useFetch<imagesResult>(`/api/images/${query}`);
+  const url = query && `/api/images/${query}`;
+  const result = useFetch<imagesResult>(url);
 
   return {
     imagesResult: result.data,
