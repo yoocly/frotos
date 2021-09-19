@@ -1,7 +1,7 @@
 import type { imagesResult } from '../../api/apis';
 import useFetch from './useFetch';
 
-export default function useSearchImages(query: string): {
+export default function useFetchSearchImages(query: string): {
   imagesResult: imagesResult | null;
   errorMessage: string | null;
   isLoading: boolean;

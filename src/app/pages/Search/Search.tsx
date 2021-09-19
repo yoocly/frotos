@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Input from '../../components/Input/Input';
 import SearchResult from '../../components/SearchResult/SearchResult';
-import useSearchImages from '../../hooks/useSearchImages';
+import useFetchSearchImages from '../../hooks/useSearchImages';
 import styles from './Search.module.css';
 
 export type SearchProps = {
@@ -11,8 +11,15 @@ export type SearchProps = {
 export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
+  const [callForMoreImages, setCallForMoreImages] = useState<boolean>(false);
 
-  const { imagesResult, isLoading } = useSearchImages(searchValue);
+  const { imagesResult, isLoading } = useFetchSearchImages(searchValue);
+
+  function handleScroll(position: number, parentHeight: number) {
+    if (2 * parentHeight > -position) {
+      setCallForMoreImages(true);
+    }
+  }
 
   return (
     <main className={`${styles.search} ${className}`}>
@@ -28,14 +35,14 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         <div>{imagesResult && `${imagesResult.count.toLocaleString()} results`}</div>
         <div className={styles.filter}></div>
       </div>
-      <div className={styles.searchResult}>
-        <SearchResult
-          isLoading={isLoading}
-          imagesResult={imagesResult}
-          onImageClick={(id) => console.log(`clicked image ${id}`)}
-          onCollectionClick={(id) => console.log(`clicked collection on image ${id}`)}
-        />
-      </div>
+      <SearchResult
+        isLoading={isLoading}
+        imagesResult={imagesResult}
+        onImageClick={(id) => console.log(`clicked image ${id}`)}
+        onCollectionClick={(id) => console.log(`clicked collection on image ${id}`)}
+        handleScroll={handleScroll}
+        className={styles.searchResult}
+      />
     </main>
   );
 }
