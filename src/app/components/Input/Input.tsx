@@ -29,6 +29,7 @@ export default function Input({
   className = '',
 }: InputProps): JSX.Element {
   function handleSubmit(event: React.FormEvent) {
+    // close the mobile keyboard on enter
     if (isMobileOnly) (document.activeElement as HTMLElement).blur();
     event.preventDefault();
     onSubmit();
