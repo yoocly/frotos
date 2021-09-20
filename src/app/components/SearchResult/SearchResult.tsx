@@ -9,6 +9,7 @@ import styles from './SearchResult.module.css';
 
 export type SearchResultProps = {
   isLoading: boolean;
+  isFetchingNewResult: boolean;
   imagesResult: imagesResult | null;
   onImageClick: (id: string) => void;
   onCollectionClick: (id: string) => void;
@@ -18,6 +19,7 @@ export type SearchResultProps = {
 
 export default function SearchResult({
   isLoading,
+  isFetchingNewResult,
   imagesResult,
   onImageClick,
   onCollectionClick,
@@ -26,7 +28,7 @@ export default function SearchResult({
 }: SearchResultProps): JSX.Element {
   const [masonryComplete, setMasonryComplete] = useState<boolean>(true);
   const searchResultElement = useRef<HTMLElement>(null);
-  const searchResultEndElement = useRef<HTMLElement>(null);
+  const searchResultEndElement = useRef<HTMLDivElement>(null);
 
   useScrollPosition(
     ({ currPos }) => handleScroll(currPos.y, searchResultElement.current?.offsetHeight || 0),
@@ -37,38 +39,41 @@ export default function SearchResult({
     searchResultElement as MutableRefObject<HTMLElement>
   );
 
-  if (isLoading && masonryComplete) setMasonryComplete(false);
+  if (!isLoading && (!imagesResult || imagesResult?.results.length === 0)) return <></>;
+  if (isFetchingNewResult && isLoading && masonryComplete) setMasonryComplete(false);
 
   const columns = Math.min(4, Math.floor(window.innerWidth / 150));
   const resultWidth = 100 / columns;
 
-  if (!isLoading && (!imagesResult || imagesResult?.count === 0)) return <></>;
-
   return (
     <section className={className} ref={searchResultElement}>
       <Spinner show={!masonryComplete} className={styles.spinner} />
-      {imagesResult && imagesResult.count > 0 && (
-        <Masonry
-          updateOnEachImageLoad={false}
-          onLayoutComplete={() => setMasonryComplete(true)}
-          className={`${!masonryComplete ? styles.loading : styles.loaded} ${className}`}
-        >
-          {imagesResult?.results.map((image) => {
-            return (
-              <SearchResultImage
-                image={image}
-                width={`calc(${resultWidth}%`}
-                inCollection={false}
-                onClick={() => onImageClick(image.id)}
-                onCollectionClick={() => onCollectionClick(image.id)}
-                className={styles.searchResultImage}
-                key={`${image.api}${image.id}`}
-              />
-            );
-          })}
-          <span ref={searchResultEndElement}>end</span>
-        </Masonry>
-      )}
+      <Masonry
+        updateOnEachImageLoad={false}
+        onImagesLoaded={() => {
+          if (!masonryComplete && !isLoading && !isFetchingNewResult) {
+            window.setTimeout(() => {
+              setMasonryComplete(true);
+            }, 500);
+          }
+        }}
+        className={`${!masonryComplete ? styles.loading : ``}`}
+      >
+        {imagesResult?.results.map((image) => {
+          return (
+            <SearchResultImage
+              image={image}
+              width={`calc(${resultWidth}%`}
+              inCollection={false}
+              onClick={() => onImageClick(image.id)}
+              onCollectionClick={() => onCollectionClick(image.id)}
+              className={styles.searchResultImage}
+              key={image.id}
+            />
+          );
+        })}
+      </Masonry>
+      <div ref={searchResultEndElement}></div>
     </section>
   );
 }
