@@ -66,7 +66,7 @@ export const apis: api[] = [
         urlSource: unsplashImage?.links?.html || '',
         author: unsplashImage?.user?.name || '',
         urlAuthor: unsplashImage?.user?.links?.html || '',
-        src: `${unsplashImage?.urls?.raw}&fm=webp&q=100&lossless=1` || '',
+        src: `${unsplashImage?.urls?.raw}` || '',
         thumbnail: unsplashImage?.urls?.thumb || '',
         thumbnailWidth: 200,
         thumbnailHeight:
