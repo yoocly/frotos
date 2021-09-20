@@ -17,7 +17,6 @@ export default function useFetch<T>(url: string | null): {
 
     setErrorMessage(null);
     setData(null);
-    console.log(url);
 
     fetch(url)
       .then((response) => response.json())
