@@ -57,7 +57,7 @@ export default function SearchResult({
             }, 500);
           }
         }}
-        className={`${!masonryComplete ? styles.loading : ``}`}
+        className={!masonryComplete ? styles.loading : ``}
       >
         {imagesResult?.results.map((image) => {
           return (
