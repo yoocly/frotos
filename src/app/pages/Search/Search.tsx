@@ -23,9 +23,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   }, [fetchMoreImages]);
 
   function handleScroll(position: number, parentHeight: number) {
-    if (!fetchMoreImages && 3 * parentHeight > -position) {
-      setFetchMoreImages(true);
-    }
+    if (!fetchMoreImages && 3 * parentHeight > -position) setFetchMoreImages(true);
   }
 
   function handleSubmit() {
