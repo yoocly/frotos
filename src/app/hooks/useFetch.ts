@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export default function useFetch<T>(url: string): {
+export default function useFetch<T>(url: string | null): {
   data: T | null;
   errorMessage: string | null;
   isLoading: boolean;
@@ -17,6 +17,7 @@ export default function useFetch<T>(url: string): {
 
     setErrorMessage(null);
     setData(null);
+    console.log(url);
 
     fetch(url)
       .then((response) => response.json())
