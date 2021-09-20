@@ -16,6 +16,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2017/12/15/13/51/polynesia-3021072_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/ge300339778d65e5be80173737f265d2db96e131bc64f17c811bde9a9b2216e18610b6d83c20ece3584e46c4ab4454ab9a96fa9afe5f6b01d1aeefe96091a3070_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 42141,
@@ -30,6 +32,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2016/11/08/05/08/adult-1807500_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/gbc1ec1ba91ea3c002264cde77c87040b60adb5a61c6b2f2871181817d47e586c95c7f4c825d2ba8f64e4bbf556829db6e47a1727030bf7cce188c99f8ef53189_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 21070.5,
@@ -44,6 +48,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2018/01/05/02/40/shellfish-3062011_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g528409ab7b4c0f3e26e0ddb120f448c4e1e766c47b21276ea3d091801ffee8d0756aff7bf9fa50df8b4a9ed4b9a2ea2de6b421aef2cb6e24c7719233e98f294a_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 14047,
@@ -58,6 +64,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2015/09/02/12/33/books-918521_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g020dc479f7443fc9e8a636543afc96c434206c487229e8861a13f1a4909c625c3d9739b59b7b10a58d89e89da5fdd6eb_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 10535.25,
@@ -73,6 +81,8 @@ const mockImages = {
       src: 'https://images.unsplash.com/photo-1587502536900-baf0c55a3f74?ixid=MnwyNTY3MDF8MXwxfHNlYXJjaHwxfHxiZWFjaHxlbnwwfHx8fDE2MzE3OTYzNDA&ixlib=rb-1.2.1&fm=webp&q=100&lossless=0',
       thumbnail:
         'https://images.unsplash.com/photo-1587502536900-baf0c55a3f74?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNTY3MDF8MXwxfHNlYXJjaHwxfHxiZWFjaHxlbnwwfHx8fDE2MzE3OTYzNDA&ixlib=rb-1.2.1&q=80&w=400&fm=webp&q=50&lossless=1',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '4:3',
       api: 'unsplash',
       score: 10005,
@@ -87,6 +97,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2015/03/09/18/34/beach-666122_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g2bcd9315f9319c552b65266796ac21157c899126190405404a32fabaf513c735a8422eb0609acdccbd03ebd6c740a254_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 8428.2,
@@ -101,6 +113,8 @@ const mockImages = {
       src: 'https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg',
       thumbnail:
         'https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:4',
       api: 'pexels',
       score: 8000,
@@ -115,6 +129,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2015/12/08/00/57/girl-1082212_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/gb81e713b97d3608d91a3985e6e0f7b44b9a999be6917e1104cd56f7d6f68761ee9bfe03015846c849ce68e9794c9217f43960b9f91de19cf3b816e4385c2eed3_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 7023.5,
@@ -129,6 +145,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2018/03/12/20/07/maldives-3220702_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g40bfcd421aa8fa0f26c14d935ae82b6304ca25a94c21af0c4db581c52ed04392bb1b4a0156aacedcbfff5c22dbdbd420b1268fec4791c0cc1d61471dd0546deb_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 6020.142857142857,
@@ -143,6 +161,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2014/08/27/18/24/girl-429380_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/ga8a11ea2663aad4f7d60e4ed1a05a58c5e3b093867052dfa8bdf58f140a056a298f5bbfea9ab43e8a0e707c04d4d1876_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 5267.625,
@@ -158,6 +178,8 @@ const mockImages = {
       src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwyfHxiZWFjaHxlbnwwfHx8fDE2MzE3OTYzNDA&ixlib=rb-1.2.1&fm=webp&q=100&lossless=0',
       thumbnail:
         'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwyfHxiZWFjaHxlbnwwfHx8fDE2MzE3OTYzNDA&ixlib=rb-1.2.1&q=80&w=400&fm=webp&q=50&lossless=1',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'unsplash',
       score: 5002.5,
@@ -172,6 +194,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2015/11/07/19/19/aurora-borealis-1032523_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g7e95c9c3b6cb84c6a8ef23d64d02c749ca7d6fa3bf4d72d641781d30c1aa607877b797b15646d9f516cce5cdded057f3223500122ed065b8e0d996cacf0e11db_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '1.42:1',
       api: 'pixabay',
       score: 4682.333333333333,
@@ -186,6 +210,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2013/04/02/13/06/beach-99388_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g62b3821c06140f8825af1520691ca36e19ec2a07ce29550495868d59616a26a979f1a796ce84cb800fef6947147defa8_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 4214.1,
@@ -200,6 +226,8 @@ const mockImages = {
       src: 'https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg',
       thumbnail:
         'https://images.pexels.com/photos/189349/pexels-photo-189349.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pexels',
       score: 4000,
@@ -214,6 +242,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2019/03/18/17/58/wave-4063684_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g4cc9f2abca36f4a80c949556c636c86cc9efa07db8b7fcb3913f1f698df9110bfa96e683b7c597c72626b745eeae6cd19833d40d6d4e6a1861233db57e4c6a6c_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 3831,
@@ -229,6 +259,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2017/06/17/18/35/background-2413081_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/ga7ddc0f5fffe38b616b9806c1a0ea6449485e88276463d4783143a76ea1c8bdfdbc27943230a033f68c68372d904e551c8cfe01630e4cd00d6a56812ffd90da4_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 3511.75,
@@ -244,6 +276,8 @@ const mockImages = {
       src: 'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwzfHxiZWFjaHxlbnwwfHx8fDE2MzE3OTYzNDA&ixlib=rb-1.2.1&fm=webp&q=100&lossless=0',
       thumbnail:
         'https://images.unsplash.com/photo-1506953823976-52e1fdc0149a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwzfHxiZWFjaHxlbnwwfHx8fDE2MzE3OTYzNDA&ixlib=rb-1.2.1&q=80&w=400&fm=webp&q=50&lossless=1',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:4',
       api: 'unsplash',
       score: 3335,
@@ -258,6 +292,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2016/11/29/09/42/beach-1868772_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/gb86e1a3b161e350b0d52dcf328799848e9f195ba1e6ba6619162a60340d2f7371e1a294d93fab340e94467246768317aa41b75eb9cdfb7b3392a5f7084af6885_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 3241.6153846153848,
@@ -272,6 +308,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2016/06/20/03/21/rainbow-1467988_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g1443f676ae9ab24ded2e1bcfd5aec581c3640a460234cbff4ab1c3d7cd5db03bdaa8807b62cfb5a0e4928fc8d0b1c4156ca47d9a80950364ebfb8f93babb4f6b_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '16:9',
       api: 'pixabay',
       score: 3010.0714285714284,
@@ -286,6 +324,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2018/04/05/14/10/boat-3292934_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/g8b623034f4ffd862ce860186f164b8466711cb3ee58a6bb9b9b294882ce1c65fcb4c9a162c7dd44c61e97ace5c3d0fd998d400b7b6301111d6bd078fbd29f553_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '3:2',
       api: 'pixabay',
       score: 2809.4,
@@ -300,6 +340,8 @@ const mockImages = {
       src: 'https://images.pexels.com/photos/1151282/pexels-photo-1151282.jpeg',
       thumbnail:
         'https://images.pexels.com/photos/1151282/pexels-photo-1151282.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '2:3',
       api: 'pexels',
       score: 2666.6666666666665,
@@ -314,6 +356,8 @@ const mockImages = {
       src: 'https://cdn.pixabay.com/photo/2020/02/16/07/55/beach-4852830_1920.jpg',
       thumbnail:
         'https://pixabay.com/get/gbf894585be9ab0096be8467d3a2fd40d107186b4e8ce594e6eb7f6529282168538428ea093395862f4e7af1b520be06140f7329020dc99197f79ae7dfca0cb1c_640.jpg',
+      thumbnailWidth: 300,
+      thumbnailHeight: 300,
       aspectRatio: '1.54:1',
       api: 'pixabay',
       score: 2633.8125,
