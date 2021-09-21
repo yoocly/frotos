@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import Button from '../Button/Button';
 import styles from './Modal.module.css';
@@ -32,6 +32,7 @@ export type ModalProps = {
   position?: typeof MODAL_POSITIONS[number];
   closeButton?: boolean;
   backButton?: boolean;
+  onClose?: () => void;
   children: React.ReactNode;
   className?: string;
 };
@@ -44,11 +45,13 @@ export default function Modal({
   position = 'centered',
   closeButton = false,
   backButton = false,
+  onClose = () => {
+    return;
+  },
   children,
   className = '',
 }: ModalProps): JSX.Element {
-  const [visible, setVisible] = useState<boolean>(show);
-  if (!visible) return <></>;
+  if (!show) return <></>;
 
   return (
     <>
@@ -65,7 +68,7 @@ export default function Modal({
             color="light"
             large
             transparent
-            onClick={() => setVisible(!visible)}
+            onClick={onClose}
             className={styles.closeButton}
           />
         )}
@@ -75,7 +78,7 @@ export default function Modal({
             color="light"
             large
             transparent
-            onClick={() => setVisible(!visible)}
+            onClick={onClose}
             className={styles.backButton}
           />
         )}
