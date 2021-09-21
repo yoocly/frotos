@@ -59,6 +59,7 @@ export default {
       control: { type: 'select' },
     },
   },
+  decorators: [(story) => <div style={{ margin: '-1rem' }}>{story()}</div>],
 } as Meta;
 
 const Template: Story<SearchResultImageProps> = (args) => (
@@ -72,5 +73,3 @@ searchResultImage.args = {
   onClick: () => console.log('clicked image'),
   onCollectionClick: () => console.log('clicked collection'),
 };
-
-addDecorator((story) => <div style={{ margin: '-1rem' }}>{story()}</div>);

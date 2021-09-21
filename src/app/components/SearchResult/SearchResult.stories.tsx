@@ -324,7 +324,7 @@ const mockImages = {
 export default {
   title: 'Components/Search Result',
   component: SearchResult,
-  argTypes: {},
+  decorators: [(story) => <div style={{ margin: '-1rem' }}>{story()}</div>],
 } as Meta;
 
 const Template: Story<SearchResultProps> = (args) => <SearchResult {...args}></SearchResult>;
