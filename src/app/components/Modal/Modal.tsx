@@ -79,7 +79,9 @@ export default function Modal({
             className={styles.backButton}
           />
         )}
-        <div className={styles.modalContent}>{children}</div>
+        <div style={isMobileOnly ? size.mobile : size.desktop} className={styles.modalContent}>
+          {children}
+        </div>
       </div>
     </>
   );
