@@ -20,12 +20,12 @@ export default function SearchResultImage({
   onCollectionClick,
   className = '',
 }: SearchResultImageProps): JSX.Element {
-  const { urlSource, author, urlAuthor, thumbnail, api } = image;
+  const { urlSource, author, urlAuthor, thumbnail, title, api } = image;
 
   return (
     <article className={`${styles.container} ${className}`} style={{ width: width }}>
       <div className={styles.thumbnailWrapper}>
-        <img src={thumbnail} className={styles.thumbnail} onClick={onClick} />
+        <img src={thumbnail} className={styles.thumbnail} alt={title} onClick={onClick} />
         <Button
           className={styles.collectionButton}
           icon={inCollection ? 'collectionAdded' : 'collectionAdd'}
