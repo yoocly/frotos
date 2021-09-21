@@ -34,44 +34,38 @@ export default function Modal({
   className = '',
 }: ModalProps): JSX.Element {
   const [visible, setVisible] = useState<boolean>(show);
-
   if (!visible) return <></>;
 
   const sizes = isMobileOnly ? size.mobile : size.desktop;
 
-  const modal = (
-    <div style={sizes} className={`${styles.modal} ${styles[position]} ${className}`}>
-      {closeButton && (
-        <Button
-          icon="close"
-          color="light"
-          large
-          transparent
-          onClick={() => setVisible(!visible)}
-          className={styles.closeButton}
-        />
-      )}
-      {backButton && (
-        <Button
-          icon="back"
-          color="light"
-          large
-          transparent
-          onClick={() => setVisible(!visible)}
-          className={styles.backButton}
-        />
-      )}
-      <div className={styles.modalContent}>{children}</div>
-    </div>
-  );
-
-  const overlay = (
-    <div className={`${styles.overlay} ${backgroundBlur ? styles.backgroundBlur : ``}`}></div>
-  );
-
   return (
     <>
-      {backgroundOverlay && overlay} {modal}
+      {backgroundOverlay && (
+        <div className={`${styles.overlay} ${backgroundBlur ? styles.backgroundBlur : ``}`}></div>
+      )}
+      <div style={sizes} className={`${styles.modal} ${styles[position]} ${className}`}>
+        {closeButton && (
+          <Button
+            icon="close"
+            color="light"
+            large
+            transparent
+            onClick={() => setVisible(!visible)}
+            className={styles.closeButton}
+          />
+        )}
+        {backButton && (
+          <Button
+            icon="back"
+            color="light"
+            large
+            transparent
+            onClick={() => setVisible(!visible)}
+            className={styles.backButton}
+          />
+        )}
+        <div className={styles.modalContent}>{children}</div>
+      </div>
     </>
   );
 }
