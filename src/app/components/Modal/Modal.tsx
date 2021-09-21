@@ -15,7 +15,6 @@ export type ModalProps = {
   backgroundOverlay?: boolean;
   backgroundBlur?: boolean;
   size?: modalSize;
-  width?: string;
   position?: typeof MODAL_POSITIONS[number];
   closeButton?: boolean;
   backButton?: boolean;
