@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../components/Input/Input';
 import SearchResult from '../../components/SearchResult/SearchResult';
-import useSearchImages from '../../hooks/useSearchImages';
+import useFetchSearchImages from '../../hooks/useFetchSearchImages';
 import styles from './Search.module.css';
 
 export type SearchProps = {
@@ -11,8 +11,25 @@ export type SearchProps = {
 export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
+  const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
 
-  const { imagesResult, isLoading } = useSearchImages(searchValue);
+  const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
+    fetchMoreImages,
+    searchValue
+  );
+
+  useEffect(() => {
+    setFetchMoreImages(false);
+  }, [fetchMoreImages]);
+
+  function handleScroll(position: number, parentHeight: number) {
+    if (!fetchMoreImages && 3 * parentHeight > -position) setFetchMoreImages(true);
+  }
+
+  function handleSubmit() {
+    setSearchValue(inputValue);
+    setFetchMoreImages(true);
+  }
 
   return (
     <main className={`${styles.search} ${className}`}>
@@ -21,21 +38,22 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         submitIcon="search"
         value={inputValue}
         onChange={(inputValue) => setInputValue(inputValue)}
-        onSubmit={() => setSearchValue(inputValue)}
+        onSubmit={handleSubmit}
         className={styles.input}
       />
       <div className={styles.filterBar}>
-        <div>{imagesResult?.count && `${imagesResult?.count.toLocaleString()} results`}</div>
+        <div>{imagesResult && `${imagesResult.count.toLocaleString()} results`}</div>
         <div className={styles.filter}></div>
       </div>
-      <div className={styles.searchResult}>
-        <SearchResult
-          isLoading={isLoading}
-          imagesResult={imagesResult}
-          onImageClick={(id) => console.log(`clicked image ${id}`)}
-          onCollectionClick={(id) => console.log(`clicked collection on image ${id}`)}
-        />
-      </div>
+      <SearchResult
+        isLoading={isLoading}
+        isFetchingNewResult={isFetchingNewResult}
+        imagesResult={imagesResult}
+        onImageClick={(id) => console.log(`clicked image ${id}`)}
+        onCollectionClick={(id) => console.log(`clicked collection on image ${id}`)}
+        handleScroll={handleScroll}
+        className={styles.searchResult}
+      />
     </main>
   );
 }

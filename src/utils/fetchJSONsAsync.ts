@@ -11,6 +11,7 @@ export default async function fetchJSONsAsync<T>(requests: requests): Promise<T[
           headers: key ? { Authorization: key } : {},
           signal: timeoutSignal(2000),
         });
+        if (!response.ok) return;
         const result = await response.json();
         return result;
       } catch (err) {
@@ -21,9 +22,8 @@ export default async function fetchJSONsAsync<T>(requests: requests): Promise<T[
   );
 
   const values = results.map((result) => {
-    if (result.status === 'fulfilled') return result.value as T;
+    if (result.status === 'fulfilled' && result.value !== undefined) return result.value as T;
     return {} as T;
   });
-
   return values;
 }
