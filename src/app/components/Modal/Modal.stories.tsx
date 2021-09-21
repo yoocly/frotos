@@ -39,5 +39,6 @@ modal.args = {
   position: 'centered',
   closeButton: true,
   backButton: false,
+  onClose: () => console.log('close me!'),
   children: `This is my modal with a lot of content.`.repeat(100),
 };
