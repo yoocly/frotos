@@ -36,14 +36,15 @@ export default function Modal({
   const [visible, setVisible] = useState<boolean>(show);
   if (!visible) return <></>;
 
-  const sizes = isMobileOnly ? size.mobile : size.desktop;
-
   return (
     <>
       {backgroundOverlay && (
         <div className={`${styles.overlay} ${backgroundBlur ? styles.backgroundBlur : ``}`}></div>
       )}
-      <div style={sizes} className={`${styles.modal} ${styles[position]} ${className}`}>
+      <div
+        style={isMobileOnly ? size.mobile : size.desktop}
+        className={`${styles.modal} ${styles[position]} ${className}`}
+      >
         {closeButton && (
           <Button
             icon="close"
