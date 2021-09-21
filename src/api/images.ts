@@ -5,9 +5,9 @@ import { apis } from './apis';
 import type { imageAPIResult } from './externalAPITypes';
 
 export async function images(req: Request, res: Response): Promise<void> {
-  const { query } = req.params;
+  const { query, page } = req.params;
   const requests = apis.map(({ url, key }) => ({
-    url: url.replace(`{query}`, query),
+    url: url.replace(`{query}`, query).replace(`{page}`, page),
     key,
   }));
 

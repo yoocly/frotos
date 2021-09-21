@@ -8,11 +8,6 @@
   overflow: hidden;
 }
 
-.loaded {
-  opacity: 1;
-  transition: ease-in 0.1s;
-}
-
 .spinner {
   height: 30vh;
 }
