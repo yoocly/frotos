@@ -5,8 +5,22 @@ import styles from './Modal.module.css';
 
 export const MODAL_POSITIONS = ['centered', 'bottomRight'] as const;
 export const modalDefaultSize = {
-  desktop: { height: '80vh', width: '80vh', maxHeight: '90vh', maxWidth: '90vh' },
-  mobile: { height: '100vh', width: '100vh', maxHeight: '', maxWidth: '' },
+  desktop: {
+    minHeight: '5rem',
+    minWidth: '50vw',
+    height: '',
+    width: '',
+    maxHeight: '90vh',
+    maxWidth: '90vw',
+  },
+  mobile: {
+    minHeight: '',
+    minWidth: '',
+    height: '100vh',
+    width: '100vw',
+    maxHeight: '',
+    maxWidth: '',
+  },
 };
 export type modalSize = typeof modalDefaultSize;
 
