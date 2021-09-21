@@ -7,10 +7,10 @@ export const MODAL_POSITIONS = ['centered', 'bottomRight'] as const;
 export const modalDefaultSize = {
   desktop: {
     minHeight: '5rem',
-    minWidth: '50vw',
+    minWidth: '80vw',
     height: '',
     width: '',
-    maxHeight: '90vh',
+    maxHeight: '80vh',
     maxWidth: '90vw',
   },
   mobile: {
