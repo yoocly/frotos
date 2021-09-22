@@ -6,6 +6,7 @@
   font-family: var(--fontBold);
   font-size: var(--fontSizeInput);
   line-height: var(--lineHeightHeadlines);
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--gapMedium);
