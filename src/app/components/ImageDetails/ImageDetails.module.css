@@ -1,0 +1,42 @@
+.infos,
+.detailList {
+  color: var(--medium);
+}
+
+.infos {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 var(--gap);
+  margin-bottom: 1rem;
+}
+
+.author,
+.authorLink {
+  color: var(--inactive);
+  font-family: var(--fontBold);
+  font-size: var(--fontSizeSmall);
+  text-decoration: none;
+}
+
+.sourceButton {
+  grid-area: 1 / 2 / 3 / 3;
+}
+
+.detailList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap) calc(3 * var(--gap));
+}
+
+.label {
+  color: var(--inactive);
+  font-family: var(--fontBold);
+  font-size: var(--fontSizeSmall);
+}
+
+.info {
+  padding-left: 1em;
+  color: var(--inactive);
+  font-family: var(--fontBold);
+  font-size: var(--fontSizeSmall);
+}
