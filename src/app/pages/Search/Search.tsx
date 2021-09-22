@@ -14,6 +14,36 @@ export type SearchProps = {
   className?: string;
 };
 
+const imageSize = {
+  desktop: {
+    maxHeight: 45,
+    maxWidth: 60,
+  },
+  mobile: {
+    maxHeight: 40,
+    maxWidth: 100,
+  },
+};
+
+const modalSize = {
+  desktop: {
+    minHeight: ``,
+    minWidth: ``,
+    height: `${2 * imageSize.desktop.maxHeight}vh`,
+    width: `${imageSize.desktop.maxWidth}vw`,
+    maxHeight: ``,
+    maxWidth: ``,
+  },
+  mobile: {
+    minHeight: ``,
+    minWidth: ``,
+    height: `${2.5 * imageSize.mobile.maxHeight}vh`,
+    width: `${imageSize.mobile.maxWidth}vw`,
+    maxHeight: ``,
+    maxWidth: ``,
+  },
+};
+
 export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
@@ -29,6 +59,17 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   useEffect(() => {
     setFetchMoreImages(false);
   }, [fetchMoreImages]);
+
+  function calcimageheight(): number {
+    if (!selectedImage) return 0;
+
+    const imageMaxSize = isMobileOnly ? imageSize.mobile : imageSize.desktop;
+    const imageAspectRatio = selectedImage.height / selectedImage.width || 1;
+    return Math.min(
+      ((window.innerWidth * imageMaxSize.maxWidth) / 100) * imageAspectRatio,
+      (window.innerHeight * imageMaxSize.maxHeight) / 100
+    );
+  }
 
   function handleScroll(position: number, parentHeight: number) {
     if (!fetchMoreImages && 3 * parentHeight > -position) setFetchMoreImages(true);
@@ -71,11 +112,14 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         closeButton={!isMobileOnly}
         backButton={isMobileOnly}
         onClose={() => setSelectedImage(null)}
+        size={modalSize}
       >
         <div className={styles.modalContent}>
-          <PreviewImage image={selectedImage} />
+          <div style={{ height: `${calcimageheight()}px` }}>
+            <PreviewImage image={selectedImage} />
+          </div>
           <NavBarImage onClick={(item) => setModalActiveTab(item)} active={modalActiveTab} />
-          {modalActiveTab}
+          <div className={styles.modalTabContent}></div>
         </div>
       </Modal>
     </main>

@@ -27,17 +27,23 @@
   overflow-x: hidden;
 }
 
-.searchResult::-webkit-scrollbar {
+.modalContent {
+  display: grid;
+  grid-template-rows: auto 6rem 1fr;
+  height: 100%;
+}
+
+.modalTabContent {
+  overflow-y: auto;
+}
+
+.searchResult::-webkit-scrollbar,
+.modalTabContent::-webkit-scrollbar {
   width: var(--gapSmall);
 }
 
-.searchResult::-webkit-scrollbar-thumb {
+.searchResult::-webkit-scrollbar-thumb,
+.modalTabContent::-webkit-scrollbar-thumb {
   background: var(--primary);
   border-radius: var(--radius);
-}
-
-.modalContent {
-  display: grid;
-  grid-template-rows: 1fr auto;
-  height: 80vh;
 }

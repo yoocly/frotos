@@ -66,6 +66,6 @@
 .backButton {
   position: absolute;
   top: var(--gapSmall);
-  left: 0;
+  left: var(--gapSmall);
   z-index: 11;
 }
