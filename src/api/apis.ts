@@ -17,6 +17,7 @@ export type castedImage = {
   author: string;
   urlAuthor?: string;
   src: string;
+  preview: string;
   thumbnail: string;
   thumbnailWidth: number;
   thumbnailHeight: number;
@@ -67,6 +68,7 @@ export const apis: api[] = [
         author: unsplashImage?.user?.name || '',
         urlAuthor: unsplashImage?.user?.links?.html || '',
         src: `${unsplashImage?.urls?.raw}` || '',
+        preview: `${unsplashImage?.urls?.regular}` || '',
         thumbnail: unsplashImage?.urls?.thumb || '',
         thumbnailWidth: 200,
         thumbnailHeight:
@@ -94,6 +96,7 @@ export const apis: api[] = [
         author: pexelsImage?.photographer || '',
         urlAuthor: pexelsImage?.photographer_url || '',
         src: pexelsImage?.src?.original || '',
+        preview: `${pexelsImage?.src?.original}?auto=compress&w=1280` || '',
         thumbnail: pexelsImage?.src?.tiny || '',
         thumbnailWidth: 280,
         thumbnailHeight: 200,
@@ -120,6 +123,7 @@ export const apis: api[] = [
         urlSource: pixabayImage?.pageURL || '',
         author: pixabayImage?.user || '',
         src: pixabayImage?.previewURL?.replace('_150.', '_1920.') || '',
+        preview: pixabayImage?.previewURL?.replace('_150.', '_1280.') || '',
         thumbnail: pixabayImage?.webformatURL || '',
         thumbnailWidth: pixabayImage?.webformatWidth || 0,
         thumbnailHeight: pixabayImage?.webformatHeight || 0,

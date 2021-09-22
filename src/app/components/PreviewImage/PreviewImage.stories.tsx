@@ -1,7 +1,7 @@
 import type { Meta, Story } from '@storybook/react';
 import React from 'react';
-import type { SearchResultImageProps } from './SearchResultImage';
-import SearchResultImage from './SearchResultImage';
+import type { PreviewImageProps } from './PreviewImage';
+import PreviewImage from './PreviewImage';
 
 const mockImages = {
   image1: {
@@ -61,24 +61,58 @@ const mockImages = {
 };
 
 export default {
-  title: 'Components/Search Result Image',
-  component: SearchResultImage,
-  argTypes: {
-    image: {
-      options: mockImages,
-      control: { type: 'select' },
-    },
-  },
+  title: 'Components/Preview Image',
+  component: PreviewImage,
+  decorators: [
+    (story) => (
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateRows: '1fr auto',
+          height: '80vh',
+          width: '80vw',
+          backgroundColor: 'green',
+          margin: '-1rem',
+        }}
+      >
+        <div style={{ backgroundColor: 'red' }}>{story()}</div>
+        <div style={{ backgroundColor: 'blue' }}>
+          other content
+          <br />
+          other content
+          <br />
+          other content
+          <br />
+          other content
+          <br />
+          other content
+          <br />
+          other content
+          <br />
+          other content
+          <br />
+          other content
+          <br />
+          other content
+        </div>
+      </div>
+    ),
+  ],
 } as Meta;
 
-const Template: Story<SearchResultImageProps> = (args) => (
-  <SearchResultImage {...args}></SearchResultImage>
-);
+const Template: Story<PreviewImageProps> = (args) => <PreviewImage {...args}></PreviewImage>;
 
-export const searchResultImage = Template.bind({});
-searchResultImage.args = {
+export const previewImage1 = Template.bind({});
+previewImage1.args = {
   image: mockImages.image1,
-  inCollection: false,
-  onClick: () => console.log('clicked image'),
-  onCollectionClick: () => console.log('clicked collection'),
+};
+
+export const previewImage2 = Template.bind({});
+previewImage2.args = {
+  image: mockImages.image2,
+};
+
+export const previewImage3 = Template.bind({});
+previewImage3.args = {
+  image: mockImages.image3,
 };
