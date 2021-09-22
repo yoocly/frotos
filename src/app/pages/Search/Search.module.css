@@ -35,3 +35,9 @@
   background: var(--primary);
   border-radius: var(--radius);
 }
+
+.modalContent {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  height: 80vh;
+}

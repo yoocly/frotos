@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { isMobileOnly } from 'react-device-detect';
+import type { image } from '../../../api/apis';
 import Input from '../../components/Input/Input';
+import Modal from '../../components/Modal/Modal';
+import type { NavBarImageItems } from '../../components/NavBarImage/NavBarImage';
+import NavBarImage from '../../components/NavBarImage/NavBarImage';
+import PreviewImage from '../../components/PreviewImage/PreviewImage';
 import SearchResult from '../../components/SearchResult/SearchResult';
 import useFetchSearchImages from '../../hooks/useFetchSearchImages';
 import styles from './Search.module.css';
@@ -12,6 +18,8 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
   const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<image | null>(null);
+  const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems | null>('details');
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
@@ -49,11 +57,27 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         isLoading={isLoading}
         isFetchingNewResult={isFetchingNewResult}
         imagesResult={imagesResult}
-        onImageClick={(id) => console.log(`clicked image ${id}`)}
+        onImageClick={(id) => {
+          setSelectedImage(imagesResult?.results[id] || null);
+          setModalActiveTab('details');
+        }}
         onCollectionClick={(id) => console.log(`clicked collection on image ${id}`)}
         handleScroll={handleScroll}
         className={styles.searchResult}
       />
+      <Modal
+        show={!!selectedImage}
+        backgroundBlur
+        closeButton={!isMobileOnly}
+        backButton={isMobileOnly}
+        onClose={() => setSelectedImage(null)}
+      >
+        <div className={styles.modalContent}>
+          <PreviewImage image={selectedImage} />
+          <NavBarImage onClick={(item) => setModalActiveTab(item)} active={modalActiveTab} />
+          {modalActiveTab}
+        </div>
+      </Modal>
     </main>
   );
 }
