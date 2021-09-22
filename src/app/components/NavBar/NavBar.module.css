@@ -38,8 +38,8 @@
 .mobile .navItemActive::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  width: 4rem;
+  bottom: calc(-1 * var(--gap));
+  width: min(100%, 4rem);
   height: 0.5rem;
   background: var(--primaryGradient);
   border-radius: var(--radius);
