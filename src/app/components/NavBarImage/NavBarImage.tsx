@@ -4,9 +4,9 @@ import type { iconKey } from '../Icon/icons';
 import styles from './NavBarImage.module.css';
 
 export const NAVBARIMAGE_ITEMS = ['details', 'collection', 'download', 'palette'] as const;
-export type NavBarItems = typeof NAVBARIMAGE_ITEMS[number];
+export type NavBarImageItems = typeof NAVBARIMAGE_ITEMS[number];
 
-const itemIconMap: { [item in NavBarItems]: iconKey } = {
+const itemIconMap: { [item in NavBarImageItems]: iconKey } = {
   details: 'info',
   download: 'download',
   palette: 'palette',
@@ -14,7 +14,7 @@ const itemIconMap: { [item in NavBarItems]: iconKey } = {
 };
 
 export type NavBarImageProps = {
-  active?: NavBarItems | undefined;
+  active?: NavBarImageItems | undefined;
   onClick: (item: string) => void;
   className?: string;
 };
