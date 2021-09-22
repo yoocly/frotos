@@ -29,4 +29,5 @@ button.args = {
   small: false,
   transparent: false,
   onClick: () => console.log('Clicked'),
+  externalLink: '',
 };
