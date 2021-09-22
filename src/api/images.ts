@@ -57,61 +57,61 @@ function getAspectRatio(width: number, height: number): string {
 
   switch (ratio) {
     case '1.33':
-      return `4:3`;
+      return `4 : 3`;
     case '0.75':
-      return `3:4`;
+      return `3 : 4`;
 
     case '1.49':
-      return `3:2`;
+      return `3 : 2`;
     case '1.5':
-      return `3:2`;
+      return `3 : 2`;
     case '1.51':
-      return `3:2`;
+      return `3 : 2`;
     case '0.66':
-      return `2:3`;
+      return `2 : 3`;
     case '0.67':
-      return `2:3`;
+      return `2 : 3`;
 
     case '1.25':
-      return `5:4`;
+      return `5 : 4`;
     case '0.8':
-      return `4:5`;
+      return `4 : 5`;
 
     case '1.19':
-      return `6:5`;
+      return `6 : 5`;
     case '1.2':
-      return `6:5`;
+      return `6 : 5`;
     case '1.21':
-      return `6:5`;
+      return `6 : 5`;
     case '0.83':
-      return `5:6`;
+      return `5 : 6`;
     case '0.84':
-      return `5:6`;
+      return `5 : 6`;
 
     case '1.66':
-      return `5:3`;
+      return `5 : 3`;
     case '1.67':
-      return `5:3`;
+      return `5 : 3`;
     case '0.6':
-      return `3:5`;
+      return `3 : 5`;
 
     case '1.77':
-      return `16:9`;
+      return `16 : 9`;
     case '1.78':
-      return `16:9`;
+      return `16 : 9`;
     case '0.56':
-      return `9:16`;
+      return `9 : 16`;
     case '0.57':
-      return `9:16`;
+      return `9 : 16`;
 
     case '1.6':
-      return `16:10`;
+      return `16 : 10`;
     case '0.62':
-      return `10:16`;
+      return `10 : 16`;
     case '0.63':
-      return `10:16`;
+      return `10 : 16`;
   }
 
-  if (width / height >= 1) return `${ratio}:1`;
-  return `1:${ratioInverse}`;
+  if (width / height >= 1) return `${ratio} : 1`;
+  return `1 : ${ratioInverse}`;
 }

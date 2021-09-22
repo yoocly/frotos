@@ -15,6 +15,7 @@ export type ButtonProps = {
   iconShadow?: boolean;
   inactive?: boolean;
   onClick?: () => void;
+  externalLink?: string;
   className?: string;
 };
 
@@ -30,9 +31,33 @@ export default function Button({
   onClick = () => {
     return;
   },
+  externalLink,
   className = '',
 }: ButtonProps): JSX.Element {
   const { colorClass } = COLORS[color];
+
+  const iconElement = (
+    <Icon
+      icon={icon}
+      color={color}
+      width={small ? '1rem' : large ? '2rem' : undefined}
+      height={small ? '1rem' : large ? '2rem' : undefined}
+    />
+  );
+  const textElement = <div className={`${colorClass}`}>{text}</div>;
+
+  if (externalLink)
+    return (
+      <a
+        href={externalLink}
+        target="_blank"
+        className={`${styles.button} ${colorClass} ${small ? styles.small : ``} ${
+          transparent ? styles.transparent : ``
+        } ${inactive ? styles.inactive : ``} ${className}`}
+      >
+        {icon && iconElement} {text && textElement}
+      </a>
+    );
 
   return (
     <button
@@ -41,16 +66,7 @@ export default function Button({
         transparent ? styles.transparent : ``
       } ${inactive ? styles.inactive : ``} ${className}`}
     >
-      {icon && (
-        <Icon
-          icon={icon}
-          color={color}
-          width={small ? '1rem' : large ? '2rem' : undefined}
-          height={small ? '1rem' : large ? '2rem' : undefined}
-          iconClass={iconShadow ? styles.iconShadow : ``}
-        />
-      )}
-      {text && <div className={`${colorClass}`}>{text}</div>}
+      {icon && iconElement} {text && textElement}
     </button>
   );
 }

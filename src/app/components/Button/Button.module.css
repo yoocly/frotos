@@ -7,10 +7,11 @@
   font-size: var(--fontSizeInput);
   line-height: var(--lineHeightHeadlines);
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--gapMedium);
   cursor: pointer;
+  text-decoration: none;
 }
 
 .small {
