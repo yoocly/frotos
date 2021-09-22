@@ -29,8 +29,9 @@
   --radius: 0.5rem;
 
   /* Shadows */
-  --shadow: 2px 2px 5px hsla(0, 0%, 0%, 0.5);
+  --shadowModal: 2px 2px 20px hsla(0, 0%, 0%, 0.5);
   --shadowSmall: 1px 1px 1px hsla(0, 0%, 0%, 0.5);
+  --shadowIcon: 1px 1px 1px #000;
 
   /* Colors */
   --hue: 200;

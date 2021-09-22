@@ -12,6 +12,7 @@ export type ButtonProps = {
   small?: boolean;
   large?: boolean;
   transparent?: boolean;
+  iconShadow?: boolean;
   inactive?: boolean;
   onClick?: () => void;
   className?: string;
@@ -24,6 +25,7 @@ export default function Button({
   small = false,
   large = false,
   transparent = false,
+  iconShadow = false,
   inactive = false,
   onClick = () => {
     return;
@@ -45,6 +47,7 @@ export default function Button({
           color={color}
           width={small ? '1rem' : large ? '2rem' : undefined}
           height={small ? '1rem' : large ? '2rem' : undefined}
+          iconClass={iconShadow ? styles.iconShadow : ``}
         />
       )}
       {text && <div className={`${colorClass}`}>{text}</div>}
