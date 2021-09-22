@@ -24,7 +24,7 @@ export type castedImage = {
   likes?: number;
   views?: number;
   downloads?: number;
-  createdAt?: Date;
+  createdAt?: string;
 };
 
 export type imagesResult = {
@@ -79,7 +79,7 @@ export const apis: api[] = [
           unsplashImage?.width && unsplashImage?.height
             ? (unsplashImage?.width / 200) * unsplashImage?.height
             : 0,
-        createdAt: unsplashImage?.created_at,
+        createdAt: unsplashImage?.created_at || '',
         likes: unsplashImage?.likes || 0,
       };
     },

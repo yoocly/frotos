@@ -69,7 +69,7 @@ export type Src = {
 
 export type unsplashImage = {
   id?: string;
-  created_at?: Date;
+  created_at?: string;
   updated_at?: Date;
   promoted_at?: Date | null;
   width?: number;

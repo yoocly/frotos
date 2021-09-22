@@ -1,4 +1,6 @@
-export const mockImages = {
+import type { imagesResult } from '../../api/apis';
+
+export const mockImages: imagesResult = {
   count: 100,
   results: [
     {
