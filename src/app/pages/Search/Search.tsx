@@ -50,7 +50,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [searchValue, setSearchValue] = useState<string>('');
   const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<image | null>(null);
-  const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems | null>('details');
+  const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems>('details');
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
@@ -77,6 +77,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   }
 
   function handleSubmit() {
+    if (inputValue === searchValue) return;
     setSearchValue(inputValue);
     setFetchMoreImages(true);
   }
