@@ -69,6 +69,7 @@ export default {
       control: { type: 'select' },
     },
   },
+  decorators: [(story) => <div style={{ margin: '-1rem' }}>{story()}</div>],
 } as Meta;
 
 const Template: Story<SearchResultImageProps> = (args) => (

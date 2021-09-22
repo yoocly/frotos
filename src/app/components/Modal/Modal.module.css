@@ -1,0 +1,66 @@
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 100;
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .backgroundBlur {
+    background: hsla(0, 0%, 0%, 50%);
+    -webkit-backdrop-filter: blur(0.5rem);
+    backdrop-filter: blur(0.5rem);
+  }
+}
+
+.modal {
+  background: var(--dark);
+  position: absolute;
+  z-index: 100;
+}
+
+.modalContent {
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modalContent::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+
+.modalContent::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
+}
+
+.centered {
+  left: 50%;
+  top: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.bottomRight {
+  right: -100vw;
+  bottom: 20vh;
+  animation: slide 1s forwards;
+}
+
+@keyframes slide {
+  100% {
+    right: 0;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  top: -2rem;
+  right: 0;
+}
+
+.backButton {
+  position: absolute;
+  top: var(--gapSmall);
+  left: 0;
+}
