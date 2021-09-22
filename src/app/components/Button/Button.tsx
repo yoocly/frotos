@@ -42,6 +42,7 @@ export default function Button({
       color={color}
       width={small ? '1rem' : large ? '2rem' : undefined}
       height={small ? '1rem' : large ? '2rem' : undefined}
+      iconClass={iconShadow ? styles.iconShadow : ``}
     />
   );
   const textElement = <div className={`${colorClass}`}>{text}</div>;
