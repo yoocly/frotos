@@ -3,7 +3,6 @@
   grid-auto-flow: column;
   padding: 1rem 1rem 1.5rem 1rem;
   margin: 0.5rem;
-  max-width: 45rem;
   border-style: solid;
   border-width: 0 0 1px 0;
   border-image: var(--inactiveGradient) 1;
