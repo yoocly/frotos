@@ -11,7 +11,7 @@ export type SearchResultProps = {
   isLoading: boolean;
   isFetchingNewResult: boolean;
   imagesResult: imagesResult | null;
-  onImageClick: (id: string) => void;
+  onImageClick: (id: number) => void;
   onCollectionClick: (id: string) => void;
   handleScroll: (position: number, parentHeight: number) => void;
   className?: string;
@@ -59,13 +59,13 @@ export default function SearchResult({
         }}
         className={!masonryComplete ? styles.loading : ``}
       >
-        {imagesResult?.results.map((image) => {
+        {imagesResult?.results.map((image, index) => {
           return (
             <SearchResultImage
               image={image}
               width={`calc(${resultWidth}%`}
               inCollection={false}
-              onClick={() => onImageClick(image.id)}
+              onClick={() => onImageClick(index)}
               onCollectionClick={() => onCollectionClick(image.id)}
               className={styles.searchResultImage}
               key={image.id}
