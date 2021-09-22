@@ -1,0 +1,24 @@
+.navBar {
+  display: grid;
+  grid-auto-flow: column;
+  padding: 1rem 1rem 1.5rem 1rem;
+  margin: 0.5rem;
+  max-width: 45rem;
+  border-style: solid;
+  border-width: 0 0 1px 0;
+  border-image: var(--inactiveGradient) 1;
+}
+
+.navItem {
+  justify-content: center;
+}
+
+.navItemActive::after {
+  content: '';
+  position: absolute;
+  bottom: calc(-0.75 * var(--gap));
+  width: min(100%, 3rem);
+  height: 0.5rem;
+  background: var(--primaryGradient);
+  border-radius: var(--radius);
+}
