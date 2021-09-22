@@ -21,6 +21,10 @@ export type castedImage = {
   thumbnail: string;
   thumbnailWidth: number;
   thumbnailHeight: number;
+  likes?: number;
+  views?: number;
+  downloads?: number;
+  createdAt?: Date;
 };
 
 export type imagesResult = {
@@ -75,6 +79,8 @@ export const apis: api[] = [
           unsplashImage?.width && unsplashImage?.height
             ? (unsplashImage?.width / 200) * unsplashImage?.height
             : 0,
+        createdAt: unsplashImage?.created_at,
+        likes: unsplashImage?.likes || 0,
       };
     },
   },
@@ -127,6 +133,9 @@ export const apis: api[] = [
         thumbnail: pixabayImage?.webformatURL || '',
         thumbnailWidth: pixabayImage?.webformatWidth || 0,
         thumbnailHeight: pixabayImage?.webformatHeight || 0,
+        views: pixabayImage?.views || 0,
+        downloads: pixabayImage?.downloads || 0,
+        likes: pixabayImage?.likes || 0,
       };
     },
   },
