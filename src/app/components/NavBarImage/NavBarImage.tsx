@@ -14,8 +14,8 @@ const itemIconMap: { [item in NavBarImageItems]: iconKey } = {
 };
 
 export type NavBarImageProps = {
-  active?: NavBarImageItems | undefined;
-  onClick: (item: string) => void;
+  active: NavBarImageItems | null;
+  onClick: (item: NavBarImageItems) => void;
   className?: string;
 };
 
