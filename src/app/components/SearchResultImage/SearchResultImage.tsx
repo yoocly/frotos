@@ -28,10 +28,12 @@ export default function SearchResultImage({
         <img src={thumbnail} className={styles.thumbnail} alt={title} onClick={onClick} />
         <Button
           className={styles.collectionButton}
-          icon={inCollection ? 'collectionAdded' : 'collectionAdd'}
+          icon={inCollection ? 'collectionAdded' : 'add'}
           color={inCollection ? 'mediumGradient' : undefined}
           inactive={inCollection}
-          small
+          large
+          transparent
+          iconShadow
           onClick={onCollectionClick}
         />
       </div>

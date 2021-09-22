@@ -18,9 +18,8 @@
 
 .collectionButton {
   position: absolute;
-  bottom: var(--gapSmall);
-  right: var(--gapSmall);
-  box-shadow: var(--shadowSmall);
+  bottom: 0;
+  right: 0;
 }
 
 .author,
