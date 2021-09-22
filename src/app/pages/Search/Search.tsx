@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import type { image } from '../../../api/apis';
+import ImageDetails from '../../components/ImageDetails/ImageDetails';
 import Input from '../../components/Input/Input';
 import Modal from '../../components/Modal/Modal';
 import type { NavBarImageItems } from '../../components/NavBarImage/NavBarImage';
@@ -119,7 +120,12 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
             <PreviewImage image={selectedImage} />
           </div>
           <NavBarImage onClick={(item) => setModalActiveTab(item)} active={modalActiveTab} />
-          <div className={styles.modalTabContent}></div>
+          <div className={styles.modalTabContent}>
+            {modalActiveTab === 'details' && <ImageDetails image={selectedImage} />}
+            {modalActiveTab === 'collection' && 'collection'}
+            {modalActiveTab === 'download' && 'Download'}
+            {modalActiveTab === 'palette' && 'palette'}
+          </div>
         </div>
       </Modal>
     </main>

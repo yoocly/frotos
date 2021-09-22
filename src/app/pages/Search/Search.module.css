@@ -35,6 +35,7 @@
 
 .modalTabContent {
   overflow-y: auto;
+  padding: 1rem;
 }
 
 .searchResult::-webkit-scrollbar,
