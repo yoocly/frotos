@@ -4,11 +4,13 @@ import Button from '../Button/Button';
 import styles from './ImageDetails.module.css';
 
 export type ImageDetailsProps = {
-  image: image;
+  image: image | null;
   className?: string;
 };
 
 export default function ImageDetails({ image, className = '' }: ImageDetailsProps): JSX.Element {
+  if (!image) return <></>;
+
   const {
     title,
     author,
