@@ -6,12 +6,20 @@ import styles from './Modal.module.css';
 export const MODAL_POSITIONS = ['centered', 'bottomRight'] as const;
 export const modalDefaultSize = {
   desktop: {
-    height: 'calc(100% - 5rem)',
-    width: 'calc(100% - 5rem)',
+    minHeight: '5rem',
+    minWidth: '50%',
+    height: '',
+    width: '',
+    maxHeight: 'calc(100% - 5rem)',
+    maxWidth: 'calc(100% - 5rem)',
   },
   mobile: {
+    minHeight: '',
+    minWidth: '',
     height: '100%',
     width: '100%',
+    maxHeight: '',
+    maxWidth: '',
   },
 };
 export type modalSize = typeof modalDefaultSize;
