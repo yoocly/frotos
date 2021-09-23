@@ -67,6 +67,11 @@
   src: url('/aller.bold.ttf');
 }
 
+html,
+body {
+  height: 100%;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -79,7 +84,7 @@ body {
 #app {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 }
 
 .colorPrimary {

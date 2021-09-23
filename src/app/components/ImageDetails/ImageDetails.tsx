@@ -50,30 +50,30 @@ export default function ImageDetails({ image, className = '' }: ImageDetailsProp
 
       <div className={styles.detailList}>
         {aspectRatio && (
-          <p>
+          <div>
             <p className={styles.label}>Aspect ratio</p>
             <p>{aspectRatio}</p>
-          </p>
+          </div>
         )}
 
         {width && height && (
-          <p>
+          <div>
             <p className={styles.label}>Max. resolution</p>
             <p>
               {width.toLocaleString()} x {height.toLocaleString()}
             </p>
-          </p>
+          </div>
         )}
 
         {views && (
-          <p>
+          <div>
             <p className={styles.label}>Views</p>
             <p>{views.toLocaleString()}</p>
-          </p>
+          </div>
         )}
 
         {downloads && (
-          <p>
+          <div>
             <p className={styles.label}>Downloads</p>
             <p>
               {downloads.toLocaleString()}
@@ -87,11 +87,11 @@ export default function ImageDetails({ image, className = '' }: ImageDetailsProp
                 </span>
               )}
             </p>
-          </p>
+          </div>
         )}
 
         {likes && (
-          <p>
+          <div>
             <p className={styles.label}>Likes</p>
             <p>
               {likes.toLocaleString()}
@@ -105,14 +105,14 @@ export default function ImageDetails({ image, className = '' }: ImageDetailsProp
                 </span>
               )}
             </p>
-          </p>
+          </div>
         )}
 
         {createdDate && (
-          <p>
+          <div>
             <p className={styles.label}>Created at</p>
             <p>{createdDate.toLocaleDateString('de-DE', { dateStyle: 'medium' })}</p>
-          </p>
+          </div>
         )}
       </div>
     </section>

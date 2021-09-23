@@ -7,17 +7,17 @@ export const MODAL_POSITIONS = ['centered', 'bottomRight'] as const;
 export const modalDefaultSize = {
   desktop: {
     minHeight: '5rem',
-    minWidth: '80vw',
+    minWidth: '50%',
     height: '',
     width: '',
-    maxHeight: '80vh',
-    maxWidth: '90vw',
+    maxHeight: 'calc(100% - 5rem)',
+    maxWidth: 'calc(100% - 5rem)',
   },
   mobile: {
     minHeight: '',
     minWidth: '',
-    height: '100vh',
-    width: '100vw',
+    height: '100%',
+    width: '100%',
     maxHeight: '',
     maxWidth: '',
   },
@@ -86,9 +86,7 @@ export default function Modal({
             className={styles.backButton}
           />
         )}
-        <div style={isMobileOnly ? size.mobile : size.desktop} className={styles.modalContent}>
-          {children}
-        </div>
+        <div className={styles.modalContent}>{children}</div>
       </div>
     </>
   );
