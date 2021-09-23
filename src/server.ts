@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import { images } from './api/images';
+import { connectDb } from './utils/mongodb';
 dotenv.config();
 
 const port = process.env.PORT || 3001;
@@ -26,7 +27,13 @@ app.get('*', (_request, response) => {
   response.sendFile('index.html', { root: 'dist/app' });
 });
 
-app.listen(port, async () => {
-  console.log(`Listening at http://localhost:${port}`);
-  console.log(`Storybook is at http://localhost:${port}/storybook`);
-});
+connectDb().then(
+  () => {
+    app.listen(port, async () => {
+      console.log('Connected to MongoDB');
+      console.log(`Backend listening at http://localhost:${port}`);
+      console.log(`Storybook is at http://localhost:${port}/storybook`);
+    });
+  },
+  (error) => console.error(error)
+);
