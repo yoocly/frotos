@@ -8,3 +8,13 @@ Authorization: {{$dotenv KEY_UNSPLASH}}
 
 ### Query Pixabay
 GET https://pixabay.com/api/?key={{$dotenv KEY_PIXABAY}}&q=pizza
+
+
+### Add a new user
+POST http://localhost:3000/api/users/add
+Content-Type: application/json
+
+{
+    "username": "testUser",
+    "password": "myTestPw"
+}
