@@ -28,20 +28,12 @@ const imageSize = {
 
 const modalSize = {
   desktop: {
-    minHeight: ``,
-    minWidth: ``,
     height: `${2 * imageSize.desktop.maxHeight}%`,
     width: `${imageSize.desktop.maxWidth}%`,
-    maxHeight: ``,
-    maxWidth: ``,
   },
   mobile: {
-    minHeight: ``,
-    minWidth: ``,
     height: `${2.5 * imageSize.mobile.maxHeight}%`,
     width: `${imageSize.mobile.maxWidth}%`,
-    maxHeight: ``,
-    maxWidth: ``,
   },
 };
 

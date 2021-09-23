@@ -46,8 +46,8 @@
 }
 
 .bottomRight {
-  right: -100vw;
-  bottom: 20vh;
+  right: -100%;
+  bottom: 20%;
   animation: slide 1s forwards;
 }
 
