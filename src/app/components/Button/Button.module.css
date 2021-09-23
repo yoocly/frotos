@@ -29,3 +29,7 @@
 .inactive {
   background: var(--inactiveGradient);
 }
+
+.iconShadow * {
+  filter: drop-shadow(var(--shadowIcon));
+}

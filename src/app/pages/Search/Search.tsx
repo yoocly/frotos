@@ -1,5 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { isMobileOnly } from 'react-device-detect';
+import type { image } from '../../../api/apis';
+import ImageDetails from '../../components/ImageDetails/ImageDetails';
 import Input from '../../components/Input/Input';
+import Modal from '../../components/Modal/Modal';
+import type { NavBarImageItems } from '../../components/NavBarImage/NavBarImage';
+import NavBarImage from '../../components/NavBarImage/NavBarImage';
+import PreviewImage from '../../components/PreviewImage/PreviewImage';
 import SearchResult from '../../components/SearchResult/SearchResult';
 import useFetchSearchImages from '../../hooks/useFetchSearchImages';
 import styles from './Search.module.css';
@@ -8,10 +15,42 @@ export type SearchProps = {
   className?: string;
 };
 
+const imageSize = {
+  desktop: {
+    maxHeight: 45,
+    maxWidth: 60,
+  },
+  mobile: {
+    maxHeight: 40,
+    maxWidth: 100,
+  },
+};
+
+const modalSize = {
+  desktop: {
+    minHeight: ``,
+    minWidth: ``,
+    height: `${2 * imageSize.desktop.maxHeight}vh`,
+    width: `${imageSize.desktop.maxWidth}vw`,
+    maxHeight: ``,
+    maxWidth: ``,
+  },
+  mobile: {
+    minHeight: ``,
+    minWidth: ``,
+    height: `${2.5 * imageSize.mobile.maxHeight}vh`,
+    width: `${imageSize.mobile.maxWidth}vw`,
+    maxHeight: ``,
+    maxWidth: ``,
+  },
+};
+
 export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [inputValue, setInputValue] = useState<string>('');
   const [searchValue, setSearchValue] = useState<string>('');
   const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<image | null>(null);
+  const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems>('details');
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
@@ -22,14 +61,28 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
     setFetchMoreImages(false);
   }, [fetchMoreImages]);
 
+  function calcImageHeight(): number {
+    if (!selectedImage) return 0;
+
+    const imageMaxSize = isMobileOnly ? imageSize.mobile : imageSize.desktop;
+    const imageAspectRatio = selectedImage.height / selectedImage.width || 1;
+    return Math.min(
+      ((window.innerWidth * imageMaxSize.maxWidth) / 100) * imageAspectRatio,
+      (window.innerHeight * imageMaxSize.maxHeight) / 100
+    );
+  }
+
   function handleScroll(position: number, parentHeight: number) {
     if (!fetchMoreImages && 3 * parentHeight > -position) setFetchMoreImages(true);
   }
 
   function handleSubmit() {
+    if (inputValue === searchValue) return;
     setSearchValue(inputValue);
     setFetchMoreImages(true);
   }
+
+  const imageHeight = calcImageHeight();
 
   return (
     <main className={`${styles.search} ${className}`}>
@@ -49,11 +102,35 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         isLoading={isLoading}
         isFetchingNewResult={isFetchingNewResult}
         imagesResult={imagesResult}
-        onImageClick={(id) => console.log(`clicked image ${id}`)}
+        onImageClick={(id) => {
+          setSelectedImage(imagesResult?.results[id] || null);
+          setModalActiveTab('details');
+        }}
         onCollectionClick={(id) => console.log(`clicked collection on image ${id}`)}
         handleScroll={handleScroll}
         className={styles.searchResult}
       />
+      <Modal
+        show={!!selectedImage}
+        backgroundBlur
+        closeButton={!isMobileOnly}
+        backButton={isMobileOnly}
+        onClose={() => setSelectedImage(null)}
+        size={modalSize}
+      >
+        <div className={styles.modalContent}>
+          <div style={{ height: `${imageHeight}px` }}>
+            <PreviewImage image={selectedImage} />
+          </div>
+          <NavBarImage onClick={(item) => setModalActiveTab(item)} active={modalActiveTab} />
+          <div className={styles.modalTabContent}>
+            {modalActiveTab === 'details' && <ImageDetails image={selectedImage} />}
+            {modalActiveTab === 'collection' && 'collection'}
+            {modalActiveTab === 'download' && 'Download'}
+            {modalActiveTab === 'palette' && 'palette'}
+          </div>
+        </div>
+      </Modal>
     </main>
   );
 }

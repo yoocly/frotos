@@ -56,7 +56,10 @@ export default function Modal({
   return (
     <>
       {backgroundOverlay && (
-        <div className={`${styles.overlay} ${backgroundBlur ? styles.backgroundBlur : ``}`}></div>
+        <div
+          className={`${styles.overlay} ${backgroundBlur ? styles.backgroundBlur : ``}`}
+          onClick={onClose}
+        ></div>
       )}
       <div
         style={isMobileOnly ? size.mobile : size.desktop}
@@ -78,6 +81,7 @@ export default function Modal({
             color="light"
             large
             transparent
+            iconShadow
             onClick={onClose}
             className={styles.backButton}
           />

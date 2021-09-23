@@ -4,11 +4,13 @@ import Spinner from '../Spinner/Spinner';
 import styles from './PreviewImage.module.css';
 
 export type PreviewImageProps = {
-  image: image;
+  image: image | null;
   className?: string;
 };
 
 export default function PreviewImage({ image, className = '' }: PreviewImageProps): JSX.Element {
+  if (!image) return <></>;
+
   return (
     <div className={`${styles.wrapper} ${className}`}>
       <Spinner className={styles.spinner} />
