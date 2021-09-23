@@ -13,7 +13,7 @@
     "prepare": "husky install",
     "test": "prettier --check . && eslint . && stylelint \"**/*.css\"",
     "start": "node dist/server.js",
-    "storybook": "start-storybook -s src/assets/public -p 6006",
+    "storybook": "start-storybook -s src/assets/public -p 6006 --ci",
     "storybook:build": "build-storybook -s src/assets/public -o dist/storybook",
     "fix": "npx eslint . --fix"
   },
@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@n8tb1t/use-scroll-position": "^2.0.3",
-    "crypto-js": "^4.1.1",
+    "argon2": "^0.28.2",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
