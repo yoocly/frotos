@@ -18,7 +18,7 @@ export default {
         style={{
           background:
             'url(https://images.pexels.com/photos/1680140/pexels-photo-1680140.jpeg?auto=compress&h=1024&w=1280)',
-          height: '100vh',
+          height: '100%',
           margin: '-1rem',
         }}
       >
