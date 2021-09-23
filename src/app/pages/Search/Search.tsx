@@ -61,7 +61,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
     setFetchMoreImages(false);
   }, [fetchMoreImages]);
 
-  function calcimageheight(): number {
+  function calcImageHeight(): number {
     if (!selectedImage) return 0;
 
     const imageMaxSize = isMobileOnly ? imageSize.mobile : imageSize.desktop;
@@ -81,6 +81,8 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
     setSearchValue(inputValue);
     setFetchMoreImages(true);
   }
+
+  const imageHeight = calcImageHeight();
 
   return (
     <main className={`${styles.search} ${className}`}>
@@ -117,7 +119,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         size={modalSize}
       >
         <div className={styles.modalContent}>
-          <div style={{ height: `${calcimageheight()}px` }}>
+          <div style={{ height: `${imageHeight}px` }}>
             <PreviewImage image={selectedImage} />
           </div>
           <NavBarImage onClick={(item) => setModalActiveTab(item)} active={modalActiveTab} />
