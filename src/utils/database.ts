@@ -49,7 +49,7 @@ export async function dbInsertOne<T>(
 export async function dbFindOne<T>(collectionName: string, payload: T): dbResult<unknown, T> {
   try {
     const result = await getCollection(collectionName).findOne(payload);
-    const status = result === null ? 204 : 200;
+    const status = result === null ? 404 : 200;
     return { status, response: { result, payload } };
   } catch (error) {
     return { status: 500, response: { error, payload } };
