@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import users from './lib/routes/users';
+import user from './lib/routes/user';
 import images from './lib/routes/images';
 import { connectDb } from './utils/database';
 dotenv.config();
@@ -11,7 +11,7 @@ app.use(express.json());
 app.disable('x-powered-by');
 
 app.use('/storybook', express.static('dist/storybook'));
-app.use('/api', users);
+app.use('/api', user);
 app.use('/api', images);
 
 app.use(express.static('dist/app'));

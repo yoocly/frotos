@@ -11,7 +11,7 @@ GET https://pixabay.com/api/?key={{$dotenv KEY_PIXABAY}}&q=pizza
 
 
 ### Add a new user
-POST http://localhost:3000/api/users/add
+POST http://localhost:3000/api/user/add
 Content-Type: application/json
 
 {
