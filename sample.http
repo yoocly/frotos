@@ -24,6 +24,5 @@ POST http://localhost:3000/api/user/check
 Content-Type: application/json
 
 {
-    "username": "testUser",
-    "password": "myTestPw"
+    "username": "testUser"
 }
