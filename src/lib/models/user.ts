@@ -1,8 +1,10 @@
+import dotenv from 'dotenv';
 import type { InsertOneResult } from 'mongodb';
-import { dbFindOne, dbInsertOne, getCollection } from '../../utils/database';
-import { hashPassword, verifyPassword } from '../../utils/hashPassword';
 import type { backendResponse } from '../../utils/backendResponse';
-import { result, error } from '../../utils/backendResponse';
+import { error, result } from '../../utils/backendResponse';
+import { dbFindOne, dbInsertOne } from '../../utils/database';
+import { hashPassword, verifyPassword } from '../../utils/hashPassword';
+dotenv.config();
 
 export type user = { username: string; password?: string; passwordHash?: string };
 export const USER_ERROR = {
@@ -12,6 +14,7 @@ export const USER_ERROR = {
   INVALID_DB_ENTRY: { code: 503, description: 'Invalid database entry' },
   INCORRECT_PASSWORD: { code: 504, description: 'Incorrect password' },
   ADD_USER_FAILED: { code: 505, description: 'Failed to add user' },
+  LOAD_JWT_FAILED: { code: 505, description: 'Failed to load jwt' },
 };
 
 const usersCollection = 'users';
@@ -39,9 +42,7 @@ export async function addUser(user: user): Promise<backendResponse<InsertOneResu
 export async function checkUserExists(user: user): Promise<backendResponse<boolean, user>> {
   const { username } = user;
 
-  const dbResponse = await getCollection(usersCollection).findOne<user>({
-    username,
-  });
+  const dbResponse = await dbFindOne<user>(usersCollection, { username });
 
   if (dbResponse === null) return error(USER_ERROR.USER_NOT_FOUND, user, 404);
   return result(true, user);

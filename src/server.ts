@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import user from './lib/routes/user';
 import images from './lib/routes/images';
+import user from './lib/routes/user';
 import { connectDb } from './utils/database';
 dotenv.config();
 
