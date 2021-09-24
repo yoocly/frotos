@@ -41,8 +41,8 @@ export async function dbInsertOne<T>(
     const result = await getCollection(collectionName).insertOne(payload);
     return { status: 201, response: { result, payload } };
   } catch (error) {
-    console.log(payload);
-    return { status: 500, response: { error, payload } };
+    console.error(`DB Error in dbInsertOne: ${error} - Payload: ${payload}`);
+    return { status: 500, response: { payload } };
   }
 }
 
@@ -52,6 +52,7 @@ export async function dbFindOne<T>(collectionName: string, payload: T): dbRespon
     const status = result === null ? 404 : 200;
     return { status, response: { result, payload } };
   } catch (error) {
-    return { status: 500, response: { error, payload } };
+    console.error(`DB Error in dbFindOne: ${error} - Payload: ${payload}`);
+    return { status: 500, response: { payload } };
   }
 }
