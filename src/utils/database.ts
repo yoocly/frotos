@@ -29,6 +29,7 @@ export function getCollection<T>(collectionName: string): Collection<T> {
 }
 
 export async function dbInsertOne<T>(
+  collectionName: string,
   payload: T,
   assertionCallback: (payload: T) => string | boolean = () => true
 ): dbResult<InsertOneResult, T> {
@@ -37,10 +38,20 @@ export async function dbInsertOne<T>(
     return { status: 500, response: { error: assertionResult, payload } };
 
   try {
-    const result = await getCollection('users').insertOne(payload);
+    const result = await getCollection(collectionName).insertOne(payload);
     return { status: 201, response: { result, payload } };
   } catch (error) {
     console.log(payload);
+    return { status: 500, response: { error, payload } };
+  }
+}
+
+export async function dbFindOne<T>(collectionName: string, payload: T): dbResult<unknown, T> {
+  try {
+    const result = await getCollection(collectionName).findOne(payload);
+    const status = result === null ? 204 : 200;
+    return { status, response: { result, payload } };
+  } catch (error) {
     return { status: 500, response: { error, payload } };
   }
 }
