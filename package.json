@@ -24,7 +24,6 @@
     "@storybook/addon-essentials": "^6.4.0-alpha.32",
     "@storybook/addon-links": "^6.4.0-alpha.32",
     "@storybook/react": "^6.4.0-alpha.32",
-    "@types/crypto-js": "^4.0.2",
     "@types/express": "^4.17.13",
     "@types/jsonwebtoken": "^8.5.5",
     "@types/node": "^16.4.13",
