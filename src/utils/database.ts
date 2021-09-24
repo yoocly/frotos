@@ -25,7 +25,7 @@ export async function dbInsertOne<T>(
   assertionCallback: (payload: T) => boolean = () => true
 ): Promise<InsertOneResult<T> | null> {
   if (!assertionCallback(payload)) {
-    console.error(`DB Error in dbInsertOne: Clear password found! --- Payload: ${payload}`);
+    console.error(`DB Error in dbInsertOne: Assertion failed --- Payload: ${payload}`);
     return null;
   }
 
