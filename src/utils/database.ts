@@ -1,16 +1,7 @@
+import dotenv from 'dotenv';
 import type { Collection, InsertOneResult } from 'mongodb';
 import { MongoClient } from 'mongodb';
-import dotenv from 'dotenv';
 dotenv.config();
-
-export type dbResponse<dbResultType, payload> = Promise<{
-  status: number;
-  response: {
-    result?: dbResultType;
-    error?: unknown;
-    payload: payload;
-  };
-}>;
 
 let client: MongoClient;
 
@@ -31,28 +22,26 @@ export function getCollection<T>(collectionName: string): Collection<T> {
 export async function dbInsertOne<T>(
   collectionName: string,
   payload: T,
-  assertionCallback: (payload: T) => string | boolean = () => true
-): dbResponse<InsertOneResult, T> {
-  const assertionResult = assertionCallback(payload);
-  if (assertionResult !== true)
-    return { status: 500, response: { error: assertionResult, payload } };
+  assertionCallback: (payload: T) => boolean = () => true
+): Promise<InsertOneResult<T> | null> {
+  if (!assertionCallback(payload)) {
+    console.error(`DB Error in dbInsertOne: Clear password found! --- Payload: ${payload}`);
+    return null;
+  }
 
   try {
-    const result = await getCollection(collectionName).insertOne(payload);
-    return { status: 201, response: { result, payload } };
+    return await getCollection(collectionName).insertOne(payload);
   } catch (error) {
-    console.error(`DB Error in dbInsertOne: ${error} - Payload: ${payload}`);
-    return { status: 500, response: { payload } };
+    console.error(`DB Error in dbInsertOne: ${error} --- Payload: ${payload}`);
+    return null;
   }
 }
 
-export async function dbFindOne<T>(collectionName: string, payload: T): dbResponse<unknown, T> {
+export async function dbFindOne<T>(collectionName: string, filter: unknown): Promise<T | null> {
   try {
-    const result = await getCollection(collectionName).findOne(payload);
-    const status = result === null ? 404 : 200;
-    return { status, response: { result, payload } };
+    return (await getCollection(collectionName).findOne({ filter })) as T | null;
   } catch (error) {
-    console.error(`DB Error in dbFindOne: ${error} - Payload: ${payload}`);
-    return { status: 500, response: { payload } };
+    console.error(`DB Error in dbFindOne: ${error} --- Filter: ${filter}`);
+    return null;
   }
 }
