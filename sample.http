@@ -18,3 +18,12 @@ Content-Type: application/json
     "username": "testUser",
     "password": "myTestPw"
 }
+
+### Check if a new user exists
+POST http://localhost:3000/api/user/check
+Content-Type: application/json
+
+{
+    "username": "testUser",
+    "password": "myTestPw"
+}
