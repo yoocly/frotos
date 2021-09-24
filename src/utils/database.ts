@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type { Collection, InsertOneResult } from 'mongodb';
+import type { Collection, Filter, InsertOneResult } from 'mongodb';
 import { MongoClient } from 'mongodb';
 dotenv.config();
 
@@ -37,9 +37,13 @@ export async function dbInsertOne<T>(
   }
 }
 
-export async function dbFindOne<T>(collectionName: string, filter: unknown): Promise<T | null> {
+export async function dbFindOne<T>(
+  collectionName: string,
+  filter: Filter<unknown>
+): Promise<T | null> {
   try {
-    return (await getCollection(collectionName).findOne({ filter })) as T | null;
+    const result = await getCollection(collectionName).findOne(filter);
+    return result as T | null;
   } catch (error) {
     console.error(`DB Error in dbFindOne: ${error} --- Filter: ${filter}`);
     return null;
