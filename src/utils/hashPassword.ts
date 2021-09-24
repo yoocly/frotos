@@ -9,7 +9,6 @@ export async function hashPassword(password: string): Promise<string> {
 }
 
 export async function verifyPassword(password: string, hash: string): Promise<boolean> {
-  console.log(addPepper(password));
   return await argon2.verify(hash, addPepper(password));
 }
 
