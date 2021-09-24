@@ -1,5 +1,5 @@
 import type { InsertOneResult } from 'mongodb';
-import type { dbResult } from '../../utils/database';
+import type { dbResponse } from '../../utils/database';
 import { dbFindOne, dbInsertOne } from '../../utils/database';
 import { hashPassword } from '../../utils/hashPassword';
 
@@ -14,20 +14,21 @@ export async function hashUserPassword(user: user): Promise<user> {
   return userWithoutPassword;
 }
 
-export async function addUser(user: user): dbResult<InsertOneResult, user> {
+export async function addUser(user: user): dbResponse<InsertOneResult, user> {
   const userPasswordHashed = await hashUserPassword(user);
 
   const assertNoClearPassword = (user: user) =>
     user.password === undefined ? true : 'Payload contains clear password';
 
-  return await dbInsertOne('user', userPasswordHashed, assertNoClearPassword);
+  const dbResponse = await dbInsertOne('user', userPasswordHashed, assertNoClearPassword);
+  return dbResponse;
 }
 
-export async function checkUserExists(user: user): dbResult<unknown, user> {
+export async function checkUserExists(user: user): dbResponse<unknown, user> {
   const { username } = user;
 
-  const dbResult = await dbFindOne('users', { username });
-  dbResult.response.result = dbResult.status === 200;
+  const dbResponse = await dbFindOne('users', { username });
+  dbResponse.response.result = dbResponse.status === 200;
 
-  return dbResult;
+  return dbResponse;
 }

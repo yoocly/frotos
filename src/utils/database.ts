@@ -3,10 +3,10 @@ import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 dotenv.config();
 
-export type dbResult<dbActionType, payload> = Promise<{
+export type dbResponse<dbResultType, payload> = Promise<{
   status: number;
   response: {
-    result?: dbActionType;
+    result?: dbResultType;
     error?: unknown;
     payload: payload;
   };
@@ -32,7 +32,7 @@ export async function dbInsertOne<T>(
   collectionName: string,
   payload: T,
   assertionCallback: (payload: T) => string | boolean = () => true
-): dbResult<InsertOneResult, T> {
+): dbResponse<InsertOneResult, T> {
   const assertionResult = assertionCallback(payload);
   if (assertionResult !== true)
     return { status: 500, response: { error: assertionResult, payload } };
@@ -46,7 +46,7 @@ export async function dbInsertOne<T>(
   }
 }
 
-export async function dbFindOne<T>(collectionName: string, payload: T): dbResult<unknown, T> {
+export async function dbFindOne<T>(collectionName: string, payload: T): dbResponse<unknown, T> {
   try {
     const result = await getCollection(collectionName).findOne(payload);
     const status = result === null ? 404 : 200;
