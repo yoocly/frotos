@@ -1,5 +1,4 @@
 import dotenv from 'dotenv';
-import type { collection } from './collection';
 import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
 dotenv.config();
 
