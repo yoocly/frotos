@@ -9,7 +9,7 @@ import type { user } from '../types/user';
 dotenv.config();
 
 export const USER_ERROR = {
-  NO_JWT: { resultCode: 401, httpCode: 401, description: 'No jwt' },
+  NO_JWT: { resultCode: 401, httpCode: 401, description: 'No authentication token' },
   AUTH_FAILED: { resultCode: 403, httpCode: 403, description: 'Authentication failed' },
   USER_NOT_FOUND: { resultCode: 404, httpCode: 404, description: 'User not found' },
   NO_PASSWORD: { resultCode: 501, httpCode: 401, description: 'No password' },
