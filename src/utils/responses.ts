@@ -1,5 +1,5 @@
 import type { Response, Request } from 'express';
-import type { user } from '../lib/models/user';
+import type { user } from '../lib/types/user';
 
 declare module 'express' {
   interface Request {
@@ -8,7 +8,7 @@ declare module 'express' {
   }
 }
 
-export type error = { code: number; description: string };
+export type error = { resultCode: number; httpCode: number; description: string };
 export type backendResponse<result, payload> = {
   resultCode: number;
   result?: result;
@@ -36,9 +36,9 @@ export function result<result>(
   } as backendResponse<result, unknown>);
 }
 
-export function error(req: Request, res: Response, error: error, status = 500): void {
-  res.status(status).json({
-    resultCode: error.code,
+export function error(req: Request, res: Response, error: error): void {
+  res.status(error.httpCode).json({
+    resultCode: error.resultCode,
     error: error.description,
     payload: req.body,
     auth: req?.auth,
