@@ -1,4 +1,3 @@
-import dotenv from 'dotenv';
 import type {
   Collection,
   DeleteResult,
@@ -9,7 +8,6 @@ import type {
   UpdateResult,
 } from 'mongodb';
 import { MongoClient } from 'mongodb';
-dotenv.config();
 
 let client: MongoClient;
 
