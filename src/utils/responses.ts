@@ -44,5 +44,5 @@ export function error(req: Request, res: Response, error: error, status = 500): 
     auth: req?.auth,
     isLoggedIn: !!req?.auth,
     forceLogin: req?.forceLogin,
-  } as backendResponse<string, unknown>);
+  } as backendResponse<unknown, unknown>);
 }
