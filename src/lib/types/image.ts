@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externalAPITypes';
+import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
 dotenv.config();
 
 export type image = castedImage & {
@@ -130,7 +130,7 @@ export const apis: api[] = [
         author: pixabayImage?.user || '',
         src: pixabayImage?.previewURL?.replace('_150.', '_1920.') || '',
         preview: pixabayImage?.previewURL?.replace('_150.', '_1280.') || '',
-        thumbnail: pixabayImage?.webformatURL || '',
+        thumbnail: pixabayImage?.previewURL?.replace('_150.', '_640.') || '',
         thumbnailWidth: pixabayImage?.webformatWidth || 0,
         thumbnailHeight: pixabayImage?.webformatHeight || 0,
         views: pixabayImage?.views || 0,

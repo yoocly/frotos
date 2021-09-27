@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
-import type { image } from '../../../api/apis';
+import type { image } from '../../../lib/types/image';
 import ImageDetails from '../../components/ImageDetails/ImageDetails';
 import Input from '../../components/Input/Input';
 import Modal from '../../components/Modal/Modal';

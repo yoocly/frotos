@@ -2,7 +2,7 @@ import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import type { MutableRefObject } from 'react';
 import React, { useRef, useState } from 'react';
 import Masonry from 'react-masonry-component';
-import type { imagesResult } from '../../../api/apis';
+import type { imagesResult } from '../../../lib/types/image';
 import SearchResultImage from '../SearchResultImage/SearchResultImage';
 import Spinner from '../Spinner/Spinner';
 import styles from './SearchResult.module.css';
