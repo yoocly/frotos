@@ -74,6 +74,8 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
   const dbResult = await dbFindOne<user>(usersCollection, { username });
   if (dbResult === null) return error(req, res, USER_ERROR.INVALID_USERNAME);
   if (dbResult?.passwordHash === undefined) return error(req, res, USER_ERROR.INVALID_DB_ENTRY);
+  if (dbResult?._id === undefined) return error(req, res, USER_ERROR.INVALID_DB_ENTRY);
+  user._id = dbResult._id;
 
   const isPasswordCorrect = await verifyPassword(password, dbResult.passwordHash);
   if (!isPasswordCorrect) return error(req, res, USER_ERROR.INCORRECT_PASSWORD);
@@ -88,7 +90,7 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
   result(req, res, { result: true }, 1);
 }
 
-export async function logoutUser(req: Request, res: Response): Promise<void> {
+export function logoutUser(req: Request, res: Response): void {
   res.clearCookie('auth');
   result(req, res, {}, 1, 204);
 }
