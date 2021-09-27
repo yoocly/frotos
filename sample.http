@@ -61,3 +61,25 @@ Content-Type: application/json
     "bla": "blubb"
 }
 
+
+### Create new collection
+POST http://localhost:3000/api/collections/add
+Content-Type: application/json
+
+{
+    "collectionName": "myCollection1"
+}
+
+
+### Get all user's collection
+GET http://localhost:3000/api/collections
+Content-Type: application/json
+
+
+### Delete a collection
+DELETE http://localhost:3000/api/collections/delete
+Content-Type: application/json
+
+{
+    "collectionId": "6151cb9927f25d09f32feee2"
+}
