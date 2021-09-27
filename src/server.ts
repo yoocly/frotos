@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express from 'express';
 import images from './lib/routes/images';
@@ -9,8 +10,10 @@ const port = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.disable('x-powered-by');
+app.use(cookieParser());
 
 app.use('/storybook', express.static('dist/storybook'));
+
 app.use('/api', user);
 app.use('/api', images);
 
