@@ -15,23 +15,49 @@ POST http://localhost:3000/api/user/add
 Content-Type: application/json
 
 {
-    "username": "testUser22",
-    "password": "myTestPw"
+    "user": {
+        "username": "testUser74",
+        "password": "myTestPw"
+    }
 }
+
 
 ### Check if an user exists
 POST http://localhost:3000/api/user/check
 Content-Type: application/json
 
 {
-    "username": "testUser"
+    "user": {
+        "username": "testUser74"
+    }
 }
+
 
 ### Login an user
 POST http://localhost:3000/api/user/login
 Content-Type: application/json
 
 {
-    "username": "testUser",
-    "password": "myTestPw"
+    "user": {
+        "username": "testUser74",
+        "password": "myTestPw"
+    }
 }
+
+
+### Logout an user
+POST http://localhost:3000/api/user/logout
+Content-Type: application/json
+
+{
+}
+
+
+### Validate login
+POST http://localhost:3000/api/user/checklogin
+Content-Type: application/json
+
+{
+    "bla": "blubb"
+}
+

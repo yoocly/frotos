@@ -1,21 +1,17 @@
 import { Router } from 'express';
-import { addUser, checkUserExists, loginUser } from '../models/user';
+import { result } from '../../utils/responses';
+import { addUser, authenticate, checkUserExists, loginUser, logoutUser } from '../models/user';
 
 const router = Router();
 
-router.post('/user/add', async (req, res) => {
-  const { status, response } = await addUser(req.body);
-  res.status(status).json({ response });
-});
+router.post('/user/check', checkUserExists);
+router.post('/user/add', addUser);
 
-router.post('/user/check', async (req, res) => {
-  const { status, response } = await checkUserExists(req.body);
-  res.status(status).json({ response });
-});
+router.post('/user/login', loginUser);
+router.post('/user/logout', logoutUser);
 
-router.post('/user/login', async (req, res) => {
-  const { status, response } = await loginUser(req.body);
-  res.status(status).json({ response });
+router.post('/user/checklogin', authenticate(false), async (req, res) => {
+  result(req, res, { result: true }, 1);
 });
 
 export default router;
