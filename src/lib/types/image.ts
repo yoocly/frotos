@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import type { collection } from './collection';
 import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
 dotenv.config();
 
@@ -30,6 +31,12 @@ export type castedImage = {
 export type imagesResult = {
   count: number;
   results: image[];
+};
+
+export type dbImage = {
+  imageId: string;
+  collections: { collectionId: string; addedAt: number }[];
+  image: image;
 };
 
 export type api = {

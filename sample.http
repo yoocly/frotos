@@ -16,7 +16,7 @@ Content-Type: application/json
 
 {
     "user": {
-        "username": "testUser74",
+        "username": "testUser",
         "password": "myTestPw"
     }
 }
@@ -39,7 +39,7 @@ Content-Type: application/json
 
 {
     "user": {
-        "username": "testUser74",
+        "username": "testUser",
         "password": "myTestPw"
     }
 }
@@ -67,7 +67,7 @@ POST http://localhost:3000/api/collections/add
 Content-Type: application/json
 
 {
-    "collectionName": "myCollection1"
+    "collectionName": "myCollection3"
 }
 
 
@@ -82,4 +82,33 @@ Content-Type: application/json
 
 {
     "collectionId": "6151cb9927f25d09f32feee2"
+}
+
+
+### Add an image to a collection
+POST http://localhost:3000/api/images/add
+Content-Type: application/json
+
+{
+    "collectionId": "6151de2520d8e8faaf03b768",
+    "image":
+    {
+        "id":"uu9tAl8WR3DI",
+        "title":"low-angle photography coconut trees during golden hour",
+        "width":4000,
+        "height":6000,
+        "urlSource":"https://unsplash.com/photos/u9tAl8WR3DI",
+        "author":"Jordan McQueen",
+        "urlAuthor":"https://unsplash.com/@jordanfmcqueen",
+        "src":"https://images.unsplash.com/photo-1535392432937-a27c36ec07b5?ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwxfHxwYWxtJTIwYmVhY2h8ZW58MHx8fHwxNjMyMzA1NDc3&ixlib=rb-1.2.1",
+        "preview":"https://images.unsplash.com/photo-1535392432937-a27c36ec07b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwxfHxwYWxtJTIwYmVhY2h8ZW58MHx8fHwxNjMyMzA1NDc3&ixlib=rb-1.2.1&q=80&w=1080",
+        "thumbnail":"https://images.unsplash.com/photo-1535392432937-a27c36ec07b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyNTY3MDF8MHwxfHNlYXJjaHwxfHxwYWxtJTIwYmVhY2h8ZW58MHx8fHwxNjMyMzA1NDc3&ixlib=rb-1.2.1&q=80&w=200",
+        "thumbnailWidth":200,
+        "thumbnailHeight":120000,
+        "createdAt":"2018-08-27T13:54:40-04:00",
+        "likes":2891,
+        "aspectRatio":"2 : 3",
+        "api":"unsplash",
+        "score":10000
+    }
 }

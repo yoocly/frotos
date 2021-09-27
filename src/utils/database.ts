@@ -1,5 +1,13 @@
 import dotenv from 'dotenv';
-import type { Collection, DeleteResult, Filter, InsertOneResult, SortDirection } from 'mongodb';
+import type {
+  Collection,
+  DeleteResult,
+  Filter,
+  InsertOneResult,
+  SortDirection,
+  UpdateFilter,
+  UpdateResult,
+} from 'mongodb';
 import { MongoClient } from 'mongodb';
 dotenv.config();
 
@@ -77,7 +85,21 @@ export async function dbDeleteOne(
     const result = await getCollection(collectionName).deleteOne(filter);
     return result;
   } catch (error) {
-    console.error(`DB Error in dbFindOne: ${error} --- Filter: ${filter}`);
+    console.error(`DB Error in dbDeleteOne: ${error} --- Filter: ${filter}`);
+    return null;
+  }
+}
+
+export async function dbUpdateOne(
+  collectionName: string,
+  filter: Filter<unknown>,
+  update: UpdateFilter<unknown>
+): Promise<UpdateResult | null> {
+  try {
+    const result = await getCollection(collectionName).updateOne(filter, update);
+    return result;
+  } catch (error) {
+    console.error(`DB Error in dbUpdateOne: ${error} --- Filter: ${filter}`);
     return null;
   }
 }
