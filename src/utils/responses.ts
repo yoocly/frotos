@@ -10,31 +10,14 @@ declare module 'express' {
 
 export type error = { code: number; description: string };
 export type backendResponse<result, payload> = {
-  status: number;
-  response: {
-    resultCode: number;
-    result?: result;
-    error?: string;
-    payload: payload;
-  };
+  resultCode: number;
+  result?: result;
+  error?: string;
+  payload: payload;
+  auth?: user;
+  isLoggedIn?: boolean;
+  forceLogin?: boolean;
 };
-
-export function resultOld<result, payload>(
-  result: result,
-  payload: payload,
-  resultCode = 0,
-  status = 200
-): backendResponse<result, payload> {
-  return { status, response: { resultCode, result, payload } };
-}
-
-export function errorOld<result, payload>(
-  error: error,
-  payload: payload,
-  status = 500
-): backendResponse<result, payload> {
-  return { status, response: { resultCode: error.code, error: error.description, payload } };
-}
 
 export function result<result>(
   req: Request,
@@ -50,9 +33,16 @@ export function result<result>(
     auth: req?.auth,
     isLoggedIn: !!req?.auth,
     forceLogin: req?.forceLogin,
-  });
+  } as backendResponse<result, unknown>);
 }
 
 export function error(req: Request, res: Response, error: error, status = 500): void {
-  res.status(status).json({ resultCode: error.code, error: error.description, payload: req.body });
+  res.status(status).json({
+    resultCode: error.code,
+    error: error.description,
+    payload: req.body,
+    auth: req?.auth,
+    isLoggedIn: !!req?.auth,
+    forceLogin: req?.forceLogin,
+  } as backendResponse<string, unknown>);
 }
