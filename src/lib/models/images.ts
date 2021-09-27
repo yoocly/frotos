@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
-import fetchJSONsAsync from '../utils/fetchJSONsAsync';
-import type { castedImage, image, imagesResult } from './apis';
-import { apis } from './apis';
-import type { imageAPIResult } from './externalAPITypes';
+import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
+import type { castedImage, image, imagesResult } from '../types/image';
+import { apis } from '../types/image';
+import type { imageAPIResult } from '../types/externals';
 
 export async function images(req: Request, res: Response): Promise<void> {
   const { query, page } = req.params;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { imagesResult } from '../../api/apis';
+import type { imagesResult } from '../../lib/types/image';
 import useFetch from './useFetch';
 
 export type fetchSearchImagesResult = {

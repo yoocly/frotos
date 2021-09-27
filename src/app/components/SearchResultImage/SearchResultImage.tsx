@@ -1,5 +1,5 @@
 import React from 'react';
-import type { image } from '../../../api/apis';
+import type { image } from '../../../lib/types/image';
 import Button from '../Button/Button';
 import styles from './SearchResultImage.module.css';
 

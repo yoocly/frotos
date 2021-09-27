@@ -1,4 +1,4 @@
-import type { imagesResult } from '../../api/apis';
+import type { imagesResult } from '../../lib/types/image';
 
 export const mockImages: imagesResult = {
   count: 100,

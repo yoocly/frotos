@@ -1,5 +1,5 @@
 import React from 'react';
-import type { image } from '../../../api/apis';
+import type { image } from '../../../lib/types/image';
 import Spinner from '../Spinner/Spinner';
 import styles from './PreviewImage.module.css';
 
