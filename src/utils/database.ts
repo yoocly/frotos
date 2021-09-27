@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import type { Collection, Filter, InsertOneResult } from 'mongodb';
+import type { Collection, DeleteResult, Filter, InsertOneResult, SortDirection } from 'mongodb';
 import { MongoClient } from 'mongodb';
 dotenv.config();
 
@@ -42,8 +42,40 @@ export async function dbFindOne<T>(
   filter: Filter<unknown>
 ): Promise<T | null> {
   try {
-    const result = await getCollection(collectionName).findOne(filter);
-    return result as T | null;
+    const result = await getCollection<T>(collectionName).findOne(filter);
+    return result;
+  } catch (error) {
+    console.error(`DB Error in dbFindOne: ${error} --- Filter: ${filter}`);
+    return null;
+  }
+}
+
+export async function dbFind<T>(
+  collectionName: string,
+  filter: Filter<unknown>,
+  options: { sortKey?: string; sortDirection?: SortDirection; limit?: number } = {}
+): Promise<T[] | null> {
+  try {
+    const findResult = getCollection<T>(collectionName).find(filter);
+    const sortedResult = options.sortKey
+      ? findResult.sort(options.sortKey, options.sortDirection)
+      : findResult;
+    const limitedResult = options.limit ? sortedResult.limit(options.limit) : sortedResult;
+    const result = await limitedResult.toArray();
+    return result;
+  } catch (error) {
+    console.error(`DB Error in dbFind: ${error} --- Filter: ${filter}`);
+    return null;
+  }
+}
+
+export async function dbDeleteOne(
+  collectionName: string,
+  filter: Filter<unknown>
+): Promise<DeleteResult | null> {
+  try {
+    const result = await getCollection(collectionName).deleteOne(filter);
+    return result;
   } catch (error) {
     console.error(`DB Error in dbFindOne: ${error} --- Filter: ${filter}`);
     return null;
