@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
 import type { Collection, Filter, InsertOneResult } from 'mongodb';
 import { MongoClient } from 'mongodb';
-dotenv.config();
 
 let client: MongoClient;
 
