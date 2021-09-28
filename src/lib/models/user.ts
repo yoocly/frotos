@@ -60,6 +60,7 @@ export async function addUser(req: Request, res: Response): Promise<void> {
   const dbResult = await dbInsertOne(
     usersCollection,
     userPasswordHashed,
+    {},
     (user: user) => user.password === undefined
   );
   if (dbResult === null) return error(req, res, USER_ERROR.ADD_USER_FAILED);
