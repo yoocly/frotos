@@ -1,7 +1,8 @@
 import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { dbDeleteOne, dbFind, dbInsertOne } from '../../utils/database';
+import { dbDeleteOne, dbInsertOne, getCollection } from '../../utils/database';
 import { error, result } from '../../utils/responses';
+import type { dbCollection } from '../types/collection';
 
 export const COLLECTION_ERROR = {
   AUTH_FAILED: { resultCode: 403, httpCode: 401, description: 'Authentication failed' },
@@ -17,18 +18,39 @@ export const COLLECTION_ERROR = {
     httpCode: 500,
     description: 'Failed to delete collection',
   },
+  ACEESS_COLLECTION_FAILED: {
+    resultCode: 505,
+    httpCode: 500,
+    description: 'Failed to access collection',
+  },
 };
-const dbCollection = 'collections';
+const collectionsCollection = 'collections';
 
 export async function getCollections(req: Request, res: Response): Promise<void> {
   if (!req.auth) return error(req, res, COLLECTION_ERROR.AUTH_FAILED);
-  const { _id } = req.auth;
+  const { _id: userId } = req.auth;
 
-  const dbResult = await dbFind(
-    dbCollection,
-    { userId: _id },
-    { sortKey: 'createdAt', sortDirection: -1 }
-  );
+  const dbResult = await getCollection(collectionsCollection)
+    .aggregate([
+      {
+        $match: {
+          userId,
+        },
+      },
+      { $sort: { createdAt: -1 } },
+      { $addFields: { imageCount: { $size: '$images' } } },
+      { $addFields: { lastImageId: { $slice: ['$images', -1] } } },
+      {
+        $lookup: {
+          from: 'images',
+          localField: 'lastImageId',
+          foreignField: 'imageId',
+          as: 'lastImage',
+        },
+      },
+    ])
+    .toArray();
+
   return result(req, res, { ...dbResult }, 1, 200);
 }
 
@@ -39,11 +61,12 @@ export async function addCollection(req: Request, res: Response): Promise<void> 
   if (!req.body.collectionName) return error(req, res, COLLECTION_ERROR.NO_COLLECTIONNAME);
   const { collectionName } = req.body;
 
-  const dbResult = await dbInsertOne(dbCollection, {
+  const dbResult = await dbInsertOne(collectionsCollection, {
     collectionName,
     userId: _id,
     createdAt: Math.floor(Date.now() / 1000),
-  });
+    images: [],
+  } as dbCollection);
   if (dbResult === null) return error(req, res, COLLECTION_ERROR.ADD_COLLECTION_FAILED);
   return result(req, res, { ...dbResult }, 1, 201);
 }
@@ -55,9 +78,47 @@ export async function deleteCollection(req: Request, res: Response): Promise<voi
   if (req.body.collectionId === undefined) return error(req, res, COLLECTION_ERROR.NO_COLLECTIONID);
   const { collectionId } = req.body;
 
-  const dbResult = await dbDeleteOne(dbCollection, { userId, _id: new ObjectId(collectionId) });
+  const dbResult = await dbDeleteOne(collectionsCollection, {
+    userId,
+    _id: new ObjectId(collectionId),
+  });
   if (!dbResult || dbResult.deletedCount === 0)
     return error(req, res, COLLECTION_ERROR.DELETE_COLLECTION_FAILED);
+
+  return result(req, res, { ...dbResult }, 1, 200);
+}
+
+export async function getCollectionImages(req: Request, res: Response): Promise<void> {
+  if (!req.auth) return error(req, res, COLLECTION_ERROR.AUTH_FAILED);
+  const { _id: userId } = req.auth;
+
+  const { collectionId } = req.params;
+
+  const dbResult = await getCollection(collectionsCollection)
+    .aggregate([
+      {
+        $match: {
+          userId,
+          _id: new ObjectId(collectionId),
+        },
+      },
+      { $set: { images: { $reverseArray: '$images' } } },
+      {
+        $lookup: {
+          from: 'images',
+          localField: 'images',
+          foreignField: 'imageId',
+          as: 'imagesList',
+        },
+      },
+
+      { $unset: 'imagesList._id' },
+      { $unset: 'imagesList.imageId' },
+    ])
+    .toArray();
+
+  if (dbResult === null || Object.keys(dbResult).length === 0)
+    return error(req, res, COLLECTION_ERROR.ACEESS_COLLECTION_FAILED);
 
   return result(req, res, { ...dbResult }, 1, 200);
 }

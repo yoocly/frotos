@@ -1,9 +1,9 @@
 import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { dbFindOne, dbInsertOne, dbUpdateOne } from '../../utils/database';
+import { dbFindOne, dbUpsertOne, dbUpdateOne, getCollection } from '../../utils/database';
 import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
 import { error, result } from '../../utils/responses';
-import type { collection } from '../types/collection';
+import type { dbCollection } from '../types/collection';
 import type { imageAPIResult } from '../types/externals';
 import type { castedImage, dbImage, image, imagesResult } from '../types/image';
 import { apis } from '../types/image';
@@ -28,9 +28,15 @@ export const IMAGE_ERROR = {
     httpCode: 400,
     description: 'The image is already in this collection',
   },
+  INVALID_IMAGE: { resultCode: 507, httpCode: 400, description: 'No valid image' },
+  IMAGE_NOT_IN_COLLECTION: {
+    resultCode: 507,
+    httpCode: 400,
+    description: 'The image is not in this collection',
+  },
 };
 const imagesCollection = 'images';
-const dbCollection = 'collections';
+const collectionsCollection = 'collections';
 
 export async function images(req: Request, res: Response): Promise<void> {
   const { query, page } = req.params;
@@ -154,37 +160,113 @@ export async function addImage(req: Request, res: Response): Promise<void> {
   if (!req.body.image) return error(req, res, IMAGE_ERROR.NO_IMAGE);
   const { image } = req.body;
 
-  const validateCollection = await dbFindOne<collection>(dbCollection, {
+  const dbResultUpsertImage = await dbUpsertOne(
+    imagesCollection,
+    { imageId: image.id },
+    {
+      $set: {
+        imageId: image.id,
+        image,
+      } as dbImage,
+    }
+  );
+  if (dbResultUpsertImage === null || dbResultUpsertImage.matchedCount !== 1)
+    return error(req, res, IMAGE_ERROR.ADD_IMAGE_FAILED);
+
+  const collection = await dbFindOne<dbCollection>(collectionsCollection, {
     _id: new ObjectId(collectionId),
     userId,
   });
-  if (validateCollection === null) return error(req, res, IMAGE_ERROR.INVALID_COLLECTION);
-
-  const existingImage = await dbFindOne<dbImage>(imagesCollection, { imageId: image.id });
-
-  const existingImageCollections = existingImage?.collections.map(
-    (collection) => collection.collectionId
-  );
-  if (existingImageCollections?.includes(collectionId))
+  if (collection === null) return error(req, res, IMAGE_ERROR.INVALID_COLLECTION);
+  if (collection.images.includes(image.id))
     return error(req, res, IMAGE_ERROR.IMAGE_ALREADY_IN_COLLECTION);
 
-  const dbResult =
-    existingImage === null
-      ? await dbInsertOne(imagesCollection, {
-          imageId: image.id,
-          collections: [{ collectionId, addedAt: Math.floor(Date.now() / 1000) }],
-          image,
-        } as dbImage)
-      : await dbUpdateOne(
-          imagesCollection,
-          { imageId: image.id },
-          {
-            $push: {
-              collections: { collectionId, addedAt: Math.floor(Date.now() / 1000) },
-            },
-          }
-        );
+  const dbResultUpdateCollection = await dbUpdateOne(
+    collectionsCollection,
+    { _id: new ObjectId(collectionId) },
+    {
+      $push: {
+        images: image.id,
+      },
+    }
+  );
+  if (dbResultUpdateCollection === null || dbResultUpdateCollection.matchedCount !== 1)
+    return error(req, res, IMAGE_ERROR.ADD_IMAGE_FAILED);
 
-  if (dbResult === null) return error(req, res, IMAGE_ERROR.ADD_IMAGE_FAILED);
+  return result(req, res, { added: true }, 1, 201);
+}
+
+export async function getImage(req: Request, res: Response): Promise<void> {
+  if (!req.auth) return error(req, res, IMAGE_ERROR.AUTH_FAILED);
+  const { _id: userId } = req.auth;
+
+  const { imageId } = req.params;
+
+  // const imageResult = await dbFindOne<dbCollection>(imagesCollection, {
+  //   imageId,
+  // });
+
+  const dbResult = await getCollection(imagesCollection)
+    .aggregate([
+      {
+        $match: {
+          imageId,
+        },
+      },
+      {
+        $lookup: {
+          from: 'collections',
+          as: 'collectionsList',
+          let: { imageId: '$imageId' },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $and: [{ $eq: ['$userId', userId] }, { $in: ['$$imageId', '$images'] }],
+                },
+              },
+            },
+          ],
+        },
+      },
+    ])
+    .toArray();
+
+  if (dbResult === null || Object.keys(dbResult).length === 0)
+    return error(req, res, IMAGE_ERROR.INVALID_IMAGE);
+
   return result(req, res, { ...dbResult }, 1, 200);
+}
+
+export async function deleteImage(req: Request, res: Response): Promise<void> {
+  if (!req.auth) return error(req, res, IMAGE_ERROR.AUTH_FAILED);
+  const { _id: userId } = req.auth;
+
+  if (!req.body.collectionId) return error(req, res, IMAGE_ERROR.NO_COLLECTIONID);
+  const { collectionId } = req.body;
+
+  if (!req.body.imageId) return error(req, res, IMAGE_ERROR.NO_IMAGE);
+  const { imageId } = req.body;
+
+  const collection = await dbFindOne<dbCollection>(collectionsCollection, {
+    _id: new ObjectId(collectionId),
+    userId,
+  });
+  if (collection === null) return error(req, res, IMAGE_ERROR.INVALID_COLLECTION);
+  if (!collection.images.includes(imageId))
+    return error(req, res, IMAGE_ERROR.IMAGE_NOT_IN_COLLECTION);
+
+  const dbResultUpdateCollection = await dbUpdateOne(
+    collectionsCollection,
+    { _id: new ObjectId(collectionId) },
+    {
+      $pull: {
+        images: imageId,
+      },
+    }
+  );
+  if (dbResultUpdateCollection === null || dbResultUpdateCollection.matchedCount !== 1)
+    return error(req, res, IMAGE_ERROR.DELETE_IMAGE_FAILED);
+
+  return result(req, res, { ...dbResultUpdateCollection }, 1, 200);
 }
