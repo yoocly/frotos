@@ -28,6 +28,7 @@ export function getCollection<T>(collectionName: string): Collection<T> {
 export async function dbInsertOne<T>(
   collectionName: string,
   payload: T,
+  options = {},
   assertionCallback: (payload: T) => boolean = () => true
 ): Promise<InsertOneResult<T> | null> {
   if (!assertionCallback(payload)) {
@@ -36,7 +37,7 @@ export async function dbInsertOne<T>(
   }
 
   try {
-    return await getCollection(collectionName).insertOne(payload);
+    return await getCollection(collectionName).insertOne(payload, options);
   } catch (error) {
     console.error(`DB Error in dbInsertOne: ${error} --- Payload: ${payload}`);
     return null;
@@ -91,13 +92,23 @@ export async function dbDeleteOne(
 export async function dbUpdateOne(
   collectionName: string,
   filter: Filter<unknown>,
-  update: UpdateFilter<unknown>
+  update: UpdateFilter<unknown>,
+  options = {}
 ): Promise<UpdateResult | null> {
   try {
-    const result = await getCollection(collectionName).updateOne(filter, update);
+    const result = await getCollection(collectionName).updateOne(filter, update, options);
     return result;
   } catch (error) {
     console.error(`DB Error in dbUpdateOne: ${error} --- Filter: ${filter}`);
     return null;
   }
+}
+
+export async function dbUpsertOne(
+  collectionName: string,
+  filter: Filter<unknown>,
+  update: UpdateFilter<unknown>,
+  options = {}
+): Promise<UpdateResult | null> {
+  return dbUpdateOne(collectionName, filter, update, { upsert: true, ...options });
 }
