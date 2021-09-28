@@ -33,8 +33,8 @@ export type imagesResult = {
 };
 
 export type dbImage = {
+  _id?: string;
   imageId: string;
-  collections: { collectionId: string; addedAt: number }[];
   image: image;
 };
 
