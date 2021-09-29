@@ -14,7 +14,7 @@
 }
 
 .signInRegister {
-  margin: 10% var(--gap);
+  margin: min(10vh, 3rem) var(--gap);
 }
 
 .or {
@@ -23,7 +23,7 @@
 }
 
 .formLoginRegister {
-  margin: 10% 0;
+  margin: min(10vh, 3rem) 0;
   display: grid;
   gap: var(--gap);
   max-width: 30em;
