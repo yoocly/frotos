@@ -1,0 +1,39 @@
+.profile {
+  margin: 1rem;
+}
+
+.title {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+
+.content {
+  display: grid;
+  gap: var(--gap);
+  margin: var(--gap) 0;
+}
+
+.signInRegister {
+  margin: min(10vh, 3rem) var(--gap);
+}
+
+.or {
+  font-size: var(--fontSizeHeadlineDefault);
+  color: var(--medium);
+}
+
+.formLoginRegister {
+  margin: min(10vh, 3rem) 0;
+  display: grid;
+  gap: var(--gap);
+  max-width: 30em;
+}
+
+.formError {
+  color: hsl(0, 100%, 70%);
+  margin: var(--gapSmall) 0;
+}
+
+.button {
+  justify-self: right;
+}

@@ -13,6 +13,7 @@ export type InputProps = {
   value: string;
   onSubmit?: () => void;
   onChange: (inputValue: string) => void;
+  onBlur?: () => void;
   className?: string;
 };
 
@@ -26,6 +27,9 @@ export default function Input({
     return;
   },
   onChange,
+  onBlur = () => {
+    return;
+  },
   className = '',
 }: InputProps): JSX.Element {
   function handleSubmit(event: React.FormEvent) {
@@ -42,6 +46,7 @@ export default function Input({
       placeholder={placeholder}
       value={value}
       onChange={(event) => onChange(event.target.value)}
+      onBlur={onBlur}
     />
   );
   const iconElement = <Icon icon={icon} className={styles.icon} />;
