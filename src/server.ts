@@ -1,6 +1,7 @@
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import express from 'express';
+import collection from './lib/routes/collection';
 import images from './lib/routes/images';
 import user from './lib/routes/user';
 import { connectDb } from './utils/database';
@@ -16,6 +17,7 @@ app.use('/storybook', express.static('dist/storybook'));
 
 app.use('/api', user);
 app.use('/api', images);
+app.use('/api', collection);
 
 app.use(express.static('dist/app'));
 app.get('*', (_request, response) => {

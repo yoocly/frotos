@@ -5,20 +5,19 @@ import jwt from 'jsonwebtoken';
 import { dbFindOne, dbInsertOne } from '../../utils/database';
 import { hashPassword, verifyPassword } from '../../utils/hashPassword';
 import { error, result } from '../../utils/responses';
+import type { user } from '../types/user';
 dotenv.config();
 
-export type user = { username?: string; password?: string; passwordHash?: string };
-
 export const USER_ERROR = {
-  NO_JWT: { code: 401, description: 'No jwt' },
-  AUTH_FAILED: { code: 403, description: 'Authentication failed' },
-  USER_NOT_FOUND: { code: 404, description: 'User not found' },
-  NO_PASSWORD: { code: 501, description: 'No password' },
-  INVALID_USERNAME: { code: 502, description: 'Invalid username' },
-  INVALID_DB_ENTRY: { code: 503, description: 'Invalid database entry' },
-  INCORRECT_PASSWORD: { code: 504, description: 'Incorrect password' },
-  ADD_USER_FAILED: { code: 505, description: 'Failed to add user' },
-  LOAD_JWT_FAILED: { code: 506, description: 'Failed to load jwt' },
+  NO_JWT: { resultCode: 401, httpCode: 401, description: 'No authentication token' },
+  AUTH_FAILED: { resultCode: 403, httpCode: 403, description: 'Authentication failed' },
+  USER_NOT_FOUND: { resultCode: 404, httpCode: 404, description: 'User not found' },
+  NO_PASSWORD: { resultCode: 501, httpCode: 401, description: 'No password' },
+  INVALID_USERNAME: { resultCode: 502, httpCode: 401, description: 'Invalid username' },
+  INVALID_DB_ENTRY: { resultCode: 503, httpCode: 500, description: 'Invalid database entry' },
+  INCORRECT_PASSWORD: { resultCode: 504, httpCode: 401, description: 'Incorrect password' },
+  ADD_USER_FAILED: { resultCode: 505, httpCode: 503, description: 'Failed to add user' },
+  LOAD_JWT_FAILED: { resultCode: 506, httpCode: 503, description: 'Failed to load jwt' },
 };
 
 const usersCollection = 'users';
@@ -42,46 +41,48 @@ export function setJWT(res: Response, accessToken: string): void {
 
 export async function checkUserExists(req: Request, res: Response): Promise<void> {
   const user = req.body.user as user;
-  if (!user?.username) return error(req, res, USER_ERROR.INVALID_USERNAME, 400);
+  if (!user?.username) return error(req, res, USER_ERROR.INVALID_USERNAME);
 
   const { username } = user;
   const dbResponse = await dbFindOne<user>(usersCollection, { username });
 
-  if (dbResponse === null) return error(req, res, USER_ERROR.USER_NOT_FOUND, 404);
+  if (dbResponse === null) return error(req, res, USER_ERROR.USER_NOT_FOUND);
   return result(req, res, { userFound: true }, 1);
 }
 
 export async function addUser(req: Request, res: Response): Promise<void> {
   const user = req.body.user as user;
-  if (!user?.username) return error(req, res, USER_ERROR.INVALID_USERNAME, 400);
-  if (!user?.password) return error(req, res, USER_ERROR.NO_PASSWORD, 400);
+  if (!user?.username) return error(req, res, USER_ERROR.INVALID_USERNAME);
+  if (!user?.password) return error(req, res, USER_ERROR.NO_PASSWORD);
 
   const userPasswordHashed = await hashUserPassword(user);
 
   const dbResult = await dbInsertOne(
     usersCollection,
     userPasswordHashed,
+    {},
     (user: user) => user.password === undefined
   );
-  if (dbResult === null) return error(req, res, USER_ERROR.ADD_USER_FAILED, 503);
+  if (dbResult === null) return error(req, res, USER_ERROR.ADD_USER_FAILED);
   return result(req, res, { ...dbResult }, 1, 201);
 }
 
 export async function loginUser(req: Request, res: Response): Promise<void> {
   const user = req.body.user as user;
   const { username, password } = user;
-  if (password === undefined) return error(req, res, USER_ERROR.NO_PASSWORD, 401);
+  if (password === undefined) return error(req, res, USER_ERROR.NO_PASSWORD);
 
   const dbResult = await dbFindOne<user>(usersCollection, { username });
-  if (dbResult === null) return error(req, res, USER_ERROR.INVALID_USERNAME, 401);
-  if (dbResult?.passwordHash === undefined)
-    return error(req, res, USER_ERROR.INVALID_DB_ENTRY, 500);
+  if (dbResult === null) return error(req, res, USER_ERROR.INVALID_USERNAME);
+  if (dbResult?.passwordHash === undefined) return error(req, res, USER_ERROR.INVALID_DB_ENTRY);
+  if (dbResult?._id === undefined) return error(req, res, USER_ERROR.INVALID_DB_ENTRY);
+  user._id = dbResult._id;
 
   const isPasswordCorrect = await verifyPassword(password, dbResult.passwordHash);
-  if (!isPasswordCorrect) return error(req, res, USER_ERROR.INCORRECT_PASSWORD, 401);
+  if (!isPasswordCorrect) return error(req, res, USER_ERROR.INCORRECT_PASSWORD);
 
   const jwtSecret = process.env.JWT_SECRET;
-  if (jwtSecret === undefined) return error(req, res, USER_ERROR.LOAD_JWT_FAILED, 503);
+  if (jwtSecret === undefined) return error(req, res, USER_ERROR.LOAD_JWT_FAILED);
 
   const accessToken = jwt.sign(removePassword(user), jwtSecret, { expiresIn: jwtExpiration });
   setJWT(res, accessToken);
@@ -90,7 +91,7 @@ export async function loginUser(req: Request, res: Response): Promise<void> {
   result(req, res, { result: true }, 1);
 }
 
-export async function logoutUser(req: Request, res: Response): Promise<void> {
+export function logoutUser(req: Request, res: Response): void {
   res.clearCookie('auth');
   result(req, res, {}, 1, 204);
 }
@@ -98,13 +99,13 @@ export async function logoutUser(req: Request, res: Response): Promise<void> {
 export function authenticate(forceLogin = true) {
   return (req: Request, res: Response, next: NextFunction): void => {
     const accessToken = req.cookies.auth || '';
-    if (!accessToken && forceLogin) return error(req, res, USER_ERROR.NO_JWT, 401);
+    if (!accessToken && forceLogin) return error(req, res, USER_ERROR.NO_JWT);
 
     const jwtSecret = process.env.JWT_SECRET;
-    if (jwtSecret === undefined) return error(req, res, USER_ERROR.LOAD_JWT_FAILED, 500);
+    if (jwtSecret === undefined) return error(req, res, USER_ERROR.LOAD_JWT_FAILED);
 
     jwt.verify(accessToken, jwtSecret, <user>(err: VerifyErrors | null, user: user) => {
-      if (err && forceLogin) return error(req, res, USER_ERROR.AUTH_FAILED, 403);
+      if (err && forceLogin) return error(req, res, USER_ERROR.AUTH_FAILED);
 
       req.auth = user;
       req.forceLogin = forceLogin;

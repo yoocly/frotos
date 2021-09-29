@@ -32,6 +32,12 @@ export type imagesResult = {
   results: image[];
 };
 
+export type dbImage = {
+  _id?: string;
+  imageId: string;
+  image: image;
+};
+
 export type api = {
   name: apiNames;
   key: string;
