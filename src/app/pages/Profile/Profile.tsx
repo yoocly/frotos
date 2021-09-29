@@ -56,8 +56,7 @@ export default function Profile({ className = '' }: ProfileProps): JSX.Element {
 
   function logout() {
     cookies.remove('auth');
-
-    queryClient.setQueryData(['checkUser', currentUser], true);
+    queryClient.invalidateQueries();
     setUsernameToCheck(currentUser || '');
     setUsername(currentUser || '');
     setPassword('');
