@@ -12,8 +12,7 @@ export const mockImages: imagesResult = {
       author: 'davidcmiller',
       src: 'https://cdn.pixabay.com/photo/2015/12/27/21/11/beach-1110498_1920.jpg',
       preview: 'https://cdn.pixabay.com/photo/2015/12/27/21/11/beach-1110498_1280.jpg',
-      thumbnail:
-        'https://pixabay.com/get/g47a7ba2ce67626e96c663ae7c948240f34358aaa0f7b2de5a32b1e1028f17164721883b6d73945e7d8a42fd0d56121b9364450681069da4157de0ee9784789f6_640.jpg',
+      thumbnail: 'https://cdn.pixabay.com/photo/2015/12/27/21/11/beach-1110498_640.jpg',
       thumbnailWidth: 640,
       thumbnailHeight: 449,
       views: 245057,

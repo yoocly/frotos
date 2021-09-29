@@ -5,7 +5,7 @@ import { addUser, authenticate, checkUserExists, loginUser, logoutUser } from '.
 const router = Router();
 
 router.post('/user/check', checkUserExists);
-router.post('/user/add', addUser);
+router.post('/user', addUser);
 
 router.post('/user/login', loginUser);
 router.post('/user/logout', logoutUser);
