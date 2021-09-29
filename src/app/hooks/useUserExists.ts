@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-export default function useExistsUser(username: string): boolean | null {
+export default function useUserExists(username: string): boolean | null {
   const userExists = useQuery(['checkUser', username], () => checkUser(username), {
     retry: false,
     enabled: !!username,

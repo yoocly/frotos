@@ -5,7 +5,7 @@ import Button from '../../components/Button/Button';
 import Headline from '../../components/Headline/Headline';
 import Input from '../../components/Input/Input';
 import useCurrentUser from '../../hooks/useCurrentUser';
-import useExistsUser from '../../hooks/useExistsUser';
+import useUserExists from '../../hooks/useUserExists';
 import styles from './Profile.module.css';
 import cookies from 'js-cookie';
 import { useQueryClient } from 'react-query';
@@ -23,7 +23,7 @@ export default function Profile({ className = '' }: ProfileProps): JSX.Element {
   const currentUser = useCurrentUser();
 
   const queryClient = useQueryClient();
-  const userExists = useExistsUser(usernameToCheck);
+  const userExists = useUserExists(usernameToCheck);
   const loginMode = userExists === true;
   const registerMode = userExists === false;
 
