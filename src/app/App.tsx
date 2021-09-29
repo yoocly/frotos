@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import BackgroundImage from './components/BackgroundImage/BackgroundImage';
 import NavBar from './components/NavBar/NavBar';
+import Profile from './pages/Profile/Profile';
 import Search from './pages/Search/Search';
 
 export default function App(): JSX.Element {
@@ -18,7 +19,7 @@ export default function App(): JSX.Element {
         </Route>
         <Route path="/profile">
           <NavBar active="profile" />
-          <main>Profile page</main>
+          <Profile />
         </Route>
         <Route path="/about">
           <NavBar active="about" />
