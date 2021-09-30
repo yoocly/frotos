@@ -64,7 +64,7 @@ export default function Profile({ className = '' }: ProfileProps): JSX.Element {
   }
 
   return currentUser ? (
-    <div className={`${styles.profile} ${className}`}>
+    <main className={`${styles.profile} ${className}`}>
       <Headline level={1} className={styles.title}>
         <span>{currentUser}</span>
         <div className={styles.button}>
@@ -75,9 +75,9 @@ export default function Profile({ className = '' }: ProfileProps): JSX.Element {
       <section className={styles.content}>
         <div>You are signed in.</div>
       </section>
-    </div>
+    </main>
   ) : (
-    <div className={`${styles.signInRegister} ${className}`}>
+    <main className={`${styles.signInRegister} ${className}`}>
       <Headline level={1} styling="large">
         {!registerMode && <>Sign in</>}
         {!registerMode && !loginMode && <span className={styles.or}> or </span>}
@@ -118,6 +118,6 @@ export default function Profile({ className = '' }: ProfileProps): JSX.Element {
           {registerMode && <Button icon="login" text="Register" />}
         </div>
       </form>
-    </div>
+    </main>
   );
 }
