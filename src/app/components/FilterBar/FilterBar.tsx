@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import styles from './FilterBar.module.css';
 import colorwheel from '../../../assets/colorwheel.webp';
 import type { filtersAspectRatio } from '../../pages/Search/Search';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
+import styles from './FilterBar.module.css';
 
 export type filterBarProps = {
   imageCount: number | null;

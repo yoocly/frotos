@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { imagesResult } from '../../lib/types/image';
 import type { filtersAspectRatio } from '../pages/Search/Search';
 import useFetch from './useFetch';
+import { apiColorMap } from '../../app/lib/colors';
 
 export type fetchSearchImagesResult = {
   imagesResult: imagesResult | null;
@@ -23,7 +24,8 @@ export default function useFetchSearchImages(
   const [totalResult, setTotalResult] = useState<imagesResult>({ count: 0, results: [] });
 
   const page = query === lastQuery ? nextPage : 1;
-  const url = query ? `/api/images/${query}/${page}/${filterAspectRatio}/${filterColor}` : null;
+  const color = Object.keys(apiColorMap)[filterColor - 1] || 'no-color';
+  const url = query ? `/api/images/${query}/${page}/${filterAspectRatio}/${color}` : null;
   const fetchResult = useFetch<imagesResult>(url);
 
   const result = fetchResult.data;
