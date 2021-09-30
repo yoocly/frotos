@@ -106,3 +106,60 @@ export const COLORS = {
     gradientSVG: GRADIENTS_SVG.inactive,
   },
 };
+
+export const apiColorMap = {
+  monochrom: {
+    unsplash: 'black_and_white',
+    pexels: 'black',
+    pixabay: 'grayscale',
+  },
+  black: {
+    unsplash: 'black',
+    pexels: 'black',
+    pixabay: 'black',
+  },
+  white: {
+    unsplash: 'white',
+    pexels: 'white',
+    pixabay: 'white',
+  },
+  gray: {
+    pexels: 'gray',
+    pixabay: 'gray',
+  },
+  red: {
+    unsplash: 'red',
+    pexels: 'red',
+    pixabay: 'red',
+  },
+  orange: {
+    unsplash: 'orange',
+    pexels: '#e68600',
+    pixabay: 'orange,brown',
+  },
+  yellow: {
+    unsplash: 'yellow',
+    pexels: 'yellow',
+    pixabay: 'yellow',
+  },
+  green: {
+    unsplash: 'green',
+    pexels: 'green',
+    pixabay: 'green',
+  },
+  teal: {
+    unsplash: 'teal',
+    pexels: 'turquoise',
+    pixabay: 'turquoise',
+  },
+  blue: {
+    unsplash: 'blue',
+    pexels: 'blue',
+    pixabay: 'blue',
+  },
+  purple: {
+    unsplash: 'purple',
+    pexels: '#b366ff',
+    pixabay: 'lilac,pink',
+  },
+};
