@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { imagesResult } from '../../lib/types/image';
+import type { filtersAspectRatio } from '../pages/Search/Search';
 import useFetch from './useFetch';
 
 export type fetchSearchImagesResult = {
@@ -11,7 +12,9 @@ export type fetchSearchImagesResult = {
 
 export default function useFetchSearchImages(
   fetchMoreImages: boolean,
-  query: string
+  query: string,
+  filterAspectRatio: filtersAspectRatio,
+  filterColor: number
 ): fetchSearchImagesResult {
   const [lastQuery, setLastQuery] = useState<string>('');
   const [lastPage, setLastPage] = useState<number>(1);
@@ -20,7 +23,7 @@ export default function useFetchSearchImages(
   const [totalResult, setTotalResult] = useState<imagesResult>({ count: 0, results: [] });
 
   const page = query === lastQuery ? nextPage : 1;
-  const url = query ? `/api/images/${query}/${page}` : null;
+  const url = query ? `/api/images/${query}/${page}/${filterAspectRatio}/${filterColor}` : null;
   const fetchResult = useFetch<imagesResult>(url);
 
   const result = fetchResult.data;

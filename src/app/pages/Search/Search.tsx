@@ -59,7 +59,9 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
-    searchValue
+    searchValue,
+    filterAspectRatio,
+    filterColor
   );
 
   useEffect(() => {
