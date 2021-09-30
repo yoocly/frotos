@@ -1,0 +1,85 @@
+.filterBar {
+  display: grid;
+  grid-auto-flow: column;
+  margin: var(--gapSmall) var(--gapSmall);
+  color: var(--medium);
+}
+
+.resultCount {
+  align-self: center;
+}
+
+.filter {
+  justify-self: end;
+  position: relative;
+  display: flex;
+}
+
+.filterAspectRatio {
+  display: grid;
+  gap: var(--gap);
+  margin: var(--gap);
+}
+
+.modalAspectRatio {
+  right: 4.5rem;
+}
+
+.filterButtonColor {
+  margin-left: var(--gap);
+  cursor: pointer;
+}
+
+.modalColor {
+  right: 0;
+}
+
+.filterColor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+  margin: var(--gap);
+}
+
+.color {
+  display: inline-block;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid var(--inactive);
+}
+
+.color1 {
+  background: linear-gradient(90deg, #000 0%, #000 50%, #fff 50%, #fff 100%);
+}
+.color2 {
+  background: #000;
+}
+.color3 {
+  background: #fff;
+}
+.color4 {
+  background: #808080;
+}
+.color5 {
+  background: #e01106;
+}
+.color6 {
+  background: #e58600;
+}
+.color7 {
+  background: #ffe600;
+}
+.color8 {
+  background: #45b82e;
+}
+.color9 {
+  background: #3cc;
+}
+.color10 {
+  background: #0080ff;
+}
+.color11 {
+  background: #b366ff;
+}

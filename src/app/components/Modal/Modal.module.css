@@ -39,6 +39,10 @@
   border-radius: var(--radius);
 }
 
+.relative {
+  position: absolute;
+}
+
 .centered {
   left: 50%;
   top: 50%;

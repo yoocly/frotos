@@ -1,9 +1,10 @@
+import type { CSSProperties } from 'react';
 import React from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import Button from '../Button/Button';
 import styles from './Modal.module.css';
 
-export const MODAL_POSITIONS = ['centered', 'bottomRight'] as const;
+export const MODAL_POSITIONS = ['centered', 'bottomRight', 'relative'] as const;
 export const modalDefaultSize = {
   desktop: {
     minHeight: '5rem',
@@ -35,6 +36,7 @@ export type ModalProps = {
   onClose?: () => void;
   children: React.ReactNode;
   className?: string;
+  style?: CSSProperties;
 };
 
 export default function Modal({
@@ -50,6 +52,7 @@ export default function Modal({
   },
   children,
   className = '',
+  style = {},
 }: ModalProps): JSX.Element {
   if (!show) return <></>;
 
@@ -62,7 +65,7 @@ export default function Modal({
         ></div>
       )}
       <div
-        style={isMobileOnly ? size.mobile : size.desktop}
+        style={{ ...(isMobileOnly ? size.mobile : size.desktop), ...style }}
         className={`${styles.modal} ${styles[position]} ${className}`}
       >
         {closeButton && (
