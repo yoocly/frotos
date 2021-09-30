@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import type { image } from '../../../lib/types/image';
+import FilterBar from '../../components/FilterBar/FilterBar';
 import ImageDetails from '../../components/ImageDetails/ImageDetails';
 import Input from '../../components/Input/Input';
 import Modal from '../../components/Modal/Modal';
@@ -11,6 +12,7 @@ import SearchResult from '../../components/SearchResult/SearchResult';
 import useFetchSearchImages from '../../hooks/useFetchSearchImages';
 import styles from './Search.module.css';
 
+export type filtersAspectRatio = 'no-filter' | 'landscape' | 'square' | 'portrait';
 export type SearchProps = {
   className?: string;
 };
@@ -51,6 +53,9 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
   const [selectedImage, setSelectedImage] = useState<image | null>(null);
   const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems>('details');
+
+  const [filterAspectRatio, setFilterAspectRatio] = useState<filtersAspectRatio>('no-filter');
+  const [filterColor, setFilterColor] = useState<number>(0);
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
@@ -94,10 +99,13 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         onSubmit={handleSubmit}
         className={styles.input}
       />
-      <div className={styles.filterBar}>
-        <div>{imagesResult && `${imagesResult.count.toLocaleString()} results`}</div>
-        <div className={styles.filter}></div>
-      </div>
+      <FilterBar
+        imageCount={imagesResult && imagesResult.count}
+        aspectRatio={filterAspectRatio}
+        color={filterColor}
+        onChangeAspectRatio={setFilterAspectRatio}
+        onChangeColor={setFilterColor}
+      />
       <SearchResult
         isLoading={isLoading}
         isFetchingNewResult={isFetchingNewResult}
@@ -110,6 +118,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         handleScroll={handleScroll}
         className={styles.searchResult}
       />
+
       <Modal
         show={!!selectedImage}
         backgroundBlur
