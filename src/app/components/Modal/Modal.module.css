@@ -2,7 +2,7 @@
   background: rgba(0, 0, 0, 0.5);
   height: 100%;
   width: 100%;
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 0;
   left: 0;
@@ -18,7 +18,7 @@
 
 .modal {
   background: var(--dark);
-  position: absolute;
+  position: fixed;
   z-index: 10;
   border-radius: var(--radius);
   box-shadow: var(--shadowModal);
@@ -46,9 +46,14 @@
 }
 
 .bottomRight {
+  right: 0%;
+  bottom: 15%;
+}
+
+.bottomRightSlide {
   right: -100%;
-  bottom: 20%;
-  animation: slide 1s forwards;
+  bottom: 15%;
+  animation: slide 0.5s forwards;
 }
 
 @keyframes slide {
