@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import BackgroundImage from './components/BackgroundImage/BackgroundImage';
 import NavBar from './components/NavBar/NavBar';
+import Collections from './pages/Collections/Collections';
 import Profile from './pages/Profile/Profile';
 import Search from './pages/Search/Search';
 
@@ -18,7 +19,7 @@ export default function App(): JSX.Element {
           </Route>
           <Route path="/collections">
             <NavBar active="collections" />
-            <main>Collections page</main>
+            <Collections />
           </Route>
           <Route path="/profile">
             <NavBar active="profile" />
