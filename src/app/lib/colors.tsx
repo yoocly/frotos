@@ -1,5 +1,4 @@
 import React from 'react';
-import type { apiColorMap } from '../../lib/types/image';
 
 export type color = {
   cssVar: string;
@@ -21,7 +20,6 @@ export type colors = {
 };
 
 export type colorKey = keyof typeof COLORS;
-export type apiColorKeys = keyof typeof apiColorMap;
 
 export const GRADIENTS_SVG = {
   primary: (): JSX.Element => (
@@ -108,3 +106,19 @@ export const COLORS = {
     gradientSVG: GRADIENTS_SVG.inactive,
   },
 };
+
+export const apiColorKeys = [
+  'nocolor',
+  'monochrom',
+  'black',
+  'white',
+  'gray',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'teal',
+  'blue',
+  'purple',
+  'monochrom',
+];

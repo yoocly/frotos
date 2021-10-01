@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
-dotenv.config();
 
 export type filtersAspectRatio = 'nofilter' | 'landscape' | 'square' | 'portrait';
 
@@ -53,6 +51,7 @@ export type api = {
 };
 
 export type apiNames = 'unsplash' | 'pexels' | 'pixabay';
+export type apiColorKeys = keyof typeof apiColorMap;
 
 export type apiResult = {
   total?: number;
