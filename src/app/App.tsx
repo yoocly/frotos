@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import BackgroundImage from './components/BackgroundImage/BackgroundImage';
 import NavBar from './components/NavBar/NavBar';
+import About from './pages/About/About';
 import Profile from './pages/Profile/Profile';
 import Search from './pages/Search/Search';
+import Splash from './pages/Splash/Splash';
 
 export default function App(): JSX.Element {
   const queryClient = new QueryClient();
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Switch>
-          <Route path="/search">
+          <Route path="/search/:query?">
             <NavBar active="search" />
             <Search />
           </Route>
@@ -26,13 +28,11 @@ export default function App(): JSX.Element {
           </Route>
           <Route path="/about">
             <NavBar active="about" />
-            <main>About page</main>
+            <About />
           </Route>
           <Route path="/">
-            <BackgroundImage>
-              <NavBar />
-              <main>Splash Home</main>
-            </BackgroundImage>
+            <NavBar />
+            <Splash />
           </Route>
         </Switch>
       </BrowserRouter>
