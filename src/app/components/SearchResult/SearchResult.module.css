@@ -1,3 +1,18 @@
+.imagesList {
+  height: 100%;
+  padding-bottom: 4rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.imagesList::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+.imagesList::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
+}
+
 .searchResultImage {
   padding: 0 var(--gapSmall);
 }
@@ -10,4 +25,24 @@
 
 .spinner {
   height: 30%;
+}
+
+.modalContent {
+  display: grid;
+  grid-template-rows: auto 6rem 1fr;
+  height: 100%;
+}
+
+.modalTabContent {
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.modalTabContent::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+
+.modalTabContent::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
 }
