@@ -91,102 +91,105 @@ export default function FilterBar({
 
   return (
     <div className={`${styles.filterBar} ${className}`}>
-      <div className={styles.resultCount}>
-        {imageCount !== 0 && `${imageCount?.toLocaleString()} results`}
-      </div>
-      <div className={styles.filter}>
-        <div>
-          <Button
-            icon={aspectRatio === 'nofilter' ? 'filterFormat' : aspectRatio}
-            color="medium"
-            transparent
-            onClick={() => {
-              resetFilters();
-              setModalFilterAspectRatio(true);
-            }}
-          />
-          <Button
-            icon="down"
-            color="medium"
-            transparent
-            onClick={() => {
-              resetFilters();
-              setModalFilterAspectRatio(true);
-            }}
-          />
-          <Modal
-            show={!!modalFilterAspectRatio}
-            size={modalFilter}
-            backgroundOverlay={false}
-            position="relative"
-            className={styles.modalAspectRatio}
-          >
-            <div className={styles.filterAspectRatio}>
+      {imageCount !== 0 && (
+        <>
+          {' '}
+          <div className={styles.resultCount}>{imageCount?.toLocaleString()} results</div>
+          <div className={styles.filter}>
+            <div>
               <Button
-                icon="filterFormat"
-                color="mediumGradient"
+                icon={aspectRatio === 'nofilter' ? 'filterFormat' : aspectRatio}
+                color="medium"
                 transparent
-                large
                 onClick={() => {
-                  onChangeAspectRatio('nofilter');
                   resetFilters();
+                  setModalFilterAspectRatio(true);
                 }}
               />
               <Button
-                icon="landscape"
-                color="mediumGradient"
+                icon="down"
+                color="medium"
                 transparent
-                large
                 onClick={() => {
-                  onChangeAspectRatio('landscape');
                   resetFilters();
+                  setModalFilterAspectRatio(true);
                 }}
               />
-              <Button
-                icon="square"
-                color="mediumGradient"
-                transparent
-                large
-                onClick={() => {
-                  onChangeAspectRatio('square');
-                  resetFilters();
-                }}
-              />
-              <Button
-                icon="portrait"
-                color="mediumGradient"
-                transparent
-                large
-                onClick={() => {
-                  onChangeAspectRatio('portrait');
-                  resetFilters();
-                }}
-              />
+              <Modal
+                show={!!modalFilterAspectRatio}
+                size={modalFilter}
+                backgroundOverlay={false}
+                position="relative"
+                className={styles.modalAspectRatio}
+              >
+                <div className={styles.filterAspectRatio}>
+                  <Button
+                    icon="filterFormat"
+                    color="mediumGradient"
+                    transparent
+                    large
+                    onClick={() => {
+                      onChangeAspectRatio('nofilter');
+                      resetFilters();
+                    }}
+                  />
+                  <Button
+                    icon="landscape"
+                    color="mediumGradient"
+                    transparent
+                    large
+                    onClick={() => {
+                      onChangeAspectRatio('landscape');
+                      resetFilters();
+                    }}
+                  />
+                  <Button
+                    icon="square"
+                    color="mediumGradient"
+                    transparent
+                    large
+                    onClick={() => {
+                      onChangeAspectRatio('square');
+                      resetFilters();
+                    }}
+                  />
+                  <Button
+                    icon="portrait"
+                    color="mediumGradient"
+                    transparent
+                    large
+                    onClick={() => {
+                      onChangeAspectRatio('portrait');
+                      resetFilters();
+                    }}
+                  />
+                </div>
+              </Modal>
             </div>
-          </Modal>
-        </div>
-        <div>
-          {getColorFilters()[color]}
-          <Button
-            icon="down"
-            color="medium"
-            transparent
-            onClick={() => {
-              resetFilters();
-              setModalFilterColor(true);
-            }}
-          />
-          <Modal
-            show={!!modalFilterColor}
-            size={modalFilter}
-            backgroundOverlay={false}
-            position="relative"
-            className={styles.modalColor}
-          >
-            <div className={styles.filterColor}>{getColorFilters(true)}</div>
-          </Modal>
-        </div>
-      </div>
+            <div>
+              {getColorFilters()[color]}
+              <Button
+                icon="down"
+                color="medium"
+                transparent
+                onClick={() => {
+                  resetFilters();
+                  setModalFilterColor(true);
+                }}
+              />
+              <Modal
+                show={!!modalFilterColor}
+                size={modalFilter}
+                backgroundOverlay={false}
+                position="relative"
+                className={styles.modalColor}
+              >
+                <div className={styles.filterColor}>{getColorFilters(true)}</div>
+              </Modal>
+            </div>
+          </div>
+        </>
+      )}{' '}
     </div>
   );
 }
