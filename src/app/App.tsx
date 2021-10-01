@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar/NavBar';
