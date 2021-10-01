@@ -9,17 +9,17 @@ import styles from './SearchResult.module.css';
 
 export type SearchResultProps = {
   isLoading: boolean;
-  isFetchingNewResult: boolean;
+  isFetchingNewResult?: boolean;
   imagesResult: imagesResult | null;
   onImageClick: (id: number) => void;
-  onCollectionClick: (id: string) => void;
+  onCollectionClick: (id: number) => void;
   handleScroll: (position: number, parentHeight: number) => void;
   className?: string;
 };
 
 export default function SearchResult({
   isLoading,
-  isFetchingNewResult,
+  isFetchingNewResult = false,
   imagesResult,
   onImageClick,
   onCollectionClick,
@@ -66,7 +66,7 @@ export default function SearchResult({
               width={`calc(${resultWidth}%`}
               inCollection={false}
               onClick={() => onImageClick(index)}
-              onCollectionClick={() => onCollectionClick(image.id)}
+              onCollectionClick={() => onCollectionClick(index)}
               className={styles.searchResultImage}
               key={image.id}
             />

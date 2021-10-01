@@ -36,3 +36,20 @@
   background: var(--primary);
   border-radius: var(--radius);
 }
+
+.popupSmall {
+  display: grid;
+  grid: 100% / auto 1fr auto;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.popupSmall * {
+  align-self: center;
+}
+
+.popupLarge {
+  display: grid;
+  margin: 1rem;
+  gap: 1rem;
+}

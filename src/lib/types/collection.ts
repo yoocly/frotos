@@ -1,7 +1,12 @@
+import type { image } from './image';
+
 export type dbCollection = {
   _id?: string;
   collectionName: string;
   userId: string;
-  createdAt: number;
+  lastChangeAt: number;
   images: string[];
+  imageCount?: number;
+  lastImage?: { image: image }[];
+  imagesList?: { image: image }[];
 };

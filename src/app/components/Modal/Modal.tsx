@@ -4,7 +4,7 @@ import { isMobileOnly } from 'react-device-detect';
 import Button from '../Button/Button';
 import styles from './Modal.module.css';
 
-export const MODAL_POSITIONS = ['centered', 'bottomRight', 'relative'] as const;
+export const MODAL_POSITIONS = ['centered', 'bottomRight', 'relative', 'bottomRightSlide'] as const;
 export const modalDefaultSize = {
   desktop: {
     minHeight: '5rem',
