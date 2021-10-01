@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
-import type { image } from '../../../lib/types/image';
+import type { filtersAspectRatio, image } from '../../../lib/types/image';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import ImageDetails from '../../components/ImageDetails/ImageDetails';
 import Input from '../../components/Input/Input';
@@ -12,7 +12,6 @@ import SearchResult from '../../components/SearchResult/SearchResult';
 import useFetchSearchImages from '../../hooks/useFetchSearchImages';
 import styles from './Search.module.css';
 
-export type filtersAspectRatio = 'no-filter' | 'landscape' | 'square' | 'portrait';
 export type SearchProps = {
   className?: string;
 };
@@ -54,7 +53,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [selectedImage, setSelectedImage] = useState<image | null>(null);
   const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems>('details');
 
-  const [filterAspectRatio, setFilterAspectRatio] = useState<filtersAspectRatio>('no-filter');
+  const [filterAspectRatio, setFilterAspectRatio] = useState<filtersAspectRatio>('nofilter');
   const [filterColor, setFilterColor] = useState<number>(0);
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import colorwheel from '../../../assets/colorwheel.webp';
-import type { filtersAspectRatio } from '../../pages/Search/Search';
+import type { filtersAspectRatio } from '../../../lib/types/image';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import styles from './FilterBar.module.css';
@@ -97,7 +97,7 @@ export default function FilterBar({
       <div className={styles.filter}>
         <div>
           <Button
-            icon={aspectRatio === 'no-filter' ? 'filterFormat' : aspectRatio}
+            icon={aspectRatio === 'nofilter' ? 'filterFormat' : aspectRatio}
             color="medium"
             transparent
             onClick={() => {
@@ -128,7 +128,7 @@ export default function FilterBar({
                 transparent
                 large
                 onClick={() => {
-                  onChangeAspectRatio('no-filter');
+                  onChangeAspectRatio('nofilter');
                   resetFilters();
                 }}
               />
