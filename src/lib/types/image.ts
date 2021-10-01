@@ -1,6 +1,6 @@
-import dotenv from 'dotenv';
 import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
-dotenv.config();
+
+export type filtersAspectRatio = 'nofilter' | 'landscape' | 'square' | 'portrait';
 
 export type image = castedImage & {
   aspectRatio: string;
@@ -42,6 +42,7 @@ export type api = {
   name: apiNames;
   key: string;
   url: string;
+  aspectRatios: Record<filtersAspectRatio, string>;
   resultKeys: {
     count: 'total' | 'total_results';
     images: 'results' | 'photos' | 'hits';
@@ -50,6 +51,7 @@ export type api = {
 };
 
 export type apiNames = 'unsplash' | 'pexels' | 'pixabay';
+export type apiColorKeys = keyof typeof apiColorMap;
 
 export type apiResult = {
   total?: number;
@@ -61,7 +63,13 @@ export const apis: api[] = [
   {
     name: 'unsplash',
     key: process.env.KEY_UNSPLASH || '',
-    url: `https://api.unsplash.com/search/photos?query={query}&lang=de&per_page=30&page={page}`,
+    url: `https://api.unsplash.com/search/photos?query={query}&lang=de&per_page=30&page={page}&orientation={aspectRatio}&color={color}`,
+    aspectRatios: {
+      nofilter: '',
+      landscape: 'landscape',
+      square: 'squarish',
+      portrait: 'portrait',
+    },
     resultKeys: {
       count: 'total',
       images: 'results',
@@ -93,7 +101,13 @@ export const apis: api[] = [
   {
     name: 'pexels',
     key: process.env.KEY_PEXELS || '',
-    url: `https://api.pexels.com/v1/search?query={query}&locale=de-DE&per_page=30&page={page}`,
+    url: `https://api.pexels.com/v1/search?query={query}&locale=de-DE&per_page=30&page={page}&orientation={aspectRatio}&color={color}`,
+    aspectRatios: {
+      nofilter: '',
+      landscape: 'landscape',
+      square: 'square',
+      portrait: 'portrait',
+    },
     resultKeys: {
       count: 'total_results',
       images: 'photos',
@@ -119,7 +133,13 @@ export const apis: api[] = [
     name: 'pixabay',
     url: `https://pixabay.com/api/?key=${
       process.env.KEY_PIXABAY || ''
-    }&q={query}&lang=de&per_page=30&page={page}`,
+    }&q={query}&lang=de&per_page=30&page={page}&orientation={aspectRatio}&colors={color}`,
+    aspectRatios: {
+      landscape: 'horizontal',
+      nofilter: 'all',
+      square: 'noRequest',
+      portrait: 'vertical',
+    },
     key: ``,
     resultKeys: {
       count: 'total',
@@ -146,3 +166,72 @@ export const apis: api[] = [
     },
   },
 ];
+
+export const apiColorMap = {
+  monochrom: {
+    unsplash: 'black_and_white',
+    // pexels: 'black',
+    pexels: 'noRequest',
+    pixabay: 'grayscale',
+  },
+  black: {
+    unsplash: 'black',
+    // pexels: 'black',
+    pexels: 'noRequest',
+    pixabay: 'black',
+  },
+  white: {
+    unsplash: 'white',
+    // pexels: 'white',
+    pexels: 'noRequest',
+    pixabay: 'white',
+  },
+  gray: {
+    unsplash: 'noRequest',
+    // pexels: 'gray',
+    pexels: 'noRequest',
+    pixabay: 'gray',
+  },
+  red: {
+    unsplash: 'red',
+    // pexels: 'red',
+    pexels: 'noRequest',
+    pixabay: 'red',
+  },
+  orange: {
+    unsplash: 'orange',
+    // pexels: '#e68600',
+    pexels: 'noRequest',
+    pixabay: 'orange,brown',
+  },
+  yellow: {
+    unsplash: 'yellow',
+    // pexels: 'yellow',
+    pexels: 'noRequest',
+    pixabay: 'yellow',
+  },
+  green: {
+    unsplash: 'green',
+    // pexels: 'green',
+    pexels: 'noRequest',
+    pixabay: 'green',
+  },
+  teal: {
+    unsplash: 'teal',
+    // pexels: 'turquoise',
+    pexels: 'noRequest',
+    pixabay: 'turquoise',
+  },
+  blue: {
+    unsplash: 'blue',
+    // pexels: 'blue',
+    pexels: 'noRequest',
+    pixabay: 'blue',
+  },
+  purple: {
+    unsplash: 'purple',
+    // pexels: '#b366ff',
+    pexels: 'noRequest',
+    pixabay: 'lilac,pink',
+  },
+};

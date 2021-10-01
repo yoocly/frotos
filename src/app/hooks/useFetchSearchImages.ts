@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { imagesResult } from '../../lib/types/image';
+import type { filtersAspectRatio, imagesResult } from '../../lib/types/image';
+import { apiColorKeys } from '../lib/colors';
 import useFetch from './useFetch';
 
 export type fetchSearchImagesResult = {
@@ -11,16 +12,21 @@ export type fetchSearchImagesResult = {
 
 export default function useFetchSearchImages(
   fetchMoreImages: boolean,
-  query: string
+  query: string,
+  filterAspectRatio: filtersAspectRatio,
+  filterColor: number
 ): fetchSearchImagesResult {
   const [lastQuery, setLastQuery] = useState<string>('');
   const [lastPage, setLastPage] = useState<number>(1);
+  const [lastFilter, setLastFilter] = useState<string>('');
   const [nextPage, setNextPage] = useState<number>(1);
   const [lastResult, setLastResult] = useState<imagesResult>({ count: 0, results: [] });
   const [totalResult, setTotalResult] = useState<imagesResult>({ count: 0, results: [] });
 
-  const page = query === lastQuery ? nextPage : 1;
-  const url = query ? `/api/images/${query}/${page}` : null;
+  const color = apiColorKeys[filterColor];
+  const filter = `${filterAspectRatio}/${color}`;
+  const page = query === lastQuery && lastFilter === filter ? nextPage : 1;
+  const url = query ? `/api/images/${query}/${page}/${filterAspectRatio}/${color}` : null;
   const fetchResult = useFetch<imagesResult>(url);
 
   const result = fetchResult.data;
@@ -34,18 +40,20 @@ export default function useFetchSearchImages(
               count: result.count,
               results: [
                 ...totalResult.results,
-                ...result.results.filter((resultItem) => !totalResult.results.includes(resultItem)),
+                ...result.results.filter((resultItem) => {
+                  return !totalResult.results.some((totalItem) => totalItem.id === resultItem.id);
+                }),
               ],
             }
           : result
       );
-
       setLastResult(result);
       setLastQuery(query);
       setLastPage(page);
-      if (query !== lastQuery) setNextPage(1);
+      setLastFilter(filter);
+      if (query !== lastQuery || filter !== lastFilter) setNextPage(1);
     }
-  }, [result, lastResult, totalResult, url, query, lastQuery, page]);
+  }, [result, lastResult, totalResult, url, query, lastQuery, page, filter, lastFilter]);
 
   useEffect(() => {
     if (fetchMoreImages && resultCount > 0) setNextPage(lastPage + 1);

@@ -2,8 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import { useHistory, useParams } from 'react-router';
-import type { image } from '../../../lib/types/image';
+import type { filtersAspectRatio, image } from '../../../lib/types/image';
 import Button from '../../components/Button/Button';
+import FilterBar from '../../components/FilterBar/FilterBar';
 import Headline from '../../components/Headline/Headline';
 import Icon from '../../components/Icon/Icon';
 import ImageDetails from '../../components/ImageDetails/ImageDetails';
@@ -80,6 +81,8 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   const [selectedImage, setSelectedImage] = useState<image | null>(null);
   const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems>('details');
 
+  const [filterAspectRatio, setFilterAspectRatio] = useState<filtersAspectRatio>('nofilter');
+  const [filterColor, setFilterColor] = useState<number>(0);
   const [addToCollectionResult, setAddToCollectionResult] = useState<{
     success: boolean;
     message: JSX.Element;
@@ -97,7 +100,9 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
-    searchValue
+    searchValue,
+    filterAspectRatio,
+    filterColor
   );
 
   useEffect(() => {
@@ -177,11 +182,13 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
           onSubmit={handleSubmit}
           className={styles.input}
         />
-
-        <div className={styles.filterBar}>
-          <div>{imagesResult && `${imagesResult.count.toLocaleString()} results`}</div>
-          <div className={styles.filter}></div>
-        </div>
+        <FilterBar
+          imageCount={imagesResult && imagesResult.count}
+          aspectRatio={filterAspectRatio}
+          color={filterColor}
+          onChangeAspectRatio={setFilterAspectRatio}
+          onChangeColor={setFilterColor}
+        />
         <SearchResult
           isLoading={isLoading}
           isFetchingNewResult={isFetchingNewResult}

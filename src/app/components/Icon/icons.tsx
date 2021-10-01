@@ -15,7 +15,9 @@ export const ICONS = {
   info: { iconify: 'ic:outline-info' },
   collection: { iconify: 'ic:round-bookmark-border' },
   profile: { iconify: 'ic:round-person-outline' },
-  format: { iconify: 'ic:round-crop-landscape' },
+  landscape: { iconify: 'ic:round-crop-landscape' },
+  portrait: { iconify: 'ic:round-crop-portrait' },
+  square: { iconify: 'ic:round-crop-square' },
   collectionAdd: { iconify: 'ic:round-bookmark-add' },
   collectionAdded: { iconify: 'ic:round-bookmark-added' },
   check: { iconify: 'ic:round-check' },
@@ -45,30 +47,31 @@ export const ICONS = {
       <svg
         width={width}
         height={height}
-        viewBox="0 0 29 29"
+        viewBox="0 0 24 24"
         className={`${
           color.gradientStrokeClass ? styles[color.gradientStrokeClass] : ``
         } ${className}`}
         fill="none"
       >
         <rect
-          x="16"
-          y="4"
-          width="11.5"
+          x="11"
+          y="1"
+          width="12"
           height="16"
-          rx="1"
+          rx="2"
           stroke={className ? `currentColor` : `var(--${color.cssVar})`}
           strokeWidth="2"
           shapeRendering="crispEdges"
         />
         <rect
-          x="4"
-          y="14"
+          x="1"
+          y="11"
           width="16"
-          height="11.5"
-          rx="1"
+          height="12"
+          rx="2"
           stroke={className ? `currentColor` : `var(--${color.cssVar})`}
           strokeWidth="2"
+          fill="var(--dark)"
         />
       </svg>
     ),

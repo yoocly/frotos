@@ -106,3 +106,19 @@ export const COLORS = {
     gradientSVG: GRADIENTS_SVG.inactive,
   },
 };
+
+export const apiColorKeys = [
+  'nocolor',
+  'monochrom',
+  'black',
+  'white',
+  'gray',
+  'red',
+  'orange',
+  'yellow',
+  'green',
+  'teal',
+  'blue',
+  'purple',
+  'monochrom',
+];
