@@ -37,7 +37,7 @@ export async function getCollections(req: Request, res: Response): Promise<void>
           userId,
         },
       },
-      { $sort: { createdAt: -1 } },
+      { $sort: { lastChangeAt: -1 } },
       { $addFields: { imageCount: { $size: '$images' } } },
       { $addFields: { lastImageId: { $slice: ['$images', -1] } } },
       {
@@ -51,7 +51,7 @@ export async function getCollections(req: Request, res: Response): Promise<void>
     ])
     .toArray();
 
-  return result(req, res, { ...dbResult }, 1, 200);
+  return result(req, res, dbResult, 1, 200);
 }
 
 export async function addCollection(req: Request, res: Response): Promise<void> {
@@ -64,7 +64,7 @@ export async function addCollection(req: Request, res: Response): Promise<void> 
   const dbResult = await dbInsertOne(collectionsCollection, {
     collectionName,
     userId: _id,
-    createdAt: Math.floor(Date.now() / 1000),
+    lastChangeAt: Math.floor(Date.now() / 1000),
     images: [],
   } as dbCollection);
   if (dbResult === null) return error(req, res, COLLECTION_ERROR.ADD_COLLECTION_FAILED);
@@ -111,7 +111,6 @@ export async function getCollectionImages(req: Request, res: Response): Promise<
           as: 'imagesList',
         },
       },
-
       { $unset: 'imagesList._id' },
       { $unset: 'imagesList.imageId' },
     ])
@@ -120,5 +119,5 @@ export async function getCollectionImages(req: Request, res: Response): Promise<
   if (dbResult === null || Object.keys(dbResult).length === 0)
     return error(req, res, COLLECTION_ERROR.ACEESS_COLLECTION_FAILED);
 
-  return result(req, res, { ...dbResult }, 1, 200);
+  return result(req, res, dbResult[0], 1, 200);
 }

@@ -1,0 +1,39 @@
+.collections {
+  margin: 1rem;
+}
+
+.item {
+  display: flex;
+  gap: var(--gap);
+  align-items: center;
+  margin: 1rem 0;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.image {
+  height: 4rem;
+  width: 4rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--radius);
+}
+
+.imageCount {
+  color: var(--medium);
+  font-size: var(--fontSizeSmall);
+}
+
+.collectionImages {
+  margin: var(--gap);
+}
+
+.backButton {
+  top: 0.2em;
+  margin-right: var(--gap);
+}
+
+.imagesList {
+  margin: var(--gap) 0;
+}

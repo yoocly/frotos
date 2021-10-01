@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { dbFindOne, dbUpsertOne, dbUpdateOne, getCollection } from '../../utils/database';
+import { dbFindOne, dbUpdateOne, dbUpsertOne, getCollection } from '../../utils/database';
 import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
 import { error, result } from '../../utils/responses';
 import type { dbCollection } from '../types/collection';
@@ -153,9 +153,12 @@ function getAspectRatio(width: number, height: number): string {
 export async function addImage(req: Request, res: Response): Promise<void> {
   if (!req.auth) return error(req, res, IMAGE_ERROR.AUTH_FAILED);
   const { _id: userId } = req.auth;
+  if (!userId) return error(req, res, IMAGE_ERROR.AUTH_FAILED);
 
-  if (!req.body.collectionId) return error(req, res, IMAGE_ERROR.NO_COLLECTIONID);
-  const { collectionId } = req.body;
+  const collectionId = !req.body.collectionId
+    ? await getRecentCollectionId(userId)
+    : req.body.collectionId;
+  if (!collectionId) return error(req, res, IMAGE_ERROR.NO_COLLECTIONID);
 
   if (!req.body.image) return error(req, res, IMAGE_ERROR.NO_IMAGE);
   const { image } = req.body;
@@ -170,7 +173,11 @@ export async function addImage(req: Request, res: Response): Promise<void> {
       } as dbImage,
     }
   );
-  if (dbResultUpsertImage === null || dbResultUpsertImage.matchedCount !== 1)
+
+  if (
+    dbResultUpsertImage === null ||
+    !(dbResultUpsertImage.matchedCount === 1 || dbResultUpsertImage.upsertedCount === 1)
+  )
     return error(req, res, IMAGE_ERROR.ADD_IMAGE_FAILED);
 
   const collection = await dbFindOne<dbCollection>(collectionsCollection, {
@@ -193,7 +200,7 @@ export async function addImage(req: Request, res: Response): Promise<void> {
   if (dbResultUpdateCollection === null || dbResultUpdateCollection.matchedCount !== 1)
     return error(req, res, IMAGE_ERROR.ADD_IMAGE_FAILED);
 
-  return result(req, res, { added: true }, 1, 201);
+  return result(req, res, { collectionId, collectionName: collection.collectionName }, 1, 201);
 }
 
 export async function getImage(req: Request, res: Response): Promise<void> {
@@ -201,10 +208,6 @@ export async function getImage(req: Request, res: Response): Promise<void> {
   const { _id: userId } = req.auth;
 
   const { imageId } = req.params;
-
-  // const imageResult = await dbFindOne<dbCollection>(imagesCollection, {
-  //   imageId,
-  // });
 
   const dbResult = await getCollection(imagesCollection)
     .aggregate([
@@ -269,4 +272,24 @@ export async function deleteImage(req: Request, res: Response): Promise<void> {
     return error(req, res, IMAGE_ERROR.DELETE_IMAGE_FAILED);
 
   return result(req, res, { ...dbResultUpdateCollection }, 1, 200);
+}
+
+async function getRecentCollectionId(userId: string): Promise<string | null> {
+  const dbResult = await getCollection(collectionsCollection)
+    .aggregate([
+      {
+        $match: {
+          userId,
+        },
+      },
+      { $sort: { lastChangeAt: -1 } },
+      { $limit: 1 },
+    ])
+    .toArray();
+
+  if (dbResult === null) return null;
+  if (dbResult.length < 1) return null;
+
+  const recentCollection = dbResult[0] as dbCollection;
+  return recentCollection._id || null;
 }
