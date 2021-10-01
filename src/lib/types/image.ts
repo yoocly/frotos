@@ -2,6 +2,8 @@ import dotenv from 'dotenv';
 import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
 dotenv.config();
 
+export type filtersAspectRatio = 'nofilter' | 'landscape' | 'square' | 'portrait';
+
 export type image = castedImage & {
   aspectRatio: string;
   api: string;
@@ -42,6 +44,7 @@ export type api = {
   name: apiNames;
   key: string;
   url: string;
+  aspectRatios: Record<filtersAspectRatio, string>;
   resultKeys: {
     count: 'total' | 'total_results';
     images: 'results' | 'photos' | 'hits';
@@ -61,7 +64,13 @@ export const apis: api[] = [
   {
     name: 'unsplash',
     key: process.env.KEY_UNSPLASH || '',
-    url: `https://api.unsplash.com/search/photos?query={query}&lang=de&per_page=30&page={page}`,
+    url: `https://api.unsplash.com/search/photos?query={query}&lang=de&per_page=30&page={page}&orientation={aspectRatio}&color={color}`,
+    aspectRatios: {
+      nofilter: '',
+      landscape: 'landscape',
+      square: 'squarish',
+      portrait: 'portrait',
+    },
     resultKeys: {
       count: 'total',
       images: 'results',
@@ -93,7 +102,13 @@ export const apis: api[] = [
   {
     name: 'pexels',
     key: process.env.KEY_PEXELS || '',
-    url: `https://api.pexels.com/v1/search?query={query}&locale=de-DE&per_page=30&page={page}`,
+    url: `https://api.pexels.com/v1/search?query={query}&locale=de-DE&per_page=30&page={page}&orientation={aspectRatio}&color={color}`,
+    aspectRatios: {
+      nofilter: '',
+      landscape: 'landscape',
+      square: 'square',
+      portrait: 'portrait',
+    },
     resultKeys: {
       count: 'total_results',
       images: 'photos',
@@ -119,7 +134,13 @@ export const apis: api[] = [
     name: 'pixabay',
     url: `https://pixabay.com/api/?key=${
       process.env.KEY_PIXABAY || ''
-    }&q={query}&lang=de&per_page=30&page={page}`,
+    }&q={query}&lang=de&per_page=30&page={page}&orientation={aspectRatio}&colors={color}`,
+    aspectRatios: {
+      landscape: 'horizontal',
+      nofilter: 'all',
+      square: 'noRequest',
+      portrait: 'vertical',
+    },
     key: ``,
     resultKeys: {
       count: 'total',

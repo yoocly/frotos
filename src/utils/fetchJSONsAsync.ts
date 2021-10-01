@@ -6,6 +6,7 @@ export type requests = { url: string; key: string }[];
 export default async function fetchJSONsAsync<T>(requests: requests): Promise<T[]> {
   const results = await Promise.allSettled(
     requests.map(async ({ url, key }) => {
+      if (url === '') return;
       try {
         const response = await fetch(url, {
           headers: key ? { Authorization: key } : {},

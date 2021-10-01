@@ -1,11 +1,20 @@
 import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { dbFindOne, dbUpsertOne, dbUpdateOne, getCollection } from '../../utils/database';
+import type { apiColorKeys } from '../../app/lib/colors';
+import { apiColorMap } from '../../app/lib/colors';
+import { dbFindOne, dbUpdateOne, dbUpsertOne, getCollection } from '../../utils/database';
 import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
 import { error, result } from '../../utils/responses';
 import type { dbCollection } from '../types/collection';
 import type { imageAPIResult } from '../types/externals';
-import type { castedImage, dbImage, image, imagesResult } from '../types/image';
+import type {
+  apiNames,
+  castedImage,
+  dbImage,
+  filtersAspectRatio,
+  image,
+  imagesResult,
+} from '../types/image';
 import { apis } from '../types/image';
 
 export const IMAGE_ERROR = {
@@ -39,11 +48,27 @@ const imagesCollection = 'images';
 const collectionsCollection = 'collections';
 
 export async function images(req: Request, res: Response): Promise<void> {
-  const { query, page } = req.params;
-  const requests = apis.map(({ url, key }) => ({
-    url: url.replace(`{query}`, query).replace(`{page}`, page),
-    key,
-  }));
+  const { query, page, aspectRatio, color } = req.params;
+
+  const requests = apis.map(({ url, key, aspectRatios, name }) => {
+    const orientation = aspectRatios[aspectRatio as filtersAspectRatio];
+    const apiName = name as apiNames;
+    const apiColor =
+      color in apiColorMap ? apiColorMap[color as apiColorKeys][apiName] : 'allcolors';
+    if (orientation === 'noRequest') return { url: '', key };
+    if (color === 'noRequest' || apiColor === 'noRequest') return { url: '', key };
+    return {
+      url: url
+        .replace(`{query}`, query)
+        .replace(`{page}`, page)
+        .replace(`{aspectRatio}`, aspectRatios[aspectRatio as filtersAspectRatio])
+        .replace(`{color}`, apiColor)
+        .replace(`&orientation=&`, `&`)
+        .replace(`&color=allcolors`, ``)
+        .replace(`&colors=allcolors`, ``),
+      key,
+    };
+  });
 
   const responses = (await fetchJSONsAsync(requests)) as imageAPIResult[];
 

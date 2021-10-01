@@ -20,6 +20,7 @@ export type colors = {
 };
 
 export type colorKey = keyof typeof COLORS;
+export type apiColorKeys = keyof typeof apiColorMap;
 
 export const GRADIENTS_SVG = {
   primary: (): JSX.Element => (
@@ -110,56 +111,68 @@ export const COLORS = {
 export const apiColorMap = {
   monochrom: {
     unsplash: 'black_and_white',
-    pexels: 'black',
+    // pexels: 'black',
+    pexels: 'noRequest',
     pixabay: 'grayscale',
   },
   black: {
     unsplash: 'black',
-    pexels: 'black',
+    // pexels: 'black',
+    pexels: 'noRequest',
     pixabay: 'black',
   },
   white: {
     unsplash: 'white',
-    pexels: 'white',
+    // pexels: 'white',
+    pexels: 'noRequest',
     pixabay: 'white',
   },
   gray: {
-    pexels: 'gray',
+    unsplash: 'noRequest',
+    // pexels: 'gray',
+    pexels: 'noRequest',
     pixabay: 'gray',
   },
   red: {
     unsplash: 'red',
-    pexels: 'red',
+    // pexels: 'red',
+    pexels: 'noRequest',
     pixabay: 'red',
   },
   orange: {
     unsplash: 'orange',
-    pexels: '#e68600',
+    // pexels: '#e68600',
+    pexels: 'noRequest',
     pixabay: 'orange,brown',
   },
   yellow: {
     unsplash: 'yellow',
-    pexels: 'yellow',
+    // pexels: 'yellow',
+    pexels: 'noRequest',
     pixabay: 'yellow',
   },
   green: {
     unsplash: 'green',
-    pexels: 'green',
+    // pexels: 'green',
+    pexels: 'noRequest',
     pixabay: 'green',
   },
   teal: {
     unsplash: 'teal',
-    pexels: 'turquoise',
+    // pexels: 'turquoise',
+    pexels: 'noRequest',
     pixabay: 'turquoise',
   },
   blue: {
     unsplash: 'blue',
-    pexels: 'blue',
+    // pexels: 'blue',
+    pexels: 'noRequest',
     pixabay: 'blue',
   },
   purple: {
     unsplash: 'purple',
-    pexels: '#b366ff',
+    // pexels: '#b366ff',
+    pexels: 'noRequest',
     pixabay: 'lilac,pink',
   },
 };
