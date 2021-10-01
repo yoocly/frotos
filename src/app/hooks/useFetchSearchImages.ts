@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { filtersAspectRatio, imagesResult } from '../../lib/types/image';
+import { apiColorMap } from '../../lib/types/image';
 import useFetch from './useFetch';
-import { apiColorMap } from '../../app/lib/colors';
 
 export type fetchSearchImagesResult = {
   imagesResult: imagesResult | null;

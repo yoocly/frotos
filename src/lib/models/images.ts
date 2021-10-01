@@ -1,7 +1,6 @@
 import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import type { apiColorKeys } from '../../app/lib/colors';
-import { apiColorMap } from '../../app/lib/colors';
 import { dbFindOne, dbUpdateOne, dbUpsertOne, getCollection } from '../../utils/database';
 import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
 import { error, result } from '../../utils/responses';
@@ -15,6 +14,7 @@ import type {
   image,
   imagesResult,
 } from '../types/image';
+import { apiColorMap } from '../types/image';
 import { apis } from '../types/image';
 
 export const IMAGE_ERROR = {
