@@ -1,0 +1,41 @@
+.about {
+  padding: var(--gap);
+  overflow-y: auto;
+  margin-bottom: 2rem;
+}
+
+.about::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+
+.about::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
+}
+
+.content p {
+  margin: var(--gap) 0 calc(2 * var(--gap));
+}
+
+.frotos {
+  font-family: var(--fontLogo);
+  color: var(--primary);
+}
+
+.display {
+  font-family: var(--fontLogo);
+}
+
+.em {
+  font-size: var(--fontSizeInput);
+  font-family: var(--fontBold);
+  color: var(--medium);
+}
+
+.link,
+.link:focus,
+.link:visited {
+  color: var(--primary);
+  text-decoration: none;
+  font-family: var(--fontBold);
+}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import type { image } from '../../../lib/types/image';
 import Button from '../../components/Button/Button';
 import Headline from '../../components/Headline/Headline';
@@ -71,7 +71,9 @@ const popupSize = {
 };
 
 export default function Search({ className = '' }: SearchProps): JSX.Element {
-  const [inputValue, setInputValue] = useState<string>('');
+  const { query } = useParams<{ query: string }>();
+
+  const [inputValue, setInputValue] = useState<string>(query);
   const [searchValue, setSearchValue] = useState<string>('');
   const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
 
@@ -97,6 +99,10 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
     fetchMoreImages,
     searchValue
   );
+
+  useEffect(() => {
+    if (inputValue) handleSubmit();
+  });
 
   useEffect(() => {
     setFetchMoreImages(false);
