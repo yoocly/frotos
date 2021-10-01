@@ -1,12 +1,12 @@
 .collections {
-  margin: 1rem;
+  padding: var(--gap);
 }
 
 .item {
   display: flex;
   gap: var(--gap);
   align-items: center;
-  margin: 1rem 0;
+  margin: var(--gap) 0;
   list-style-type: none;
   cursor: pointer;
 }
@@ -26,7 +26,10 @@
 }
 
 .collectionImages {
-  margin: var(--gap);
+  display: grid;
+  grid-template-rows: auto 1fr;
+  padding: var(--gap);
+  height: 100%;
 }
 
 .backButton {
@@ -34,6 +37,6 @@
   margin-right: var(--gap);
 }
 
-.imagesList {
-  margin: var(--gap) 0;
+.title {
+  margin-bottom: var(--gap);
 }

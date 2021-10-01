@@ -27,7 +27,7 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
 
   return showCollectionImages ? (
     <main className={`${styles.collectionImages} ${className}`}>
-      <Headline level={1}>
+      <Headline level={1} className={styles.title}>
         <Button
           icon="back"
           transparent
@@ -37,10 +37,9 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
         {showCollectionImages.collectionName}
       </Headline>
       <SearchResult
-        isLoading={!!collectionImages?.count}
+        isLoading={false}
         imagesResult={collectionImages}
         className={styles.imagesList}
-        onImageClick={(index) => console.log(index)}
         onCollectionClick={(index) => console.log(index)}
         handleScroll={() => true}
       />
