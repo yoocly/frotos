@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import Masonry from 'react-masonry-component';
 import type { image, imagesResult } from '../../../lib/types/image';
+import ImageCollections from '../ImageCollections/ImageCollections';
 import ImageDetails from '../ImageDetails/ImageDetails';
 import Modal from '../Modal/Modal';
 import type { NavBarImageItems } from '../NavBarImage/NavBarImage';
@@ -142,7 +143,7 @@ export default function SearchResult({
           <NavBarImage onClick={(item) => setModalActiveTab(item)} active={modalActiveTab} />
           <div className={styles.modalTabContent}>
             {modalActiveTab === 'details' && <ImageDetails image={selectedImage} />}
-            {modalActiveTab === 'collection' && 'collection'}
+            {modalActiveTab === 'collection' && <ImageCollections image={selectedImage} />}
             {modalActiveTab === 'download' && 'Download'}
             {modalActiveTab === 'palette' && 'palette'}
           </div>
