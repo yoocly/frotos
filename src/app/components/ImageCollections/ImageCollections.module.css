@@ -1,0 +1,24 @@
+.item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--gap);
+  align-items: center;
+  margin-bottom: var(--gap);
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.image {
+  height: 4rem;
+  width: 4rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: var(--radius);
+}
+
+.imageCount {
+  display: block;
+  color: var(--medium);
+  font-size: var(--fontSizeSmall);
+}
