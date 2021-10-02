@@ -6,6 +6,7 @@ import Button from '../../components/Button/Button';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import Headline from '../../components/Headline/Headline';
 import Icon from '../../components/Icon/Icon';
+import ImageCollections from '../../components/ImageCollections/ImageCollections';
 import Input from '../../components/Input/Input';
 import Modal from '../../components/Modal/Modal';
 import SearchResult from '../../components/SearchResult/SearchResult';
@@ -50,6 +51,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
     message: JSX.Element;
     collectionName?: string;
     collectionId?: string;
+    image?: image;
   } | null>(null);
   const [modalAddToCollectionExtended, setModalAddToCollectionExtended] = useState<boolean | null>(
     null
@@ -103,6 +105,7 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         ),
         collectionId,
         collectionName,
+        image,
       });
     } catch (error) {
       if (axios.isAxiosError(error)) {
@@ -177,8 +180,8 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
           backgroundOverlay={false}
         >
           <div className={styles.popupLarge}>
-            <Headline>Add to</Headline>
-            <div>Coll123</div>
+            <Headline className={styles.headline}>Add to</Headline>
+            <ImageCollections image={addToCollectionResult?.image || null} />
             <Button
               icon="check"
               text="Done"

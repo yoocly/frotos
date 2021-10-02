@@ -24,4 +24,9 @@
   display: grid;
   margin: 1rem;
   gap: 1rem;
+  justify-items: self-end;
+}
+
+.headline {
+  width: 100%;
 }
