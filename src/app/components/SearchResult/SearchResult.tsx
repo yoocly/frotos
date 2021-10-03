@@ -1,12 +1,14 @@
 import { useScrollPosition } from '@n8tb1t/use-scroll-position';
 import axios from 'axios';
+
 import type { MutableRefObject } from 'react';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import Masonry from 'react-masonry-component';
 import { useHistory } from 'react-router';
 import type { image, imagesResult } from '../../../lib/types/image';
 import useCurrentUser from '../../hooks/useCurrentUser';
+import { triggerDownloadImage } from '../../lib/download';
 import Button from '../Button/Button';
 import Headline from '../Headline/Headline';
 import Icon from '../Icon/Icon';
@@ -91,6 +93,11 @@ export default function SearchResult({
   const searchResultElement = useRef<HTMLElement>(null);
   const searchResultEndElement = useRef<HTMLDivElement>(null);
 
+  const [downloadImage, setDownloadImage] = useState<{
+    selectedImage: image | null;
+    count: number;
+  }>({ selectedImage: null, count: 0 });
+
   const [addToCollectionResult, setAddToCollectionResult] = useState<{
     success: boolean;
     message: JSX.Element;
@@ -106,6 +113,11 @@ export default function SearchResult({
 
   const currentUser = useCurrentUser();
   const history = useHistory();
+
+  useEffect(() => {
+    if (downloadImage.selectedImage)
+      triggerDownloadImage(downloadImage.selectedImage, { format: 'webp' });
+  }, [downloadImage]);
 
   useScrollPosition(
     ({ currPos }) => handleScroll(currPos.y, searchResultElement.current?.offsetHeight || 0),
@@ -229,7 +241,13 @@ export default function SearchResult({
           <div className={styles.modalTabContent}>
             {modalActiveTab === 'details' && <ImageDetails image={selectedImage} />}
             {modalActiveTab === 'collection' && <ImageCollections image={selectedImage} />}
-            {modalActiveTab === 'download' && 'Download'}
+            {modalActiveTab === 'download' && (
+              <Button
+                icon="download"
+                text="Download"
+                onClick={() => setDownloadImage({ selectedImage, count: downloadImage.count + 1 })}
+              />
+            )}
             {modalActiveTab === 'palette' && 'palette'}
           </div>
         </div>
