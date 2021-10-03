@@ -40,7 +40,6 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
         isLoading={false}
         imagesResult={collectionImages}
         className={styles.imagesList}
-        onCollectionClick={(index) => console.log(index)}
         handleScroll={() => true}
       />
     </main>
