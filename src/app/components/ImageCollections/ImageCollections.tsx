@@ -17,29 +17,38 @@ export default function ImageCollections({
 }: ImageCollectionsProps): JSX.Element {
   const currentUser = useCurrentUser();
   const userCollections = useCollections(currentUser);
-  const collections = useImageCollections(image, userCollections);
+  const { collections, addToCollection, removeFromCollection } = useImageCollections(
+    image,
+    userCollections
+  );
 
   return (
     <div className={`${styles.imageCollections} ${className}`}>
       <ul>
         {collections &&
           collections.map((collection) => (
-            <li
-              className={styles.item}
-              key={collection._id}
-              id={collection._id}
-              onClick={() => console.log('click')}
-            >
+            <li className={styles.item} key={collection._id} id={collection._id}>
               <div>
-                <Checkbox checked={collection.hasSelectedImage} onChange={() => console.log('add')}>
+                <Checkbox
+                  checked={collection.hasSelectedImage}
+                  onChange={() =>
+                    collection.hasSelectedImage
+                      ? removeFromCollection(collection)
+                      : addToCollection(collection)
+                  }
+                >
                   {collection.collectionName}
-                  {collection.imageCount && (
+                  {collection.imageCount !== undefined && (
                     <span className={styles.imageCount}>{collection.imageCount} Images</span>
                   )}
                 </Checkbox>
               </div>
               <div
-                style={{ backgroundImage: `url(${collection.lastImage?.[0].image.thumbnail})` }}
+                style={{
+                  backgroundImage: `url(${
+                    collection.imageCount ? collection.lastImage?.[0].image.thumbnail : ``
+                  })`,
+                }}
                 className={styles.image}
               ></div>
             </li>

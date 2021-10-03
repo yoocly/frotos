@@ -62,12 +62,16 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
               }
             >
               <div
-                style={{ backgroundImage: `url(${collection.lastImage?.[0].image.thumbnail})` }}
+                style={{
+                  backgroundImage: `url(${
+                    collection.imageCount ? collection.lastImage?.[0].image.thumbnail : ``
+                  })`,
+                }}
                 className={styles.image}
               ></div>
               <div>
                 {collection.collectionName}
-                {collection.imageCount && (
+                {collection.imageCount !== undefined && (
                   <div className={styles.imageCount}>{collection.imageCount} Images</div>
                 )}
               </div>
