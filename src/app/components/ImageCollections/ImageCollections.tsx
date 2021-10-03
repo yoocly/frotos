@@ -23,7 +23,7 @@ export default function ImageCollections({
   );
 
   return (
-    <div className={`${styles.imageCollections} ${className}`}>
+    <div className={className}>
       <ul>
         {collections &&
           collections.map((collection) => (

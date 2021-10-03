@@ -22,11 +22,24 @@
 
 .popupLarge {
   display: grid;
-  margin: 1rem;
-  gap: 1rem;
+  margin: var(--gap);
+  gap: var(--gap);
   justify-items: self-end;
 }
 
 .headline {
   width: 100%;
+}
+
+.collections {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.collections::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+.collections::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
 }

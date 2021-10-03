@@ -107,20 +107,30 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         collectionName,
         image,
       });
+
+      setModalAddToCollectionExtended(false);
+      setTimeout(() => {
+        if (modalAddToCollectionExtendedRef.current === false)
+          setModalAddToCollectionExtended(null);
+      }, 4000);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.data?.resultCode === 501) {
-          setAddToCollectionResult({ success: false, message: <>No collection found!</> });
+          setAddToCollectionResult({
+            success: false,
+            message: <>No collection found!</>,
+            image,
+          });
         } else {
-          setAddToCollectionResult({ success: false, message: <>Failed to add image!</> });
+          setAddToCollectionResult({
+            success: false,
+            message: <>Failed to add image!</>,
+            image,
+          });
         }
       }
+      setModalAddToCollectionExtended(true);
     }
-
-    setModalAddToCollectionExtended(false);
-    setTimeout(() => {
-      if (modalAddToCollectionExtendedRef.current === false) setModalAddToCollectionExtended(null);
-    }, 4000);
   }
 
   return (
@@ -181,7 +191,10 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
         >
           <div className={styles.popupLarge}>
             <Headline className={styles.headline}>Add to</Headline>
-            <ImageCollections image={addToCollectionResult?.image || null} />
+            <ImageCollections
+              className={styles.collections}
+              image={addToCollectionResult?.image || null}
+            />
             <Button
               icon="check"
               text="Done"

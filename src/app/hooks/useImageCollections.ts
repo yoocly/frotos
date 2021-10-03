@@ -33,6 +33,7 @@ export default function useImageCollections(
     await mutationAdd.mutateAsync({ image, collectionId: collection._id });
     queryClient.invalidateQueries(['image', image?.id]);
     queryClient.invalidateQueries(['collections']);
+    queryClient.invalidateQueries(['collectionImages', collection._id]);
   }
 
   async function removeFromCollection(collection: dbCollection): Promise<void> {
@@ -40,6 +41,7 @@ export default function useImageCollections(
     await mutationRemove.mutateAsync({ imageId: image.id, collectionId: collection._id });
     queryClient.invalidateQueries(['image', image?.id]);
     queryClient.invalidateQueries(['collections']);
+    queryClient.invalidateQueries(['collectionImages', collection._id]);
   }
 
   return { collections: collections || null, addToCollection, removeFromCollection };
