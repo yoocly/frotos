@@ -16,5 +16,4 @@ export const searchResult = Template.bind({});
 searchResult.args = {
   isLoading: false,
   imagesResult: mockImages,
-  onCollectionClick: (id) => console.log(`clicked collection on image ${id}`),
 };
