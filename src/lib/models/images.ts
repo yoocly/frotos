@@ -262,10 +262,10 @@ export async function getImage(req: Request, res: Response): Promise<void> {
     ])
     .toArray();
 
-  if (dbResult === null || Object.keys(dbResult).length === 0)
+  if (dbResult === null || Object.keys(dbResult).length !== 1)
     return error(req, res, IMAGE_ERROR.INVALID_IMAGE);
 
-  return result(req, res, { ...dbResult }, 1, 200);
+  return result(req, res, dbResult[0], 1, 200);
 }
 
 export async function deleteImage(req: Request, res: Response): Promise<void> {

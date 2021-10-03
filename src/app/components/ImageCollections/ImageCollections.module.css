@@ -1,12 +1,9 @@
-.collections {
-  padding: var(--gap);
-}
-
 .item {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: var(--gap);
   align-items: center;
-  margin: var(--gap) 0;
+  margin-bottom: var(--gap);
   list-style-type: none;
   cursor: pointer;
 }
@@ -21,22 +18,7 @@
 }
 
 .imageCount {
+  display: block;
   color: var(--medium);
   font-size: var(--fontSizeSmall);
-}
-
-.collectionImages {
-  display: grid;
-  grid-template-rows: auto 1fr;
-  padding: var(--gap);
-  height: 100%;
-}
-
-.backButton {
-  top: 0.2em;
-  margin-right: var(--gap);
-}
-
-.title {
-  margin-bottom: var(--gap);
 }

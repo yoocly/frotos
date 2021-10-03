@@ -1,3 +1,18 @@
+.imagesList {
+  height: 100%;
+  padding-bottom: 4rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.imagesList::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+.imagesList::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
+}
+
 .searchResultImage {
   padding: 0 var(--gapSmall);
 }
@@ -10,4 +25,59 @@
 
 .spinner {
   height: 30%;
+}
+
+.modalContent {
+  display: grid;
+  grid-template-rows: auto 6rem 1fr;
+  height: 100%;
+}
+
+.modalTabContent {
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.modalTabContent::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+
+.modalTabContent::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
+}
+
+.popupSmall {
+  display: grid;
+  grid: 100% / auto 1fr auto;
+  margin: 1rem;
+  gap: 1rem;
+}
+
+.popupSmall * {
+  align-self: center;
+}
+
+.popupLarge {
+  display: grid;
+  margin: var(--gap);
+  gap: var(--gap);
+  justify-items: self-end;
+}
+
+.headline {
+  width: 100%;
+}
+
+.collections {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.collections::-webkit-scrollbar {
+  width: var(--gapSmall);
+}
+.collections::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius);
 }

@@ -9,4 +9,5 @@ export type dbCollection = {
   imageCount?: number;
   lastImage?: { image: image }[];
   imagesList?: { image: image }[];
+  hasSelectedImage?: boolean;
 };
