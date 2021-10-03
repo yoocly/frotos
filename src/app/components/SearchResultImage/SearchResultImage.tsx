@@ -28,10 +28,9 @@ export default function SearchResultImage({
         <img src={thumbnail} className={styles.thumbnail} alt={title} onClick={onClick} />
         <Button
           className={styles.collectionButton}
-          icon={inCollection ? 'collectionAdded' : 'add'}
+          icon={inCollection ? 'collectionAdded' : 'collection'}
           color={inCollection ? 'mediumGradient' : undefined}
           inactive={inCollection}
-          large
           transparent
           iconShadow
           onClick={onCollectionClick}

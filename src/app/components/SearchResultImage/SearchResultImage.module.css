@@ -18,8 +18,8 @@
 
 .collectionButton {
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: calc(0.5 * var(--gapSmall));
+  right: calc(0.5 * var(--gapSmall));
 }
 
 .author,
