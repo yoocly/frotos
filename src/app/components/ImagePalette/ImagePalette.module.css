@@ -1,0 +1,21 @@
+.imagePalette {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.title {
+  color: var(--inactive);
+  font-family: var(--fontBold);
+  font-size: var(--fontSizeSmall);
+}
+
+.colorBox {
+  padding: var(--gapSmall);
+  text-align: center;
+  font-size: var(--fontSizeSmall);
+}
+
+.spinner {
+  grid-column: span 2;
+}

@@ -235,3 +235,5 @@ export const apiColorMap = {
     pixabay: 'lilac,pink',
   },
 };
+
+export type imageColors = { rgb: [number, number, number]; hsl: [number, number, number] };

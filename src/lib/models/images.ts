@@ -14,6 +14,7 @@ import type {
   dbImage,
   filtersAspectRatio,
   image,
+  imageColors,
   imagesResult,
 } from '../types/image';
 import { apiColorMap, apis } from '../types/image';
@@ -393,7 +394,7 @@ export async function imageColors(req: Request, res: Response): Promise<void> {
 
   const colors = colorsRaw.map((color) => {
     return { rgb: color.rgb(), hsl: color.hsl() };
-  });
+  }) as imageColors[];
 
   return result(req, res, colors, 1, 200);
 }
