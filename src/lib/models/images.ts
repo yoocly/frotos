@@ -1,5 +1,7 @@
 import type { Request, Response } from 'express';
+import { writeFile } from 'fs/promises';
 import { ObjectId } from 'mongodb';
+import fetch from 'node-fetch';
 import { dbFindOne, dbUpdateOne, dbUpsertOne, getCollection } from '../../utils/database';
 import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
 import { error, result } from '../../utils/responses';
@@ -14,8 +16,10 @@ import type {
   image,
   imagesResult,
 } from '../types/image';
-import { apiColorMap } from '../types/image';
-import { apis } from '../types/image';
+import { apiColorMap, apis } from '../types/image';
+import appPath from 'app-root-path';
+import sharp from 'sharp';
+import type { downloadImageOptions } from '../../app/lib/download';
 
 export const IMAGE_ERROR = {
   AUTH_FAILED: { resultCode: 403, httpCode: 401, description: 'Authentication failed' },
@@ -39,9 +43,14 @@ export const IMAGE_ERROR = {
   },
   INVALID_IMAGE: { resultCode: 507, httpCode: 400, description: 'No valid image' },
   IMAGE_NOT_IN_COLLECTION: {
-    resultCode: 507,
+    resultCode: 508,
     httpCode: 400,
     description: 'The image is not in this collection',
+  },
+  DOWNLOAD_FROM_SERVER_FAILED: {
+    resultCode: 509,
+    httpCode: 500,
+    description: 'Image download from server failed',
   },
 };
 const imagesCollection = 'images';
@@ -319,4 +328,51 @@ async function getRecentCollectionId(userId: string): Promise<string | null> {
 
   const recentCollection = dbResult[0] as dbCollection;
   return recentCollection._id || null;
+}
+
+export async function downloadImage(req: Request, res: Response): Promise<void> {
+  if (!req.body.image) return error(req, res, IMAGE_ERROR.NO_IMAGE);
+  const { image, options } = req.body;
+  const localFile = `${appPath.path}/image.${options.format}`;
+
+  if (!(await downloadFileToServer(image.preview, localFile, options)))
+    error(req, res, IMAGE_ERROR.DOWNLOAD_FROM_SERVER_FAILED);
+
+  res.download(localFile);
+}
+
+async function downloadFileToServer(
+  url: string,
+  localFile: string,
+  options: downloadImageOptions
+): Promise<boolean> {
+  try {
+    const { format, width, height, quality } = options;
+
+    const response = await fetch(url);
+    if (!response.ok) return false;
+
+    const serverBuffer = await response.buffer();
+
+    const formatBuffer =
+      format === 'png'
+        ? await sharp(serverBuffer).png({ quality }).toBuffer()
+        : format === 'jpg'
+        ? await sharp(serverBuffer).jpeg({ quality }).toBuffer()
+        : format === 'webp'
+        ? await sharp(serverBuffer).webp({ quality }).toBuffer()
+        : format === 'avif'
+        ? await sharp(serverBuffer).avif({ quality }).toBuffer()
+        : serverBuffer;
+
+    const resizeBuffer = await sharp(formatBuffer)
+      .resize(width, height, { fit: 'outside' })
+      .toBuffer();
+
+    await writeFile(localFile, resizeBuffer);
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
 }

@@ -1,0 +1,14 @@
+.downloadForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.sliderBox {
+  grid-column: span 2;
+}
+
+.button {
+  grid-column: span 2;
+  justify-self: right;
+}

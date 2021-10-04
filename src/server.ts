@@ -15,11 +15,11 @@ app.use(cookieParser());
 
 app.use('/storybook', express.static('dist/storybook'));
 
+app.use(express.static('dist/app'));
 app.use('/api', user);
 app.use('/api', images);
 app.use('/api', collection);
 
-app.use(express.static('dist/app'));
 app.get('*', (_request, response) => {
   response.sendFile('index.html', { root: 'dist/app' });
 });

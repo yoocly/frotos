@@ -8,6 +8,7 @@ import { useHistory } from 'react-router';
 import type { image, imagesResult } from '../../../lib/types/image';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import Button from '../Button/Button';
+import DownloadForm from '../DownloadForm/DownloadForm';
 import Headline from '../Headline/Headline';
 import Icon from '../Icon/Icon';
 import ImageCollections from '../ImageCollections/ImageCollections';
@@ -34,7 +35,7 @@ const imageSize = {
     maxWidth: 60,
   },
   mobile: {
-    maxHeight: 40,
+    maxHeight: 35,
     maxWidth: 100,
   },
 };
@@ -51,7 +52,7 @@ const modalDetailsSize = {
   mobile: {
     minHeight: ``,
     minWidth: ``,
-    height: `${2.5 * imageSize.mobile.maxHeight}%`,
+    height: `${2.85 * imageSize.mobile.maxHeight}%`,
     width: `${imageSize.mobile.maxWidth}%`,
     maxHeight: ``,
     maxWidth: ``,
@@ -229,7 +230,7 @@ export default function SearchResult({
           <div className={styles.modalTabContent}>
             {modalActiveTab === 'details' && <ImageDetails image={selectedImage} />}
             {modalActiveTab === 'collection' && <ImageCollections image={selectedImage} />}
-            {modalActiveTab === 'download' && 'Download'}
+            {modalActiveTab === 'download' && <DownloadForm image={selectedImage} />}
             {modalActiveTab === 'palette' && 'palette'}
           </div>
         </div>
