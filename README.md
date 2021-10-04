@@ -1,4 +1,4 @@
-# perfectpic
+# FROTOS
 App to search Unsplash, Pexels and Pixabay for free images and to organize, edit and download them
 
 # .env Keys:
