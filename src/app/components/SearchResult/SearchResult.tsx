@@ -13,6 +13,7 @@ import Headline from '../Headline/Headline';
 import Icon from '../Icon/Icon';
 import ImageCollections from '../ImageCollections/ImageCollections';
 import ImageDetails from '../ImageDetails/ImageDetails';
+import ImagePalette from '../ImagePalette/ImagePalette';
 import Modal from '../Modal/Modal';
 import type { NavBarImageItems } from '../NavBarImage/NavBarImage';
 import NavBarImage from '../NavBarImage/NavBarImage';
@@ -231,7 +232,7 @@ export default function SearchResult({
             {modalActiveTab === 'details' && <ImageDetails image={selectedImage} />}
             {modalActiveTab === 'collection' && <ImageCollections image={selectedImage} />}
             {modalActiveTab === 'download' && <DownloadForm image={selectedImage} />}
-            {modalActiveTab === 'palette' && 'palette'}
+            {modalActiveTab === 'palette' && <ImagePalette image={selectedImage} />}
           </div>
         </div>
       </Modal>
