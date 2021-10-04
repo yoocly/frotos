@@ -1,14 +1,15 @@
 .downloadForm {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--gap);
 }
 
 .sliderBox {
   grid-column: span 2;
+  margin-bottom: var(--gap);
 }
 
 .button {
   grid-column: span 2;
   justify-self: right;
+  position: relative;
 }
