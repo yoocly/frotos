@@ -1,8 +1,14 @@
 import axios from 'axios';
-import type { image } from '../../lib/types/image';
 import download from 'js-file-download';
+import type { image } from '../../lib/types/image';
+import type { IMAGE_FORMATS } from '../components/DownloadForm/DownloadForm';
 
-export type downloadImageOptions = { format: 'gif' | 'png' | 'jpg' | 'webp' | 'avif' };
+export type downloadImageOptions = {
+  format: typeof IMAGE_FORMATS[number];
+  width: number;
+  height: number;
+  quality: number;
+};
 
 export async function triggerDownloadImage(
   image: image | null,
