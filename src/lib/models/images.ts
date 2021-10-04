@@ -20,6 +20,7 @@ import { apiColorMap, apis } from '../types/image';
 import appPath from 'app-root-path';
 import sharp from 'sharp';
 import type { downloadImageOptions } from '../../app/lib/download';
+import getColors from 'get-image-colors';
 
 export const IMAGE_ERROR = {
   AUTH_FAILED: { resultCode: 403, httpCode: 401, description: 'Authentication failed' },
@@ -335,7 +336,7 @@ export async function downloadImage(req: Request, res: Response): Promise<void> 
   const { image, options } = req.body;
   const localFile = `${appPath.path}/image.${options.format}`;
 
-  if (!(await downloadFileToServer(image.preview, localFile, options)))
+  if (!(await downloadFileToServer(image.src, localFile, options)))
     error(req, res, IMAGE_ERROR.DOWNLOAD_FROM_SERVER_FAILED);
 
   res.download(localFile);
@@ -365,9 +366,10 @@ async function downloadFileToServer(
         ? await sharp(serverBuffer).avif({ quality }).toBuffer()
         : serverBuffer;
 
-    const resizeBuffer = await sharp(formatBuffer)
-      .resize(width, height, { fit: 'outside' })
-      .toBuffer();
+    const resizeBuffer =
+      width > 0
+        ? await sharp(formatBuffer).resize(width, height, { fit: 'outside' }).toBuffer()
+        : formatBuffer;
 
     await writeFile(localFile, resizeBuffer);
     return true;
@@ -375,4 +377,24 @@ async function downloadFileToServer(
     console.error(error);
     return false;
   }
+}
+
+export async function imageColors(req: Request, res: Response): Promise<void> {
+  if (!req.body.image) return error(req, res, IMAGE_ERROR.NO_IMAGE);
+  const { image } = req.body;
+  const localFile = `${appPath.path}/image.jpg`;
+
+  const response = await fetch(image.preview);
+  if (!response.ok) return error(req, res, IMAGE_ERROR.DOWNLOAD_FROM_SERVER_FAILED);
+
+  const serverBuffer = await response.buffer();
+  if (!serverBuffer) return error(req, res, IMAGE_ERROR.DOWNLOAD_FROM_SERVER_FAILED);
+
+  const colorsRaw = await getColors(serverBuffer, 'image/jpeg');
+
+  const colors = colorsRaw.map((color) => {
+    return { rgb: color.rgb(), hsl: color.hsl() };
+  });
+
+  return result(req, res, colors, 1, 200);
 }

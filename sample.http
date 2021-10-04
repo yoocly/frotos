@@ -194,3 +194,28 @@ Content-Type: application/json
             "score":8000
         }  
     }
+
+
+### Get colors of an image
+POST http://localhost:3000/api/images/colors
+Content-Type: application/json
+
+    {
+        "image":
+        {
+            "id":"e7502344",
+            "width":9600,
+            "height":12000,
+            "urlSource":"https://www.pexels.com/de-de/foto/strand-ferien-menschen-sommer-7502344/",
+            "author":"Jess Loiterton",
+            "urlAuthor":"https://www.pexels.com/de-de/@jess-vide",
+            "src":"https://images.pexels.com/photos/7502344/pexels-photo-7502344.jpeg",
+            "preview":"https://images.pexels.com/photos/7502344/pexels-photo-7502344.jpeg?auto=compress&w=1280",
+            "thumbnail":"https://images.pexels.com/photos/7502344/pexels-photo-7502344.jpeg?auto=compress&cs=tinysrgb&dpr=1&fit=crop&h=200&w=280",
+            "thumbnailWidth":280,
+            "thumbnailHeight":200,
+            "aspectRatio":"4 : 5",
+            "api":"pexels",
+            "score":8000
+        }  
+    }
