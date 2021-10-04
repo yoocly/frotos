@@ -1,0 +1,43 @@
+.radio {
+  display: flex;
+  cursor: pointer;
+  margin-bottom: var(--gapSmall);
+}
+
+.radio input {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.styledRadio {
+  margin-top: calc(
+    0.4 * (var(--fontSizeDefault) * var(--lineHeightDefault) - var(--fontSizeDefault))
+  );
+  height: var(--fontSizeDefault);
+  width: var(--fontSizeDefault);
+  border-radius: 50%;
+  border: 1px solid var(--medium);
+  cursor: pointer;
+}
+
+.styledRadio::before {
+  background: var(--dark);
+  content: '';
+}
+
+.radio input:checked + .styledRadio {
+  margin-top: calc(
+    0.4 * (var(--fontSizeDefault) * var(--lineHeightDefault) - var(--fontSizeDefault))
+  );
+  height: var(--fontSizeDefault);
+  width: var(--fontSizeDefault);
+  border-radius: 50%;
+  border: 1px solid var(--light);
+  cursor: pointer;
+  background: var(--primaryGradient);
+}
+
+.labelText {
+  margin-left: var(--gapSmall);
+}

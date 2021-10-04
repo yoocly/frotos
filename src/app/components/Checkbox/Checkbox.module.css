@@ -16,7 +16,7 @@
   height: var(--fontSizeDefault);
   width: var(--fontSizeDefault);
   border-radius: calc(0.4 * var(--radius));
-  border: 1px solid var(--light);
+  border: 1px solid var(--medium);
   cursor: pointer;
 }
 
