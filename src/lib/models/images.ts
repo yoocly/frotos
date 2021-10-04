@@ -382,7 +382,6 @@ async function downloadFileToServer(
 export async function imageColors(req: Request, res: Response): Promise<void> {
   if (!req.body.image) return error(req, res, IMAGE_ERROR.NO_IMAGE);
   const { image } = req.body;
-  const localFile = `${appPath.path}/image.jpg`;
 
   const response = await fetch(image.preview);
   if (!response.ok) return error(req, res, IMAGE_ERROR.DOWNLOAD_FROM_SERVER_FAILED);
