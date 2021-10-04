@@ -52,7 +52,7 @@ export default function DownloadForm({ image, className = '' }: DownloadFormProp
     <section className={`${styles.downloadForm} ${className}`}>
       <Slider
         value={quality}
-        min={0}
+        min={1}
         max={100}
         icon="quality"
         className={styles.sliderBox}
