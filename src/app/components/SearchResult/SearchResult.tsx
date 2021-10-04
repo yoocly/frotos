@@ -36,7 +36,7 @@ const imageSize = {
     maxWidth: 60,
   },
   mobile: {
-    maxHeight: 35,
+    maxHeight: 37.5,
     maxWidth: 100,
   },
 };
@@ -53,7 +53,7 @@ const modalDetailsSize = {
   mobile: {
     minHeight: ``,
     minWidth: ``,
-    height: `${2.85 * imageSize.mobile.maxHeight}%`,
+    height: `${2.666 * imageSize.mobile.maxHeight}%`,
     width: `${imageSize.mobile.maxWidth}%`,
     maxHeight: ``,
     maxWidth: ``,
