@@ -347,7 +347,7 @@ async function downloadFileToServer(
   options: downloadImageOptions
 ): Promise<boolean> {
   try {
-    const { format } = options;
+    const { format, width, height, quality } = options;
 
     const response = await fetch(url);
     if (!response.ok) return false;
@@ -356,16 +356,20 @@ async function downloadFileToServer(
 
     const formatBuffer =
       format === 'png'
-        ? await sharp(serverBuffer).png().toBuffer()
+        ? await sharp(serverBuffer).png({ quality }).toBuffer()
         : format === 'jpg'
-        ? await sharp(serverBuffer).jpeg().toBuffer()
+        ? await sharp(serverBuffer).jpeg({ quality }).toBuffer()
         : format === 'webp'
-        ? await sharp(serverBuffer).webp().toBuffer()
+        ? await sharp(serverBuffer).webp({ quality }).toBuffer()
         : format === 'avif'
-        ? await sharp(serverBuffer).avif().toBuffer()
+        ? await sharp(serverBuffer).avif({ quality }).toBuffer()
         : serverBuffer;
 
-    await writeFile(localFile, formatBuffer);
+    const resizeBuffer = await sharp(formatBuffer)
+      .resize(width, height, { fit: 'outside' })
+      .toBuffer();
+
+    await writeFile(localFile, resizeBuffer);
     return true;
   } catch (error) {
     console.error(error);
