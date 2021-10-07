@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import type { image } from '../../../lib/types/image';
-import { triggerDownloadImage } from '../../lib/download';
+import { useDownloadImage } from '../../hooks/useDownloadImage';
 import Button from '../Button/Button';
 import Radio from '../Radio/Radio';
 import Slider from '../Slider/Slider';
+import Spinner from '../Spinner/Spinner';
 import styles from './DownloadForm.module.css';
 
 export const IMAGE_FORMATS = ['avif', 'webp', 'jpg', 'png', 'gif'];
@@ -22,16 +23,16 @@ export default function DownloadForm({ image, className = '' }: DownloadFormProp
     height: image?.height || 1280,
   });
 
-  useEffect(() => {
-    if (downloadImage)
-      triggerDownloadImage(downloadImage, {
-        format,
-        width: resolution.width,
-        height: resolution.height,
-        quality,
-      });
-    setDownloadImage(null);
-  }, [downloadImage, resolution, format, quality]);
+  const isFetchingImage = useDownloadImage(
+    downloadImage,
+    {
+      format,
+      width: resolution.width,
+      height: resolution.height,
+      quality,
+    },
+    setDownloadImage
+  );
 
   if (!image) return <></>;
 
@@ -86,12 +87,16 @@ export default function DownloadForm({ image, className = '' }: DownloadFormProp
           </Radio>
         ))}
       </div>
-      <Button
-        icon="download"
-        text="Download"
-        onClick={() => setDownloadImage(image)}
-        className={styles.button}
-      />
+      {isFetchingImage ? (
+        <Spinner className={styles.button} />
+      ) : (
+        <Button
+          icon="download"
+          text="Download"
+          onClick={() => setDownloadImage(image)}
+          className={styles.button}
+        />
+      )}
     </section>
   );
 }
