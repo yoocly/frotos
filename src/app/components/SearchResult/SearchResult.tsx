@@ -32,8 +32,8 @@ export type SearchResultProps = {
 
 const imageSize = {
   desktop: {
-    maxHeight: 45,
-    maxWidth: 60,
+    maxHeight: 33,
+    maxWidth: 50,
   },
   mobile: {
     maxHeight: 37.5,
@@ -45,8 +45,8 @@ const modalDetailsSize = {
   desktop: {
     minHeight: ``,
     minWidth: ``,
-    height: `${2 * imageSize.desktop.maxHeight}%`,
-    width: `${imageSize.desktop.maxWidth}%`,
+    height: `calc(${3 * imageSize.desktop.maxHeight}% - 3rem)`,
+    width: `30rem`,
     maxHeight: ``,
     maxWidth: ``,
   },
