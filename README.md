@@ -6,8 +6,6 @@ App to search Unsplash, Pexels and Pixabay for free images and to organize, edit
 https://user-images.githubusercontent.com/87307560/136006950-1a9c6357-cf2b-493c-afdc-41aa00f7b373.mp4
 
 
-# .env Keys:
-
 # Setup
 
 Clone this repo and run `npm install` to install all the dependencies.
