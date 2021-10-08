@@ -24,9 +24,9 @@ HASH_PEPPER={Random string for password hashing pepper in addition to Argon2id}
 JWT_SECRET={JSON Web Token Secret}
 ```
 
-Run `npm run dev` to start the server at `http://localhost:3001`, the client at `http://localhost:3000` and storybook at `http://localhost:6006`.
+Run `npm run dev` to start the server at [`http://localhost:3001`](http://localhost:3001), the client at [`http://localhost:3000`](http://localhost:3000) and storybook at [`http://localhost:6006`](http://localhost:6006).
 
-A production build can be build with `npm run build`.
+A production build can be built with `npm run build`.
 
 # Technologies
 
@@ -40,9 +40,10 @@ A production build can be build with `npm run build`.
 - Express.js
 - MongoDB with MongoDB Atlas
 - Axios
-- Argon2
+- Argon2id
 - JSON Web Token
 - Sharp
 - Typescript
 - CSS Modules
 - Masonry Layout with self-built infinite scrolling
+- ...
