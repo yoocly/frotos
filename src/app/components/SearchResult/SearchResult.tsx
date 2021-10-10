@@ -145,6 +145,7 @@ export default function SearchResult({
         image,
       });
       const { collectionId, collectionName } = addToCollectionResult.data?.result;
+
       setAddToCollectionResult({
         success: true,
         message: (

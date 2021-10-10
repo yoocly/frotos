@@ -28,6 +28,7 @@ export default function ImagePalette({ image, className = '' }: ImagePaletteProp
                     background: css,
                     color: lighttextcolor ? `var(--medium) ` : `var(--dark) `,
                   }}
+                  key={`colorBox${color}`}
                 >
                   {css}
                 </div>
@@ -37,6 +38,7 @@ export default function ImagePalette({ image, className = '' }: ImagePaletteProp
                     background: complementcss,
                     color: lighttextcolor ? `var(--medium) ` : `var(--dark) `,
                   }}
+                  key={`colorBoxComplement${color}`}
                 >
                   {complementcss}
                 </div>

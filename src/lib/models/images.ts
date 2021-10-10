@@ -233,6 +233,7 @@ export async function addImage(req: Request, res: Response): Promise<void> {
       $push: {
         images: image.id,
       },
+      $set: { lastChangeAt: Math.floor(Date.now() / 1000) },
     }
   );
   if (dbResultUpdateCollection === null || dbResultUpdateCollection.matchedCount !== 1)
