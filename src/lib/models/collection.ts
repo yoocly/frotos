@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
-import { dbDeleteOne, dbInsertOne, getCollection } from '../../utils/database';
+import { dbDeleteOne, dbInsertOne, dbUpdateOne, getCollection } from '../../utils/database';
 import { error, result } from '../../utils/responses';
 import type { dbCollection } from '../types/collection';
 
@@ -118,6 +118,15 @@ export async function getCollectionImages(req: Request, res: Response): Promise<
 
   if (dbResult === null || Object.keys(dbResult).length === 0)
     return error(req, res, COLLECTION_ERROR.ACEESS_COLLECTION_FAILED);
+
+  dbUpdateOne(
+    collectionsCollection,
+    {
+      userId,
+      _id: new ObjectId(collectionId),
+    },
+    { $set: { lastChangeAt: Math.floor(Date.now() / 1000) } }
+  );
 
   return result(req, res, dbResult[0], 1, 200);
 }
