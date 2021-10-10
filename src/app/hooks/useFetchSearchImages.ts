@@ -1,11 +1,11 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import type { filtersAspectRatio, imagesResult } from '../../lib/types/image';
 import { apiColorKeys } from '../lib/colors';
-import useFetch from './useFetch';
 
 export type fetchSearchImagesResult = {
   imagesResult: imagesResult | null;
-  errorMessage: string | null;
   isLoading: boolean;
   isFetchingNewResult: boolean;
 };
@@ -27,9 +27,23 @@ export default function useFetchSearchImages(
   const filter = `${filterAspectRatio}/${color}`;
   const page = query === lastQuery && lastFilter === filter ? nextPage : 1;
   const url = query ? `/api/images/${query}/${page}/${filterAspectRatio}/${color}` : null;
-  const fetchResult = useFetch<imagesResult>(url);
 
-  const result = fetchResult.data;
+  const fetchResult = useQuery(
+    [query, page, filterAspectRatio, color],
+    () => axios.get(url || ''),
+    {
+      retry: false,
+      enabled: !!query,
+      retryOnMount: false,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      keepPreviousData: true,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    }
+  );
+  const result = fetchResult.data?.data as imagesResult;
   const resultCount = result?.results.length || 0;
 
   useEffect(() => {
@@ -61,7 +75,6 @@ export default function useFetchSearchImages(
 
   return {
     imagesResult: totalResult,
-    errorMessage: fetchResult.errorMessage,
     isLoading: fetchResult.isLoading,
     isFetchingNewResult: !result?.results && page === 1,
   };
