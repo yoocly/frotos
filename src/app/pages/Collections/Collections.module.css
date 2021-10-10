@@ -1,5 +1,5 @@
 .collections {
-  padding: var(--gap);
+  padding: var(--gap) var(--gap) 5rem;
 }
 
 .item {

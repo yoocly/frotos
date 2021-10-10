@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import { useHistory } from 'react-router';
 import Button from '../../components/Button/Button';
 import Headline from '../../components/Headline/Headline';
@@ -15,6 +17,7 @@ export type CollectionsProps = {
 };
 
 export default function Collections({ className = '' }: CollectionsProps): JSX.Element {
+  const queryClient = useQueryClient();
   const history = useHistory();
   const currentUser = useCurrentUser();
   if (!currentUser) history.push(`/profile`);
@@ -30,8 +33,14 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
 
   const collectionImages = useCollectionImages(showCollectionImages?.collectionId || null);
 
-  function handleAddCollection() {
-    console.log(addCollectionName);
+  async function handleAddCollection() {
+    const addResult = await axios.post('/api/collections', { collectionName: addCollectionName });
+    if (addResult.status !== 201) return;
+
+    queryClient.invalidateQueries('collections');
+    setShowAddCollectionModal(false);
+    setAddCollectionName('');
+    setShowCollectionImages(null);
   }
 
   return showCollectionImages ? (
@@ -89,6 +98,24 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
       <Button icon="add" text="Add collection" onClick={() => setShowAddCollectionModal(true)} />
       <Modal
         show={showAddCollectionModal}
+        size={{
+          desktop: {
+            minHeight: '5rem',
+            minWidth: '50%',
+            height: '',
+            width: '',
+            maxHeight: 'calc(100% - 5rem)',
+            maxWidth: 'calc(100% - 5rem)',
+          },
+          mobile: {
+            minHeight: '5rem',
+            minWidth: '',
+            height: '',
+            width: 'calc(100% - 2rem)',
+            maxHeight: 'calc(100% - 5rem)',
+            maxWidth: '',
+          },
+        }}
         closeButton
         onClose={() => setShowAddCollectionModal(false)}
       >
