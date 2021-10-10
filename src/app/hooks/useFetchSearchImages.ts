@@ -34,6 +34,13 @@ export default function useFetchSearchImages(
     {
       retry: false,
       enabled: !!query,
+      retryOnMount: false,
+      refetchOnMount: false,
+      refetchOnWindowFocus: false,
+      refetchOnReconnect: false,
+      keepPreviousData: true,
+      staleTime: Infinity,
+      cacheTime: Infinity,
     }
   );
   const result = fetchResult.data?.data as imagesResult;
