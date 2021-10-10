@@ -27,9 +27,6 @@ export default function useFetchSearchImages(
   const filter = `${filterAspectRatio}/${color}`;
   const page = query === lastQuery && lastFilter === filter ? nextPage : 1;
   const url = query ? `/api/images/${query}/${page}/${filterAspectRatio}/${color}` : null;
-  // const fetchResult = useFetch<imagesResult>(url);
-
-  // const result = fetchResult.data;
 
   const fetchResult = useQuery(
     [query, page, filterAspectRatio, color],
@@ -40,7 +37,6 @@ export default function useFetchSearchImages(
     }
   );
   const result = fetchResult.data?.data as imagesResult;
-
   const resultCount = result?.results.length || 0;
 
   useEffect(() => {
