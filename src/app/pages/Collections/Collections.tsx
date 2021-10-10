@@ -43,6 +43,12 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
     setShowCollectionImages(null);
   }
 
+  async function handleDeleteCollection(collectionId: string | undefined): Promise<void> {
+    if (!collectionId) return;
+    await axios.delete('/api/collections', { data: { collectionId } });
+    queryClient.invalidateQueries('collections');
+  }
+
   return showCollectionImages ? (
     <main className={`${styles.collectionImages} ${className}`}>
       <Headline level={1} className={styles.title}>
@@ -67,17 +73,7 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
       <ul>
         {collections &&
           collections.map((collection) => (
-            <li
-              className={styles.item}
-              key={collection._id}
-              id={collection._id}
-              onClick={() =>
-                setShowCollectionImages({
-                  collectionId: collection._id || '',
-                  collectionName: collection.collectionName,
-                })
-              }
-            >
+            <li className={styles.item} key={collection._id} id={collection._id}>
               <div
                 style={{
                   backgroundImage: `url(${
@@ -85,13 +81,32 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
                   })`,
                 }}
                 className={styles.image}
+                onClick={() =>
+                  setShowCollectionImages({
+                    collectionId: collection._id || '',
+                    collectionName: collection.collectionName,
+                  })
+                }
               ></div>
-              <div>
+              <div
+                onClick={() =>
+                  setShowCollectionImages({
+                    collectionId: collection._id || '',
+                    collectionName: collection.collectionName,
+                  })
+                }
+              >
                 {collection.collectionName}
                 {collection.imageCount !== undefined && (
                   <div className={styles.imageCount}>{collection.imageCount} Images</div>
                 )}
               </div>
+              <Button
+                icon="delete"
+                transparent
+                color="primaryGradient"
+                onClick={() => handleDeleteCollection(collection._id)}
+              />
             </li>
           ))}
       </ul>
