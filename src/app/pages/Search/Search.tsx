@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import type { filtersAspectRatio } from '../../../lib/types/image';
+import type { lastSearch } from '../../App';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import Input from '../../components/Input/Input';
 import SearchResult from '../../components/SearchResult/SearchResult';
@@ -9,28 +9,27 @@ import styles from './Search.module.css';
 
 export type SearchProps = {
   className?: string;
+  lastSearchState: [lastSearch, (s: lastSearch) => void];
 };
 
-export default function Search({ className = '' }: SearchProps): JSX.Element {
+export default function Search({ className = '', lastSearchState }: SearchProps): JSX.Element {
   const { query } = useParams<{ query: string }>();
+  const [lastSearch, setLastSearch] = lastSearchState;
+  const { keywords, filterAspectRatio, filterColor } = lastSearch;
 
-  const [inputValue, setInputValue] = useState<string>(query);
-  const [searchValue, setSearchValue] = useState<string>('');
+  const [inputValue, setInputValue] = useState<string>(query || keywords);
   const [fetchMoreImages, setFetchMoreImages] = useState<boolean>(false);
-
-  const [filterAspectRatio, setFilterAspectRatio] = useState<filtersAspectRatio>('nofilter');
-  const [filterColor, setFilterColor] = useState<number>(0);
 
   const { imagesResult, isLoading, isFetchingNewResult } = useFetchSearchImages(
     fetchMoreImages,
-    searchValue,
+    keywords,
     filterAspectRatio,
     filterColor
   );
 
   useEffect(() => {
-    if (query) handleSubmit();
-  }, [query]);
+    if (query || lastSearch) handleSubmit();
+  }, [query, lastSearch]);
 
   useEffect(() => {
     setFetchMoreImages(false);
@@ -41,8 +40,8 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
   }
 
   function handleSubmit() {
-    if (inputValue === searchValue) return;
-    setSearchValue(inputValue);
+    if (inputValue === keywords) return;
+    setLastSearch({ keywords: inputValue, filterAspectRatio, filterColor });
     setFetchMoreImages(true);
   }
 
@@ -61,8 +60,20 @@ export default function Search({ className = '' }: SearchProps): JSX.Element {
           imageCount={imagesResult && imagesResult.count}
           aspectRatio={filterAspectRatio}
           color={filterColor}
-          onChangeAspectRatio={setFilterAspectRatio}
-          onChangeColor={setFilterColor}
+          onChangeAspectRatio={(newFilterAspectRatio) =>
+            setLastSearch({
+              keywords: inputValue,
+              filterAspectRatio: newFilterAspectRatio,
+              filterColor,
+            })
+          }
+          onChangeColor={(newFilterColor) =>
+            setLastSearch({
+              keywords: inputValue,
+              filterAspectRatio,
+              filterColor: newFilterColor,
+            })
+          }
         />
         <SearchResult
           isLoading={isLoading}
