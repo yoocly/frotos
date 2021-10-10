@@ -265,7 +265,9 @@ export default function SearchResult({
         backgroundOverlay={false}
       >
         <div className={styles.popupLarge}>
-          <Headline className={styles.headline}>Add to</Headline>
+          <Headline level={2} className={styles.headline}>
+            Add to
+          </Headline>
           <ImageCollections
             className={styles.collections}
             image={addToCollectionResult?.image || null}

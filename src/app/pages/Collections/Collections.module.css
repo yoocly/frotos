@@ -1,9 +1,10 @@
 .collections {
-  padding: var(--gap);
+  padding: var(--gap) var(--gap) 5rem;
 }
 
 .item {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   gap: var(--gap);
   align-items: center;
   margin: var(--gap) 0;
@@ -39,4 +40,10 @@
 
 .title {
   margin-bottom: var(--gap);
+}
+
+.modalAdd {
+  display: grid;
+  gap: var(--gap);
+  margin: var(--gap);
 }
