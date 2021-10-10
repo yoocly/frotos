@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router';
 import Button from '../../components/Button/Button';
 import Headline from '../../components/Headline/Headline';
+import Input from '../../components/Input/Input';
+import Modal from '../../components/Modal/Modal';
 import SearchResult from '../../components/SearchResult/SearchResult';
 import useCollectionImages from '../../hooks/useCollectionImages';
 import useCollections from '../../hooks/useCollections';
@@ -23,7 +25,14 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
     collectionName: string;
   } | null>(null);
 
+  const [showAddCollectionModal, setShowAddCollectionModal] = useState<boolean>(false);
+  const [addCollectionName, setAddCollectionName] = useState<string>('');
+
   const collectionImages = useCollectionImages(showCollectionImages?.collectionId || null);
+
+  function handleAddCollection() {
+    console.log(addCollectionName);
+  }
 
   return showCollectionImages ? (
     <main className={`${styles.collectionImages} ${className}`}>
@@ -77,6 +86,25 @@ export default function Collections({ className = '' }: CollectionsProps): JSX.E
             </li>
           ))}
       </ul>
+      <Button icon="add" text="Add collection" onClick={() => setShowAddCollectionModal(true)} />
+      <Modal
+        show={showAddCollectionModal}
+        closeButton
+        onClose={() => setShowAddCollectionModal(false)}
+      >
+        <div className={styles.modalAdd}>
+          <Headline level={2} className={styles.headline}>
+            Add collection
+          </Headline>
+          <Input
+            placeholder="Collection name"
+            submitIcon="add"
+            value={addCollectionName}
+            onChange={(inputValue) => setAddCollectionName(inputValue)}
+            onSubmit={handleAddCollection}
+          />
+        </div>
+      </Modal>
     </main>
   );
 }

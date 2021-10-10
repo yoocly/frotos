@@ -40,3 +40,9 @@
 .title {
   margin-bottom: var(--gap);
 }
+
+.modalAdd {
+  display: grid;
+  gap: var(--gap);
+  margin: var(--gap);
+}
