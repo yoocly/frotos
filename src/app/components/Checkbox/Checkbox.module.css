@@ -31,6 +31,15 @@
   content: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1rem' height='1rem' viewBox='0 0 24 24'><path d='M9 16.17L5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z' fill='white'/></svg>");
 }
 
+.checkbox input:not(:checked):hover + .styledCheckbox {
+  border: 1px solid var(--lightPrimary);
+  background: var(--inactiveGradient);
+}
+
+.checkbox input:checked:hover + .styledCheckbox {
+  border: 1px solid var(--lightPrimary);
+}
+
 .labelText {
   margin-left: var(--gapSmall);
 }
