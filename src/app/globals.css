@@ -98,45 +98,54 @@ body {
   height: 100%;
 }
 
-.colorPrimary {
+.colorPrimary,
+.hoverColorPrimary:hover {
   color: var(--primary);
 }
 
-.colorPrimaryGradient {
+.colorPrimaryGradient,
+.hoverColorPrimaryGradient:hover {
   background: var(--primaryGradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.colorLight {
+.colorLight,
+.hoverColorLight:hover {
   color: var(--light);
 }
 
-.colorLightPrimary {
+.colorLightPrimary,
+.hoverColorLightPrimary:hover {
   color: var(--lightPrimary);
 }
 
-.colorDark {
+.colorDark,
+.hoverColorDark:hover {
   color: var(--dark);
 }
 
-.colorInactive {
+.colorInactive,
+.hoverColorInactive:hover {
   color: var(--inactive);
 }
 
-.colorInactiveGradient {
+.colorInactiveGradient,
+.hoverColorInactiveGradient:hover {
   background: var(--inactiveGradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.colorMedium {
+.colorMedium,
+.hoverColorMedium:hover {
   color: var(--medium);
 }
 
-.colorMediumGradient {
+.colorMediumGradient,
+.hoverColorMediumGradient:hover {
   background: var(--mediumGradient);
   -webkit-background-clip: text;
   background-clip: text;

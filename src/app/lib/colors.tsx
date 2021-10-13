@@ -78,15 +78,24 @@ export const GRADIENTS_SVG = {
 };
 
 export const COLORS = {
-  primary: { cssVar: `primary`, colorClass: `colorPrimary` },
-  lightPrimary: { cssVar: `lightPrimary`, colorClass: `colorLightPrimary` },
-  light: { cssVar: `light`, colorClass: `colorLight` },
-  medium: { cssVar: `medium`, colorClass: `colorMedium` },
-  inactive: { cssVar: `inactive`, colorClass: `colorInactive` },
-  dark: { cssVar: `dark`, colorClass: `colorDark` },
+  primary: { cssVar: `primary`, colorClass: `colorPrimary`, hoverColorClass: `hoverColorPrimary` },
+  lightPrimary: {
+    cssVar: `lightPrimary`,
+    colorClass: `colorLightPrimary`,
+    hoverColorClass: `hoverColorLightPrimary`,
+  },
+  light: { cssVar: `light`, colorClass: `colorLight`, hoverColorClass: `hoverColorLight` },
+  medium: { cssVar: `medium`, colorClass: `colorMedium`, hoverColorClass: `hoverColorMedium` },
+  inactive: {
+    cssVar: `inactive`,
+    colorClass: `colorInactive`,
+    hoverColorClass: `hoverColorInactive`,
+  },
+  dark: { cssVar: `dark`, colorClass: `colorDark`, hoverColorClass: `hoverColorDark` },
   primaryGradient: {
     cssVar: `primaryGradient`,
     colorClass: `colorPrimaryGradient`,
+    hoverColorClass: `hoverColorPrimaryGradient`,
     gradientFillClass: `fillPrimaryGradient`,
     gradientStrokeClass: `strokePrimaryGradient`,
     gradientSVG: GRADIENTS_SVG.primary,
@@ -94,6 +103,7 @@ export const COLORS = {
   mediumGradient: {
     cssVar: `mediumGradient`,
     colorClass: `colorMediumGradient`,
+    hoverColorClass: `hoverColorMediumGradient`,
     gradientFillClass: `fillMediumGradient`,
     gradientStrokeClass: `strokeMediumGradient`,
     gradientSVG: GRADIENTS_SVG.medium,
@@ -101,6 +111,7 @@ export const COLORS = {
   inactiveGradient: {
     cssVar: `inactiveGradient`,
     colorClass: `colorInactiveGradient`,
+    hoverColorClass: `hoverColorInactiveGradient`,
     gradientFillClass: `fillInactiveGradient`,
     gradientStrokeClass: `strokeInactiveGradient`,
     gradientSVG: GRADIENTS_SVG.inactive,
