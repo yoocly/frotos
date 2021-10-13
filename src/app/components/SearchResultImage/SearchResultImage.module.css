@@ -7,6 +7,8 @@
 .thumbnailWrapper {
   grid-column: span 2;
   position: relative;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
 }
 
 .thumbnail {
@@ -14,6 +16,12 @@
   height: 100%;
   border-radius: var(--radius);
   cursor: pointer;
+}
+
+.thumbnailWrapper:hover {
+  border: 1px solid var(--medium);
+  box-shadow: var(--shadowModal);
+  transform: scale(1.02);
 }
 
 .collectionButton {

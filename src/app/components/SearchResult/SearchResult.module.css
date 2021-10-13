@@ -1,8 +1,8 @@
 .imagesList {
   height: 100%;
-  padding-bottom: 4rem;
   overflow-y: auto;
   overflow-x: hidden;
+  padding: var(--gap) 0 4rem;
 }
 
 .imagesList::-webkit-scrollbar {
