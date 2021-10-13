@@ -14,7 +14,7 @@ export default function NavBar({ active, className = '' }: NavBarProps): JSX.Ele
 
   const colorDefault = `mediumGradient`;
   const colorActive = `primaryGradient`;
-  const colorHover = `light`;
+  const colorHover = `lightPrimary`;
 
   function redirectTo(target: string) {
     history.push(`/${target}`);
