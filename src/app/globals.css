@@ -99,12 +99,15 @@ body {
 }
 
 .colorPrimary,
-.hoverColorPrimary:hover {
+.hoverColorPrimary:hover,
+.hoverColorPrimary:hover * {
   color: var(--primary);
+  fill: var(--primary);
 }
 
 .colorPrimaryGradient,
-.hoverColorPrimaryGradient:hover {
+.hoverColorPrimaryGradient:hover,
+.hoverColorPrimaryGradient:hover * {
   background: var(--primaryGradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -112,27 +115,36 @@ body {
 }
 
 .colorLight,
-.hoverColorLight:hover {
+.hoverColorLight:hover,
+.hoverColorLight:hover * {
   color: var(--light);
+  fill: var(--light);
 }
 
 .colorLightPrimary,
-.hoverColorLightPrimary:hover {
+.hoverColorLightPrimary:hover,
+.hoverColorLightPrimary:hover * {
   color: var(--lightPrimary);
+  fill: var(--lightPrimary);
 }
 
 .colorDark,
-.hoverColorDark:hover {
+.hoverColorDark:hover,
+.hoverColorDark:hover * {
   color: var(--dark);
+  fill: var(--dark);
 }
 
 .colorInactive,
-.hoverColorInactive:hover {
+.hoverColorInactive:hover,
+.hoverColorInactive:hover * {
   color: var(--inactive);
+  fill: var(--inactive);
 }
 
 .colorInactiveGradient,
-.hoverColorInactiveGradient:hover {
+.hoverColorInactiveGradient:hover,
+.hoverColorInactiveGradient:hover * {
   background: var(--inactiveGradient);
   -webkit-background-clip: text;
   background-clip: text;
@@ -140,12 +152,15 @@ body {
 }
 
 .colorMedium,
-.hoverColorMedium:hover {
+.hoverColorMedium:hover,
+.hoverColorMedium:hover * {
   color: var(--medium);
+  fill: var(--medium);
 }
 
 .colorMediumGradient,
-.hoverColorMediumGradient:hover {
+.hoverColorMediumGradient:hover,
+.hoverColorMediumGradient:hover * {
   background: var(--mediumGradient);
   -webkit-background-clip: text;
   background-clip: text;

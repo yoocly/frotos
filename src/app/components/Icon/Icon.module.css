@@ -25,3 +25,12 @@
 .strokeInactiveGradient * {
   stroke: url(#inactiveGradient);
 }
+
+.filterFormatOnHover:hover * {
+  fill: var(--dark);
+  stroke: var(--lightPrimary);
+}
+
+.logoOnHover:hover * {
+  fill: currentColor;
+}
