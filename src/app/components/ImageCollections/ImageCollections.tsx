@@ -1,8 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router';
 import type { image } from '../../../lib/types/image';
 import useCollections from '../../hooks/useCollections';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import useImageCollections from '../../hooks/useImageCollections';
+import Button from '../Button/Button';
 import Checkbox from '../Checkbox/Checkbox';
 import styles from './ImageCollections.module.css';
 
@@ -16,13 +18,21 @@ export default function ImageCollections({
   className = '',
 }: ImageCollectionsProps): JSX.Element {
   const currentUser = useCurrentUser();
+  const history = useHistory();
   const userCollections = useCollections(currentUser);
   const { collections, addToCollection, removeFromCollection } = useImageCollections(
     image,
     userCollections
   );
 
-  return (
+  return !currentUser ? (
+    <>
+      <div className={styles.signupNotice}>
+        You have to sign up to add this image to a collections.
+      </div>
+      <Button icon="login" text="Sign up" onClick={() => history.push('/profile')} />
+    </>
+  ) : (
     <div className={className}>
       <ul>
         {collections &&
