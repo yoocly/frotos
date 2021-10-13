@@ -1,3 +1,7 @@
+.signupNotice {
+  margin-bottom: var(--gap);
+}
+
 .item {
   display: grid;
   grid-template-columns: 1fr auto;
