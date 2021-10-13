@@ -50,6 +50,10 @@
   border: 1px solid var(--inactive);
 }
 
+.color:hover {
+  border-color: var(--lightPrimary);
+}
+
 .color1 {
   background: linear-gradient(90deg, #000 0%, #000 50%, #fff 50%, #fff 100%);
 }

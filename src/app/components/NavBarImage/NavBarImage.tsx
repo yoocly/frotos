@@ -26,11 +26,13 @@ export default function NavBarImage({
 }: NavBarImageProps): JSX.Element {
   const colorDefault = `mediumGradient`;
   const colorActive = `primaryGradient`;
+  const colorHover = `lightPrimary`;
 
   const items = NAVBARIMAGE_ITEMS.map((item) => (
     <Button
       icon={itemIconMap[item]}
       color={active === item ? colorActive : colorDefault}
+      hoverColor={active === item ? colorActive : colorHover}
       transparent
       large
       className={`${styles.navItem} ${active === item ? styles.navItemActive : ``}`}

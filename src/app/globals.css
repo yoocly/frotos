@@ -43,6 +43,11 @@
     hsl(var(--hue), 100%, 50%) 5%,
     hsl(var(--hue), 100%, 40%) 77%
   );
+  --primaryGradientHover: linear-gradient(
+    100deg,
+    hsl(var(--hue), 100%, 60%) 5%,
+    hsl(var(--hue), 100%, 45%) 77%
+  );
   --light: hsl(var(--hue), 100%, 100%);
   --lightPrimary: hsl(var(--hue), 100%, 95%);
   --dark: hsl(var(--hue), 10%, 25%);
@@ -93,45 +98,69 @@ body {
   height: 100%;
 }
 
-.colorPrimary {
+.colorPrimary,
+.hoverColorPrimary:hover,
+.hoverColorPrimary:hover * {
   color: var(--primary);
+  fill: var(--primary);
 }
 
-.colorPrimaryGradient {
+.colorPrimaryGradient,
+.hoverColorPrimaryGradient:hover,
+.hoverColorPrimaryGradient:hover * {
   background: var(--primaryGradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.colorLight {
+.colorLight,
+.hoverColorLight:hover,
+.hoverColorLight:hover * {
   color: var(--light);
+  fill: var(--light);
 }
 
-.colorLightPrimary {
+.colorLightPrimary,
+.hoverColorLightPrimary:hover,
+.hoverColorLightPrimary:hover * {
   color: var(--lightPrimary);
+  fill: var(--lightPrimary);
 }
 
-.colorDark {
+.colorDark,
+.hoverColorDark:hover,
+.hoverColorDark:hover * {
   color: var(--dark);
+  fill: var(--dark);
 }
 
-.colorInactive {
+.colorInactive,
+.hoverColorInactive:hover,
+.hoverColorInactive:hover * {
   color: var(--inactive);
+  fill: var(--inactive);
 }
 
-.colorInactiveGradient {
+.colorInactiveGradient,
+.hoverColorInactiveGradient:hover,
+.hoverColorInactiveGradient:hover * {
   background: var(--inactiveGradient);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.colorMedium {
+.colorMedium,
+.hoverColorMedium:hover,
+.hoverColorMedium:hover * {
   color: var(--medium);
+  fill: var(--medium);
 }
 
-.colorMediumGradient {
+.colorMediumGradient,
+.hoverColorMediumGradient:hover,
+.hoverColorMediumGradient:hover * {
   background: var(--mediumGradient);
   -webkit-background-clip: text;
   background-clip: text;

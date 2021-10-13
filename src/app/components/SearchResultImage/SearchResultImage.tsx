@@ -30,6 +30,7 @@ export default function SearchResultImage({
           className={styles.collectionButton}
           icon={inCollection ? 'collectionAdded' : 'collection'}
           color={inCollection ? 'mediumGradient' : undefined}
+          hoverColor="primary"
           inactive={inCollection}
           transparent
           iconShadow

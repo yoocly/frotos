@@ -9,6 +9,7 @@ export type ButtonProps = {
   icon?: iconKey;
   text?: string;
   color?: colorKey;
+  hoverColor?: colorKey;
   small?: boolean;
   large?: boolean;
   transparent?: boolean;
@@ -23,6 +24,7 @@ export default function Button({
   icon = 'none',
   text,
   color = 'lightPrimary',
+  hoverColor = 'lightPrimary',
   small = false,
   large = false,
   transparent = false,
@@ -35,6 +37,7 @@ export default function Button({
   className = '',
 }: ButtonProps): JSX.Element {
   const { colorClass } = COLORS[color];
+  const { hoverColorClass } = COLORS[hoverColor];
 
   const iconElement = (
     <Icon
@@ -52,9 +55,9 @@ export default function Button({
       <a
         href={externalLink}
         target="_blank"
-        className={`${styles.button} ${colorClass} ${small ? styles.small : ``} ${
-          transparent ? styles.transparent : ``
-        } ${inactive ? styles.inactive : ``} ${className}`}
+        className={`${styles.button} ${colorClass} ${hoverColorClass} ${
+          small ? styles.small : ``
+        } ${transparent ? styles.transparent : ``} ${inactive ? styles.inactive : ``} ${className}`}
       >
         {icon && iconElement} {text && textElement}
       </a>
@@ -63,7 +66,7 @@ export default function Button({
   return (
     <button
       onClick={onClick}
-      className={`${styles.button} ${colorClass} ${small ? styles.small : ``} ${
+      className={`${styles.button} ${colorClass} ${hoverColorClass} ${small ? styles.small : ``} ${
         transparent ? styles.transparent : ``
       } ${inactive ? styles.inactive : ``} ${className}`}
     >
