@@ -2,6 +2,11 @@
   display: flex;
   cursor: pointer;
   margin-bottom: var(--gapSmall);
+  color: var(--medium);
+}
+
+.radio:hover {
+  color: var(--light);
 }
 
 .radio input {
@@ -26,7 +31,12 @@
   content: '';
 }
 
-.radio input:checked + .styledRadio {
+.radio input:hover + .styledRadio {
+  border-color: var(--lightPrimary);
+  background: var(--inactiveGradient);
+}
+
+.radio input:checked ~ .styledRadio {
   margin-top: calc(
     0.4 * (var(--fontSizeDefault) * var(--lineHeightDefault) - var(--fontSizeDefault))
   );
@@ -40,4 +50,7 @@
 
 .labelText {
   margin-left: var(--gapSmall);
+}
+.radio input:checked ~ .labelText {
+  color: var(--light);
 }
