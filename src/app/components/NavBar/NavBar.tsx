@@ -14,6 +14,7 @@ export default function NavBar({ active, className = '' }: NavBarProps): JSX.Ele
 
   const colorDefault = `mediumGradient`;
   const colorActive = `primaryGradient`;
+  const colorHover = `light`;
 
   function redirectTo(target: string) {
     history.push(`/${target}`);
@@ -28,6 +29,7 @@ export default function NavBar({ active, className = '' }: NavBarProps): JSX.Ele
           icon="search"
           text={!isMobileOnly ? 'Search' : undefined}
           color={active === 'search' ? colorActive : colorDefault}
+          hoverColor={active === 'search' ? colorActive : colorHover}
           transparent
           large={isMobileOnly}
           small={!isMobileOnly}
@@ -39,6 +41,7 @@ export default function NavBar({ active, className = '' }: NavBarProps): JSX.Ele
           icon="collection"
           text={!isMobileOnly ? 'Collections' : undefined}
           color={active === 'collections' ? colorActive : colorDefault}
+          hoverColor={active === 'collections' ? colorActive : colorHover}
           transparent
           large={isMobileOnly}
           small={!isMobileOnly}
@@ -50,6 +53,7 @@ export default function NavBar({ active, className = '' }: NavBarProps): JSX.Ele
           icon="profile"
           text={!isMobileOnly ? 'Profile' : undefined}
           color={active === 'profile' ? colorActive : colorDefault}
+          hoverColor={active === 'profile' ? colorActive : colorHover}
           transparent
           large={isMobileOnly}
           small={!isMobileOnly}
@@ -61,6 +65,7 @@ export default function NavBar({ active, className = '' }: NavBarProps): JSX.Ele
           icon="info"
           text={!isMobileOnly ? 'About' : undefined}
           color={active === 'about' ? colorActive : colorDefault}
+          hoverColor={active === 'about' ? colorActive : colorHover}
           transparent
           large={isMobileOnly}
           small={!isMobileOnly}
