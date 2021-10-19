@@ -1,9 +1,9 @@
-import type { dbCollection } from '../../lib/types/collection';
+import type { DbCollection } from '../../lib/types/collection';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import type { backendResponse } from '../../utils/responses';
 
-export default function useCollections(currentUser: string | null): dbCollection[] | null {
+export default function useCollections(currentUser: string | null): DbCollection[] | null {
   const collections = useQuery('collections', () => getCollections(), {
     retry: false,
     enabled: !!currentUser,
@@ -13,5 +13,5 @@ export default function useCollections(currentUser: string | null): dbCollection
 }
 
 async function getCollections() {
-  return await axios.get<backendResponse<dbCollection[], undefined>>('/api/collections');
+  return await axios.get<backendResponse<DbCollection[], undefined>>('/api/collections');
 }

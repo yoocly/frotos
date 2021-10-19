@@ -1,10 +1,10 @@
-import type { dbCollection } from '../../lib/types/collection';
+import type { DbCollection } from '../../lib/types/collection';
 import axios from 'axios';
 import { useQuery } from 'react-query';
 import type { backendResponse } from '../../utils/responses';
-import type { imagesResult } from '../../lib/types/image';
+import type { ImagesResult } from '../../lib/types/image';
 
-export default function useCollectionImages(collectionId: string | null): imagesResult | null {
+export default function useCollectionImages(collectionId: string | null): ImagesResult | null {
   const collectionImages = useQuery(
     ['collectionImages', collectionId],
     () => getCollectionImages(collectionId || ''),
@@ -18,7 +18,7 @@ export default function useCollectionImages(collectionId: string | null): images
 }
 
 async function getCollectionImages(collectionId: string) {
-  return await axios.get<backendResponse<dbCollection, undefined>>(
+  return await axios.get<backendResponse<DbCollection, undefined>>(
     `/api/collections/${collectionId}`
   );
 }

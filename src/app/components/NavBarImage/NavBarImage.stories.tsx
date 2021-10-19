@@ -15,7 +15,7 @@ export default {
   },
 } as Meta;
 
-const Template: Story<NavBarImageProps> = (args) => <NavBarImage {...args}></NavBarImage>;
+const template: Story<NavBarImageProps> = (args) => <NavBarImage {...args}></NavBarImage>;
 
-export const navBarImage = Template.bind({});
+export const navBarImage = template.bind({});
 navBarImage.args = { onClick: (item) => console.log(`clicked ${item}`) };

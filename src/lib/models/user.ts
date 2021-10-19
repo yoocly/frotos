@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import { dbFindOne, dbInsertOne } from '../../utils/database';
 import { hashPassword, verifyPassword } from '../../utils/hashPassword';
 import { error, result } from '../../utils/responses';
-import type { user } from '../types/user';
+import type { User } from '../types/user';
 dotenv.config();
 
 export const USER_ERROR = {
@@ -24,13 +24,13 @@ const usersCollection = 'users';
 const jwtExpiration = '1h';
 const cookieExpiration = 60 * 60 * 1000;
 
-function removePassword(user: user): user {
+function removePassword(user: User): User {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { password, ...userWithoutPassword } = user;
   return userWithoutPassword;
 }
 
-export async function hashUserPassword(user: user): Promise<user> {
+export async function hashUserPassword(user: User): Promise<User> {
   const hash = user.password !== undefined ? await hashPassword(user.password) : undefined;
   return removePassword({ ...user, passwordHash: hash });
 }
@@ -40,18 +40,18 @@ export function setJWT(res: Response, accessToken: string): void {
 }
 
 export async function checkUserExists(req: Request, res: Response): Promise<void> {
-  const user = req.body.user as user;
+  const user = req.body.user as User;
   if (!user?.username) return error(req, res, USER_ERROR.INVALID_USERNAME);
 
   const { username } = user;
-  const dbResponse = await dbFindOne<user>(usersCollection, { username });
+  const dbResponse = await dbFindOne<User>(usersCollection, { username });
 
   if (dbResponse === null) return error(req, res, USER_ERROR.USER_NOT_FOUND);
   return result(req, res, { userFound: true }, 1);
 }
 
 export async function addUser(req: Request, res: Response): Promise<void> {
-  const user = req.body.user as user;
+  const user = req.body.user as User;
   if (!user?.username) return error(req, res, USER_ERROR.INVALID_USERNAME);
   if (!user?.password) return error(req, res, USER_ERROR.NO_PASSWORD);
 
@@ -61,18 +61,18 @@ export async function addUser(req: Request, res: Response): Promise<void> {
     usersCollection,
     userPasswordHashed,
     {},
-    (user: user) => user.password === undefined
+    (user: User) => user.password === undefined
   );
   if (dbResult === null) return error(req, res, USER_ERROR.ADD_USER_FAILED);
   return result(req, res, { ...dbResult }, 1, 201);
 }
 
 export async function loginUser(req: Request, res: Response): Promise<void> {
-  const user = req.body.user as user;
+  const user = req.body.user as User;
   const { username, password } = user;
   if (password === undefined) return error(req, res, USER_ERROR.NO_PASSWORD);
 
-  const dbResult = await dbFindOne<user>(usersCollection, { username });
+  const dbResult = await dbFindOne<User>(usersCollection, { username });
   if (dbResult === null) return error(req, res, USER_ERROR.INVALID_USERNAME);
   if (dbResult?.passwordHash === undefined) return error(req, res, USER_ERROR.INVALID_DB_ENTRY);
   if (dbResult?._id === undefined) return error(req, res, USER_ERROR.INVALID_DB_ENTRY);

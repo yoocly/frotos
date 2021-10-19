@@ -17,11 +17,11 @@ export default {
   decorators: [(story) => <div style={{ margin: '-1rem' }}>{story()}</div>],
 } as Meta;
 
-const Template: Story<SearchResultImageProps> = (args) => (
+const template: Story<SearchResultImageProps> = (args) => (
   <SearchResultImage {...args}></SearchResultImage>
 );
 
-export const searchResultImage = Template.bind({});
+export const searchResultImage = template.bind({});
 searchResultImage.args = {
   image: mockImages.results[0],
   inCollection: false,

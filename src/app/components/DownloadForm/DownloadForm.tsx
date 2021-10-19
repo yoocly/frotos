@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { image } from '../../../lib/types/image';
+import type { Image } from '../../../lib/types/image';
 import { useDownloadImage } from '../../hooks/useDownloadImage';
 import Button from '../Button/Button';
 import Radio from '../Radio/Radio';
@@ -9,12 +9,12 @@ import styles from './DownloadForm.module.css';
 
 export const IMAGE_FORMATS = ['avif', 'webp', 'jpg', 'png', 'gif'];
 export type DownloadFormProps = {
-  image: image | null;
+  image: Image | null;
   className?: string;
 };
 
 export default function DownloadForm({ image, className = '' }: DownloadFormProps): JSX.Element {
-  const [downloadImage, setDownloadImage] = useState<image | null>(null);
+  const [downloadImage, setDownloadImage] = useState<Image | null>(null);
   const [format, setFormat] = useState<string>('webp');
   const [quality, setQuality] = useState<number>(80);
 

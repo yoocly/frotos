@@ -1,10 +1,10 @@
 import React from 'react';
-import type { image } from '../../../lib/types/image';
+import type { Image } from '../../../lib/types/image';
 import Button from '../Button/Button';
 import styles from './ImageDetails.module.css';
 
 export type ImageDetailsProps = {
-  image: image | null;
+  image: Image | null;
   className?: string;
 };
 

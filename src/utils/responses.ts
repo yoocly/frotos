@@ -1,9 +1,9 @@
 import type { Response, Request } from 'express';
-import type { user } from '../lib/types/user';
+import type { User } from '../lib/types/user';
 
 declare module 'express' {
   interface Request {
-    auth?: user;
+    auth?: User;
     forceLogin?: boolean;
   }
 }
@@ -14,7 +14,7 @@ export type backendResponse<result, payload> = {
   result?: result;
   error?: string;
   payload: payload;
-  auth?: user;
+  auth?: User;
   isLoggedIn?: boolean;
   forceLogin?: boolean;
 };

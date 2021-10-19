@@ -5,7 +5,7 @@ import React, { useRef, useState } from 'react';
 import { isMobileOnly } from 'react-device-detect';
 import Masonry from 'react-masonry-component';
 import { useHistory } from 'react-router';
-import type { image, imagesResult } from '../../../lib/types/image';
+import type { Image, ImagesResult } from '../../../lib/types/image';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import Button from '../Button/Button';
 import DownloadForm from '../DownloadForm/DownloadForm';
@@ -25,7 +25,7 @@ import styles from './SearchResult.module.css';
 export type SearchResultProps = {
   isLoading: boolean;
   isFetchingNewResult?: boolean;
-  imagesResult: imagesResult | null;
+  imagesResult: ImagesResult | null;
   handleScroll: (position: number, parentHeight: number) => void;
   className?: string;
 };
@@ -86,7 +86,7 @@ export default function SearchResult({
   handleScroll,
   className = '',
 }: SearchResultProps): JSX.Element {
-  const [selectedImage, setSelectedImage] = useState<image | null>(null);
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const [modalActiveTab, setModalActiveTab] = useState<NavBarImageItems>('details');
 
   const [masonryComplete, setMasonryComplete] = useState<boolean>(false);
@@ -98,7 +98,7 @@ export default function SearchResult({
     message: JSX.Element;
     collectionName?: string;
     collectionId?: string;
-    image?: image;
+    image?: Image;
   } | null>(null);
   const [modalAddToCollectionExtended, setModalAddToCollectionExtended] = useState<boolean | null>(
     null
@@ -136,7 +136,7 @@ export default function SearchResult({
     );
   }
 
-  async function handleAddToCollection(image: image | undefined): Promise<void> {
+  async function handleAddToCollection(image: Image | undefined): Promise<void> {
     if (!image) return;
     if (!currentUser) history.push(`/profile`);
 

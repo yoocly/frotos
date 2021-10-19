@@ -1,6 +1,6 @@
-import type { imagesResult } from '../../lib/types/image';
+import type { ImagesResult } from '../../lib/types/image';
 
-export const mockImages: imagesResult = {
+export const mockImages: ImagesResult = {
   count: 100,
   results: [
     {

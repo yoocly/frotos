@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import type { image } from '../../../lib/types/image';
+import type { Image } from '../../../lib/types/image';
 import useCollections from '../../hooks/useCollections';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import useImageCollections from '../../hooks/useImageCollections';
@@ -9,7 +9,7 @@ import Checkbox from '../Checkbox/Checkbox';
 import styles from './ImageCollections.module.css';
 
 export type ImageCollectionsProps = {
-  image: image | null;
+  image: Image | null;
   className?: string;
 };
 

@@ -1,14 +1,14 @@
-import type { imageAPIImage, pexelsImage, pixabayImage, unsplashImage } from './externals';
+import type { ImageAPIImage, PexelsImage, PixabayImage, UnsplashImage } from './externals';
 
-export type filtersAspectRatio = 'nofilter' | 'landscape' | 'square' | 'portrait';
+export type FiltersAspectRatio = 'nofilter' | 'landscape' | 'square' | 'portrait';
 
-export type image = castedImage & {
+export type Image = CastedImage & {
   aspectRatio: string;
   api: string;
   score: number;
 };
 
-export type castedImage = {
+export type CastedImage = {
   id: string;
   title?: string;
   width: number;
@@ -27,39 +27,39 @@ export type castedImage = {
   createdAt?: string;
 };
 
-export type imagesResult = {
+export type ImagesResult = {
   count: number;
-  results: image[];
+  results: Image[];
 };
 
-export type dbImage = {
+export type DbImage = {
   _id?: string;
   imageId: string;
-  image: image;
+  image: Image;
 };
 
-export type api = {
-  name: apiNames;
+export type Api = {
+  name: ApiNames;
   key: string;
   url: string;
-  aspectRatios: Record<filtersAspectRatio, string>;
+  aspectRatios: Record<FiltersAspectRatio, string>;
   resultKeys: {
     count: 'total' | 'total_results';
     images: 'results' | 'photos' | 'hits';
   };
-  castImage: (image: imageAPIImage) => castedImage;
+  castImage: (image: ImageAPIImage) => CastedImage;
 };
 
-export type apiNames = 'unsplash' | 'pexels' | 'pixabay';
-export type apiColorKeys = keyof typeof apiColorMap;
+export type ApiNames = 'unsplash' | 'pexels' | 'pixabay';
+export type ApiColorKeys = keyof typeof apiColorMap;
 
-export type apiResult = {
+export type ApiResult = {
   total?: number;
-  total_results?: number;
+  totalResults?: number;
   results?: { id?: string }[];
 }[];
 
-export const apis: api[] = [
+export const apis: Api[] = [
   {
     name: 'unsplash',
     key: process.env.KEY_UNSPLASH || '',
@@ -74,8 +74,8 @@ export const apis: api[] = [
       count: 'total',
       images: 'results',
     },
-    castImage: function (image: imageAPIImage): castedImage {
-      const unsplashImage = image as unsplashImage;
+    castImage: function (image: ImageAPIImage): CastedImage {
+      const unsplashImage = image as UnsplashImage;
 
       return {
         id: `u${unsplashImage?.id}` || '',
@@ -112,8 +112,8 @@ export const apis: api[] = [
       count: 'total_results',
       images: 'photos',
     },
-    castImage: function (image: imageAPIImage): castedImage {
-      const pexelsImage = image as pexelsImage;
+    castImage: function (image: ImageAPIImage): CastedImage {
+      const pexelsImage = image as PexelsImage;
       return {
         id: `e${pexelsImage?.id}` || '',
         width: pexelsImage?.width || 0,
@@ -145,8 +145,8 @@ export const apis: api[] = [
       count: 'total',
       images: 'hits',
     },
-    castImage: function (image: imageAPIImage): castedImage {
-      const pixabayImage = image as pixabayImage;
+    castImage: function (image: ImageAPIImage): CastedImage {
+      const pixabayImage = image as PixabayImage;
       return {
         id: `i${pixabayImage?.id}` || '',
         title: pixabayImage?.tags || '',
@@ -236,4 +236,4 @@ export const apiColorMap = {
   },
 };
 
-export type imageColors = { rgb: [number, number, number]; hsl: [number, number, number] };
+export type ImageColors = { rgb: [number, number, number]; hsl: [number, number, number] };

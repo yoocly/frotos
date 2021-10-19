@@ -1,19 +1,19 @@
-export type imageAPIResult = {
+export type ImageAPIResult = {
   total?: number;
   total_pages?: number;
-  results?: unsplashImage[];
+  results?: UnsplashImage[];
   page?: number;
   per_page?: number;
-  photos?: pexelsImage[];
+  photos?: PexelsImage[];
   total_results?: number;
   next_page?: string;
   totalHits?: number;
-  hits?: pixabayImage[];
+  hits?: PixabayImage[];
 };
 
-export type imageAPIImage = unsplashImage | pexelsImage | pixabayImage;
+export type ImageAPIImage = UnsplashImage | PexelsImage | PixabayImage;
 
-export type pixabayImage = {
+export type PixabayImage = {
   id?: number;
   pageURL?: string;
   type?: HitType;
@@ -43,7 +43,7 @@ export enum HitType {
   VectorSVG = 'vector/svg',
 }
 
-export type pexelsImage = {
+export type PexelsImage = {
   id?: number;
   width?: number;
   height?: number;
@@ -67,7 +67,7 @@ export type Src = {
   tiny?: string;
 };
 
-export type unsplashImage = {
+export type UnsplashImage = {
   id?: string;
   created_at?: string;
   updated_at?: Date;
