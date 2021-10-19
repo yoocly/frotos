@@ -1,11 +1,11 @@
 import React from 'react';
-import type { image } from '../../../lib/types/image';
+import type { Image } from '../../../lib/types/image';
 import { useImagePalette } from '../../hooks/useImagePalette';
 import Spinner from '../Spinner/Spinner';
 import styles from './ImagePalette.module.css';
 
 export type ImagePaletteProps = {
-  image: image | null;
+  image: Image | null;
   className?: string;
 };
 

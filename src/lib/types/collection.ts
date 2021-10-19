@@ -1,13 +1,13 @@
-import type { image } from './image';
+import type { Image } from './image';
 
-export type dbCollection = {
+export type DbCollection = {
   _id?: string;
   collectionName: string;
   userId: string;
   lastChangeAt: number;
   images: string[];
   imageCount?: number;
-  lastImage?: { image: image }[];
-  imagesList?: { image: image }[];
+  lastImage?: { image: Image }[];
+  imagesList?: { image: Image }[];
   hasSelectedImage?: boolean;
 };

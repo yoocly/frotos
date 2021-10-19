@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import type { image, imageColors } from '../../lib/types/image';
+import type { Image, ImageColors } from '../../lib/types/image';
 
 export type imagePalette = {
   hsl: number[];
@@ -9,14 +9,14 @@ export type imagePalette = {
   lightTextColor: boolean;
 }[];
 
-export function useImagePalette(image: image | null): imagePalette | undefined {
+export function useImagePalette(image: Image | null): imagePalette | undefined {
   const colorsResponse = useQuery(['colors', image?.id], () => getColors(image), {
     retry: false,
     enabled: !!image,
   });
 
   if (colorsResponse.status !== 'success') return;
-  const colors = colorsResponse.data?.data?.result as imageColors[];
+  const colors = colorsResponse.data?.data?.result as ImageColors[];
 
   const palette = colors.map((color) => {
     const hsl = [
@@ -36,7 +36,7 @@ export function useImagePalette(image: image | null): imagePalette | undefined {
   return palette;
 }
 
-async function getColors(image: image | null) {
+async function getColors(image: Image | null) {
   return await axios.post('/api/images/colors', {
     image,
   });

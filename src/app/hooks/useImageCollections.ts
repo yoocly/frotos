@@ -1,15 +1,15 @@
 import axios from 'axios';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import type { dbCollection } from '../../lib/types/collection';
-import type { image } from '../../lib/types/image';
+import type { DbCollection } from '../../lib/types/collection';
+import type { Image } from '../../lib/types/image';
 
 export default function useImageCollections(
-  image: image | null,
-  userCollections: dbCollection[] | null
+  image: Image | null,
+  userCollections: DbCollection[] | null
 ): {
-  collections: dbCollection[] | null;
-  addToCollection: (collection: dbCollection) => void;
-  removeFromCollection: (collection: dbCollection) => void;
+  collections: DbCollection[] | null;
+  addToCollection: (collection: DbCollection) => void;
+  removeFromCollection: (collection: DbCollection) => void;
 } {
   const queryClient = useQueryClient();
   const mutationAdd = useMutation(addImage);
@@ -19,7 +19,7 @@ export default function useImageCollections(
     retry: false,
     enabled: !!image,
   });
-  const imageCollections = imageData.data?.data.result.collectionsList as dbCollection[];
+  const imageCollections = imageData.data?.data.result.collectionsList as DbCollection[];
 
   const collections = userCollections?.map((collection) => ({
     ...collection,
@@ -28,7 +28,7 @@ export default function useImageCollections(
     ),
   }));
 
-  async function addToCollection(collection: dbCollection): Promise<void> {
+  async function addToCollection(collection: DbCollection): Promise<void> {
     if (!image || !collection._id) return;
     await mutationAdd.mutateAsync({ image, collectionId: collection._id });
     queryClient.invalidateQueries(['image', image?.id]);
@@ -36,7 +36,7 @@ export default function useImageCollections(
     queryClient.invalidateQueries(['collectionImages', collection._id]);
   }
 
-  async function removeFromCollection(collection: dbCollection): Promise<void> {
+  async function removeFromCollection(collection: DbCollection): Promise<void> {
     if (!image?.id || !collection._id) return;
     await mutationRemove.mutateAsync({ imageId: image.id, collectionId: collection._id });
     queryClient.invalidateQueries(['image', image?.id]);
@@ -51,7 +51,7 @@ async function getImage(imageId: string) {
   return await axios.get(`/api/images/${imageId}`);
 }
 
-async function addImage(addImageData: { image: image; collectionId: string }): Promise<void> {
+async function addImage(addImageData: { image: Image; collectionId: string }): Promise<void> {
   const { image, collectionId } = addImageData;
   await axios.post(`/api/images/`, { collectionId, image });
 }

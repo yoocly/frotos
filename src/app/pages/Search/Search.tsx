@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import type { lastSearch } from '../../App';
+import type { LastSearch } from '../../App';
 import FilterBar from '../../components/FilterBar/FilterBar';
 import Input from '../../components/Input/Input';
 import SearchResult from '../../components/SearchResult/SearchResult';
@@ -9,7 +9,7 @@ import styles from './Search.module.css';
 
 export type SearchProps = {
   className?: string;
-  lastSearchState: [lastSearch, (s: lastSearch) => void];
+  lastSearchState: [LastSearch, (s: LastSearch) => void];
 };
 
 export default function Search({ className = '', lastSearchState }: SearchProps): JSX.Element {

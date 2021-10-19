@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
-import type { filtersAspectRatio, imagesResult } from '../../lib/types/image';
+import type { FiltersAspectRatio, ImagesResult } from '../../lib/types/image';
 import { apiColorKeys } from '../lib/colors';
 
 export type fetchSearchImagesResult = {
-  imagesResult: imagesResult | null;
+  imagesResult: ImagesResult | null;
   isLoading: boolean;
   isFetchingNewResult: boolean;
 };
@@ -13,15 +13,15 @@ export type fetchSearchImagesResult = {
 export default function useFetchSearchImages(
   fetchMoreImages: boolean,
   query: string,
-  filterAspectRatio: filtersAspectRatio,
+  filterAspectRatio: FiltersAspectRatio,
   filterColor: number
 ): fetchSearchImagesResult {
   const [lastQuery, setLastQuery] = useState<string>('');
   const [lastPage, setLastPage] = useState<number>(1);
   const [lastFilter, setLastFilter] = useState<string>('');
   const [nextPage, setNextPage] = useState<number>(1);
-  const [lastResult, setLastResult] = useState<imagesResult>({ count: 0, results: [] });
-  const [totalResult, setTotalResult] = useState<imagesResult>({ count: 0, results: [] });
+  const [lastResult, setLastResult] = useState<ImagesResult>({ count: 0, results: [] });
+  const [totalResult, setTotalResult] = useState<ImagesResult>({ count: 0, results: [] });
 
   const color = apiColorKeys[filterColor];
   const filter = `${filterAspectRatio}/${color}`;
@@ -43,7 +43,7 @@ export default function useFetchSearchImages(
       cacheTime: Infinity,
     }
   );
-  const result = fetchResult.data?.data as imagesResult;
+  const result = fetchResult.data?.data as ImagesResult;
   const resultCount = result?.results.length || 0;
 
   useEffect(() => {

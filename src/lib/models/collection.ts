@@ -2,7 +2,7 @@ import type { Request, Response } from 'express';
 import { ObjectId } from 'mongodb';
 import { dbDeleteOne, dbInsertOne, dbUpdateOne, getCollection } from '../../utils/database';
 import { error, result } from '../../utils/responses';
-import type { dbCollection } from '../types/collection';
+import type { DbCollection } from '../types/collection';
 
 export const COLLECTION_ERROR = {
   AUTH_FAILED: { resultCode: 403, httpCode: 401, description: 'Authentication failed' },
@@ -66,7 +66,7 @@ export async function addCollection(req: Request, res: Response): Promise<void> 
     userId: _id,
     lastChangeAt: Math.floor(Date.now() / 1000),
     images: [],
-  } as dbCollection);
+  } as DbCollection);
   if (dbResult === null) return error(req, res, COLLECTION_ERROR.ADD_COLLECTION_FAILED);
   return result(req, res, { ...dbResult }, 1, 201);
 }

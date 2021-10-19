@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import colorwheel from '../../../assets/colorwheel.webp';
-import type { filtersAspectRatio } from '../../../lib/types/image';
+import type { FiltersAspectRatio } from '../../../lib/types/image';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal';
 import styles from './FilterBar.module.css';
 
 export type filterBarProps = {
   imageCount: number | null;
-  aspectRatio: filtersAspectRatio;
+  aspectRatio: FiltersAspectRatio;
   color: number;
-  onChangeAspectRatio: (aspectRatio: filtersAspectRatio) => void;
+  onChangeAspectRatio: (aspectRatio: FiltersAspectRatio) => void;
   onChangeColor: (color: number) => void;
   className?: string;
 };

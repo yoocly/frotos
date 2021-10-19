@@ -9,17 +9,17 @@ import type { downloadImageOptions } from '../../app/hooks/useDownloadImage';
 import { dbFindOne, dbUpdateOne, dbUpsertOne, getCollection } from '../../utils/database';
 import fetchJSONsAsync from '../../utils/fetchJSONsAsync';
 import { error, result } from '../../utils/responses';
-import type { dbCollection } from '../types/collection';
-import type { imageAPIResult } from '../types/externals';
+import type { DbCollection } from '../types/collection';
+import type { ImageAPIResult } from '../types/externals';
 import type {
-  apiColorKeys,
-  apiNames,
-  castedImage,
-  dbImage,
-  filtersAspectRatio,
-  image,
-  imageColors,
-  imagesResult,
+  ApiColorKeys,
+  ApiNames,
+  CastedImage,
+  DbImage,
+  FiltersAspectRatio,
+  Image,
+  ImageColors,
+  ImagesResult,
 } from '../types/image';
 import { apiColorMap, apis } from '../types/image';
 
@@ -62,10 +62,10 @@ export async function images(req: Request, res: Response): Promise<void> {
   const { query, page, aspectRatio, color } = req.params;
 
   const requests = apis.map(({ url, key, aspectRatios, name }) => {
-    const orientation = aspectRatios[aspectRatio as filtersAspectRatio];
-    const apiName = name as apiNames;
+    const orientation = aspectRatios[aspectRatio as FiltersAspectRatio];
+    const apiName = name as ApiNames;
     const apiColor =
-      color in apiColorMap ? apiColorMap[color as apiColorKeys][apiName] : 'allcolors';
+      color in apiColorMap ? apiColorMap[color as ApiColorKeys][apiName] : 'allcolors';
 
     if (orientation === 'noRequest') return { url: '', key };
     if (color === 'noRequest' || apiColor === 'noRequest') return { url: '', key };
@@ -74,7 +74,7 @@ export async function images(req: Request, res: Response): Promise<void> {
       url: url
         .replace(`{query}`, query)
         .replace(`{page}`, page)
-        .replace(`{aspectRatio}`, aspectRatios[aspectRatio as filtersAspectRatio])
+        .replace(`{aspectRatio}`, aspectRatios[aspectRatio as FiltersAspectRatio])
         .replace(`{color}`, apiColor)
         .replace(`&orientation=&`, `&`)
         .replace(`&color=allcolors`, ``)
@@ -83,7 +83,7 @@ export async function images(req: Request, res: Response): Promise<void> {
     };
   });
 
-  const responses = (await fetchJSONsAsync(requests)) as imageAPIResult[];
+  const responses = (await fetchJSONsAsync(requests)) as ImageAPIResult[];
 
   const results = responses.map((response, index) => {
     const { name: api, resultKeys, castImage } = apis[index];
@@ -108,12 +108,12 @@ export async function images(req: Request, res: Response): Promise<void> {
   const mergedResults = results.map((result) => result.images).flat();
   const sortedResults = mergedResults.sort((a, b) => (a.score < b.score ? 1 : -1));
 
-  const jsonResponse: imagesResult = { count: totalCount, results: sortedResults };
+  const jsonResponse: ImagesResult = { count: totalCount, results: sortedResults };
 
   res.status(200).json(jsonResponse);
 }
 
-function enrichImage(castedImage: castedImage, api: string, index: number, total: number): image {
+function enrichImage(castedImage: CastedImage, api: string, index: number, total: number): Image {
   return {
     ...castedImage,
     aspectRatio: getAspectRatio(castedImage.width, castedImage.height),
@@ -208,7 +208,7 @@ export async function addImage(req: Request, res: Response): Promise<void> {
       $set: {
         imageId: image.id,
         image,
-      } as dbImage,
+      } as DbImage,
     }
   );
 
@@ -218,7 +218,7 @@ export async function addImage(req: Request, res: Response): Promise<void> {
   )
     return error(req, res, IMAGE_ERROR.ADD_IMAGE_FAILED);
 
-  const collection = await dbFindOne<dbCollection>(collectionsCollection, {
+  const collection = await dbFindOne<DbCollection>(collectionsCollection, {
     _id: new ObjectId(collectionId),
     userId,
   });
@@ -290,7 +290,7 @@ export async function deleteImage(req: Request, res: Response): Promise<void> {
   if (!req.body.imageId) return error(req, res, IMAGE_ERROR.NO_IMAGE);
   const { imageId } = req.body;
 
-  const collection = await dbFindOne<dbCollection>(collectionsCollection, {
+  const collection = await dbFindOne<DbCollection>(collectionsCollection, {
     _id: new ObjectId(collectionId),
     userId,
   });
@@ -329,7 +329,7 @@ async function getRecentCollectionId(userId: string): Promise<string | null> {
   if (dbResult === null) return null;
   if (dbResult.length < 1) return null;
 
-  const recentCollection = dbResult[0] as dbCollection;
+  const recentCollection = dbResult[0] as DbCollection;
   return recentCollection._id || null;
 }
 
@@ -395,7 +395,7 @@ export async function imageColors(req: Request, res: Response): Promise<void> {
 
   const colors = colorsRaw.map((color) => {
     return { rgb: color.rgb(), hsl: color.hsl() };
-  }) as imageColors[];
+  }) as ImageColors[];
 
   return result(req, res, colors, 1, 200);
 }

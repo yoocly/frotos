@@ -1,10 +1,10 @@
 import React from 'react';
-import type { image } from '../../../lib/types/image';
+import type { Image } from '../../../lib/types/image';
 import Spinner from '../Spinner/Spinner';
 import styles from './PreviewImage.module.css';
 
 export type PreviewImageProps = {
-  image: image | null;
+  image: Image | null;
   className?: string;
 };
 

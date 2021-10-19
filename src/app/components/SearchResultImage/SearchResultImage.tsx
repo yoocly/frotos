@@ -1,10 +1,10 @@
 import React from 'react';
-import type { image } from '../../../lib/types/image';
+import type { Image } from '../../../lib/types/image';
 import Button from '../Button/Button';
 import styles from './SearchResultImage.module.css';
 
 export type SearchResultImageProps = {
-  image: image;
+  image: Image;
   width: string;
   inCollection?: boolean;
   onClick: () => void;

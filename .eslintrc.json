@@ -18,6 +18,13 @@
   "plugins": ["@typescript-eslint"],
   "rules": {
     "max-len": ["error", { "code": 100, "ignoreStrings": true, "ignoreUrls": true }],
-    "@typescript-eslint/consistent-type-imports": "error"
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        "selector": "function",
+        "format": ["PascalCase", "camelCase"]
+      }
+    ]
   }
 }
