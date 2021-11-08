@@ -18,6 +18,7 @@
   border-radius: calc(0.4 * var(--radius));
   border: 1px solid var(--medium);
   cursor: pointer;
+  margin-right: var(--gapSmall);
 }
 
 .styledCheckbox::before {
@@ -38,8 +39,4 @@
 
 .checkbox input:checked:hover + .styledCheckbox {
   border: 1px solid var(--lightPrimary);
-}
-
-.labelText {
-  margin-left: var(--gapSmall);
 }
