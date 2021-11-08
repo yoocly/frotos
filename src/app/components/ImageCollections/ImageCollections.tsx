@@ -38,29 +38,31 @@ export default function ImageCollections({
         {collections &&
           collections.map((collection) => (
             <li className={styles.item} key={collection._id} id={collection._id}>
-              <div>
-                <Checkbox
-                  checked={collection.hasSelectedImage}
-                  onChange={() =>
-                    collection.hasSelectedImage
-                      ? removeFromCollection(collection)
-                      : addToCollection(collection)
-                  }
-                >
-                  {collection.collectionName}
-                  {collection.imageCount !== undefined && (
-                    <span className={styles.imageCount}>{collection.imageCount} Images</span>
-                  )}
-                </Checkbox>
-              </div>
-              <div
-                style={{
-                  backgroundImage: `url(${
-                    collection.imageCount ? collection.lastImage?.[0].image.thumbnail : ``
-                  })`,
-                }}
-                className={styles.image}
-              ></div>
+              <Checkbox
+                checked={collection.hasSelectedImage}
+                onChange={() =>
+                  collection.hasSelectedImage
+                    ? removeFromCollection(collection)
+                    : addToCollection(collection)
+                }
+              >
+                <div className={styles.itemBox}>
+                  <div>
+                    {collection.collectionName}
+                    {collection.imageCount !== undefined && (
+                      <span className={styles.imageCount}>{collection.imageCount} Images</span>
+                    )}
+                  </div>
+                  <div
+                    style={{
+                      backgroundImage: `url(${
+                        collection.imageCount ? collection.lastImage?.[0].image.thumbnail : ``
+                      })`,
+                    }}
+                    className={styles.image}
+                  ></div>
+                </div>
+              </Checkbox>
             </li>
           ))}
       </ul>
